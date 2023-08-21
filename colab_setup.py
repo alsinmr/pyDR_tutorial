@@ -9,11 +9,12 @@ Created on Mon Aug 21 15:31:49 2023
 
 
 import sys
+import os
 if 'google.colab' in sys.modules:
     _=help('modules')
     
     if not('MDAnalysis' in sys.modules):
-        !pip3 install MDAnalysis
+        os.popen('pip3 install MDAnalysis')
     if not('pyDR' in sys.modules):
-        !git clone https://github.com/alsinmr/pyDR.git
+        os.popen('git clone https://github.com/alsinmr/pyDR.git')
     
