@@ -6,4 +6,6 @@ root: intro
 chapters:
 - file: markdown
 - file: notebooks
+- file: Ch1_detectors_intro
+- file: Ch2_detector_opt
 - file: markdown-notebooks
