@@ -17,6 +17,8 @@ if 'google.colab' in sys.modules:
     except:
         os.popen('pip3 install MDAnalysis')
     
+    os.chdir('/content')
+    
     try:
         import pyDR
     except:
