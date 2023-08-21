@@ -23,4 +23,5 @@ if 'google.colab' in sys.modules:
         import pyDR
     except:
         os.popen('git clone https://github.com/alsinmr/pyDR.git')
-            
+    
+    os.chdir('/content/pyDR_tutorial')
