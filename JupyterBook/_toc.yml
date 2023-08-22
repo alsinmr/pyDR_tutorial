@@ -3,10 +3,14 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: Ch1_detectors_intro
-- file: Ch2_detector_opt
-- file: Ch3_basic_NMR
-- file: markdown-notebooks
+parts:
+- caption: Tutorial
+  numbered: false
+  chapters:
+  - file: Ch1_detectors_intro.ipynb
+  - file: Ch2_detector_opt.ipynb
+
+- caption: Templates
+  numbered: false
+  chapters:
+  - file: Ch3_basic_NMR.ipynb

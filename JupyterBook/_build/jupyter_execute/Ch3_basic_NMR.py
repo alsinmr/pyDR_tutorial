@@ -5,7 +5,7 @@
 
 # <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/JupyterBook/Ch3_basic_NMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
-# In this example, we load an NMR data set and demonstrate how to go about fitting it. For this, we need a text file with the measured relaxation rates and experimental data in it. This is provided for this example, but one can also upload one's own data. Make sure to follow the prescribed file format. Entries are separated by tabs within a given line and by carriage returns over multiple lines. The commented cell below may be uncommented to read out the example data file as an example.
+# In this example, we load an NMR data set and demonstrate how to go about fitting it. For this, we need a text file with the measured relaxation rates and experimental data in it. This is provided for this example, but one can also upload one's own data. Make sure to follow the prescribed file format. Entries are separated by tabs within a given line and by carriage returns over multiple lines. An example data file is printed out as an example.
 
 # In[1]:
 
@@ -17,8 +17,7 @@ import os
 cwd=os.getcwd()
 if 'google.colab' in sys.modules:
     get_ipython().system('git clone https://github.com/alsinmr/pyDR_tutorial.git')
-    os.chdir('pyDR_tutorial')
-    import colab_setup  #Installs the required packages for pyDR
+    from pyDR_tutorial import colab_setup
 else:
     os.chdir(os.path.join(cwd,'..')) #Go to the JupyterBook directory
     sys.path.append(os.path.join(cwd,'../..')) #Path to pyDR (make sure this is correct if working locally)
@@ -31,22 +30,20 @@ else:
 import pyDR
 
 
+# ## Loading NMR data
+# 
+# First, we load a data object and discuss some of its contents, including plotting the experimental data.
+
 # In[3]:
 
 
-# #Read-out data text file
-# with open('data/HETs_15N.txt','r') as f:
-#     for line in f:
-#         print(line.strip())
+#Read-out data text file
+with open('data/HETs_15N.txt','r') as f:
+    for line in f:
+        print(line.strip())
 
 
 # In[4]:
-
-
-os.getcwd()
-
-
-# In[5]:
 
 
 data=pyDR.IO.readNMR('data/HETs_15N.txt')
@@ -70,7 +67,7 @@ data=pyDR.IO.readNMR('data/HETs_15N.txt')
 # 
 # Below, you can investigate these different components. We show data.info, which provides the various relevant experimental parameters for determining the sensitivities of the 8 experiments. Note that this data set also includes $S^2$, which is treated separately and does not show up in data.info.
 
-# In[6]:
+# In[5]:
 
 
 data.info
@@ -96,20 +93,22 @@ data.info
 
 # A graphical summary of the data object is obtained via data.plot (can use various plotting options, such as plot type, etc.). The plt_obj provides a variety of functions for manipulating the plot.
 
-# In[7]:
+# In[6]:
 
 
 plt_obj=data.plot(style='bar')
 plt_obj.fig.set_size_inches([8,10])
 
 
+# ## Processing NMR experimental data
+# 
 # Now, we want to process this data set. To do so, we first must optimize a set of detectors to analyze it with. The detector object is already attached to the data object, data.detect. So, we just need to run the optimization algorithm. We also will include $S^2$ in the data analysis, which we must also specify. We will use 4 detectors plus one more for $S^2$ data, to yield 5 total. Once the detector analysis is run, we may simply run the "fit" function to obtain the detector analysis, and finally plot the results. Note that this is essentially the same analysis that appeared
 # 
 # A. A. Smith, M. Ernst, S. Riniker, B. H. Meier. [Localized and collective motions in HET-s(218-289) Fibrils from Combined NMR Relaxation and MD Simulation.](https://onlinelibrary.wiley.com/doi/full/10.1002/anie.201901929) Angew. Chem. Int. Ed. 2019, 58, 9383-9388.
 # 
 # although a few improvements have been made since the initial analysis.
 
-# In[8]:
+# In[7]:
 
 
 data.detect.r_auto(4).inclS2()  #Optimize the detectors
@@ -123,7 +122,7 @@ _=plt_obj.ax[-1].set_xlabel('Residue')
 
 # Finally, we can check the fit quality by comparing the back-calculated relaxation rate constants to the original experimental relaxation rate constants.
 
-# In[9]:
+# In[8]:
 
 
 fig=fit.plot_fit()[0].axes.figure
