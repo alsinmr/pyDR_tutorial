@@ -8,4 +8,5 @@ chapters:
 - file: notebooks
 - file: Ch1_detectors_intro
 - file: Ch2_detector_opt
+- file: Ch3_basic_NMR
 - file: markdown-notebooks
