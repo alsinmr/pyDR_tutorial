@@ -32,20 +32,28 @@ import pyDR
 
 # ## Loading NMR data
 # 
-# First, we load a data object and discuss some of its contents, including plotting the experimental data.
+# First, we load a data object and discuss some of its contents, including plotting the experimental data. The contents of the data text file are shown below (entries are truncated for convenient viewing).
 
 # In[3]:
 
 
-#Read-out data text file
+#Read-out data text file (only first 6 entries shown for R,Rstd,S2,S2std,label)
+stops=['R','Rstd','S2','S2std','label','END']
+counter=-10000
 with open('data/HETs_15N.txt','r') as f:
     for line in f:
-        print(line.strip())
+        counter+=1
+        if line.strip() in stops:counter=0           
+        if counter<6:
+            print(line.strip())
+        elif counter==6:
+            print('...\n')
 
 
 # In[4]:
 
 
+# Load the data
 data=pyDR.IO.readNMR('data/HETs_15N.txt')
 
 
@@ -127,6 +135,57 @@ _=plt_obj.ax[-1].set_xlabel('Residue')
 
 fig=fit.plot_fit()[0].axes.figure
 fig.set_size_inches([12,10])
+
+
+# ## Connecting data to locations in a structure, 3D visualization
+# 
+# It is often useful to see how relaxation parameters relate to the structure. Also, for sake of comparison of dynamics between methods, one may assign a common set of labels, but alternatively, one may associate dynamics via the structure. For both, we may attach a "selection" object to the data. The selection is a list of atom groups (from the [MDAnalysis](http://mdanalysis.org/) software packgage), with the same number of entries as the number of data points in the data object (len(data)).
+# 
+# We will also include a 'Project' here. Projects add a lot of functionality; here they provide us with convenient communcation with [ChimeraX](https://www.cgl.ucsf.edu/chimerax/).
+
+# In[9]:
+
+
+proj=pyDR.Project()  #Project without storage location
+proj.append_data(data) #Add data to project
+data.select=pyDR.MolSelect(topo='data/HETs_2kj3.pdb') #Add selection to data
+
+# data.label contains the residue numbers, so we can just point to these. 
+#The pdb contains 3 copies of HET-s (segments A,B,C), so we have to select just one segment
+_=data.select.select_bond(Nuc='N',resids=data.label,segids='B') #Define the selection
+
+fit=data.fit()  #Selections are automatically passed from data to fit
+#but, we do need to re-run the fit to achieve this
+
+
+# If you are running locally (**Does not work in Google Colab!**), you can view the detector analysis directly on the HET-s molecule. Note, this requires installation of ChimeraX. It also requires providing pyDIFRATE with a path to the ChimeraX executable, although this step only needs to be done once, unless the program is moved, updated, etc.
+
+# In[10]:
+
+
+#Set chimera path (only required once)
+pyDR.chimeraX.chimeraX_funs.set_chimera_path('/Applications/ChimeraX-1.5.app/Contents/MacOS/ChimeraX')
+
+fit.chimera()
+proj.chimera.command_line('~show ~/B@N,C,CA') #Send command to chimera
+
+
+# You can mouse over the different detector names in ChimeraX ($\rho_0$,$\rho_1$,etc.), to view the different detector responses. However, the size of the responses are on different scales, so only $\rho_0$ is visible on the default scale. Run the cells below to view the different responses.
+
+# In[11]:
+
+
+proj.chimera.close()
+fit.chimera(rho_index=[1,2])
+proj.chimera.command_line('~show ~/B@N,C,CA')
+
+
+# In[12]:
+
+
+proj.chimera.close()
+fit.chimera(rho_index=[3,4],scaling=200)
+proj.chimera.command_line('~show ~/B@N,C,CA')
 
 
 # In[ ]:

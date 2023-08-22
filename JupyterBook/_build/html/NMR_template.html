@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Chapter 3: A Basic NMR Analysis &#8212; The pyDIFRATE Tutorial</title>
+    <title>Template: Basic NMR &#8212; The pyDIFRATE Tutorial</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Template: Basic NMR" href="NMR_template.html" />
-    <link rel="prev" title="Chapter 2: Detector Optimization" href="Ch2_detector_opt.html" />
+    <link rel="prev" title="Chapter 3: A Basic NMR Analysis" href="Ch3_basic_NMR.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -132,7 +131,7 @@ const thebe_selector_output = ".output, .cell_output"
   Tutorial
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Ch1_detectors_intro.html">
    <font color="maroon">
@@ -147,8 +146,8 @@ const thebe_selector_output = ".output, .cell_output"
    </font>
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch3_basic_NMR.html">
    <font color="maroon">
     Chapter 3: A Basic NMR Analysis
    </font>
@@ -160,9 +159,9 @@ const thebe_selector_output = ".output, .cell_output"
   Templates
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="NMR_template.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    <font color="maroon">
     Template: Basic NMR
    </font>
@@ -227,7 +226,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/alsinmr/pyDR_tutorial/master?urlpath=tree/JupyterBook/Ch3_basic_NMR.ipynb"
+        <a href="https://mybinder.org/v2/gh/alsinmr/pyDR_tutorial/master?urlpath=tree/JupyterBook/NMR_template.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -287,7 +286,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/alsinmr/pyDR_tutorial//issues/new?title=Issue%20on%20page%20%2FCh3_basic_NMR.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/alsinmr/pyDR_tutorial//issues/new?title=Issue%20on%20page%20%2FNMR_template.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -315,7 +314,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/Ch3_basic_NMR.ipynb"
+        <a href="_sources/NMR_template.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -375,13 +374,28 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#loading-nmr-data">
-   Loading NMR data
+  <a class="reference internal nav-link" href="#load-nmr-data">
+   Load NMR Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#processing-nmr-experimental-data">
-   Processing NMR experimental data
+  <a class="reference internal nav-link" href="#attach-structure-to-the-data">
+   Attach structure to the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-data">
+   Plot the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#process-nmr-data">
+   Process NMR data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-fit-quality">
+   Plot the fit quality
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -398,7 +412,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1><font color="maroon">Chapter 3: A Basic NMR Analysis</font></h1>
+                <h1><font color="maroon">Template: Basic NMR</font></h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -409,13 +423,28 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#loading-nmr-data">
-   Loading NMR data
+  <a class="reference internal nav-link" href="#load-nmr-data">
+   Load NMR Data
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#processing-nmr-experimental-data">
-   Processing NMR experimental data
+  <a class="reference internal nav-link" href="#attach-structure-to-the-data">
+   Attach structure to the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-data">
+   Plot the data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#process-nmr-data">
+   Process NMR data
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-fit-quality">
+   Plot the fit quality
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -433,10 +462,10 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-chapter-3-a-basic-nmr-analysis-font">
-<h1><font color="maroon">Chapter 3: A Basic NMR Analysis</font><a class="headerlink" href="#font-color-maroon-chapter-3-a-basic-nmr-analysis-font" title="Permalink to this headline">#</a></h1>
-<p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/JupyterBook/Ch3_basic_NMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>In this example, we load an NMR data set and demonstrate how to go about fitting it. For this, we need a text file with the measured relaxation rates and experimental data in it. This is provided for this example, but one can also upload one’s own data. Make sure to follow the prescribed file format. Entries are separated by tabs within a given line and by carriage returns over multiple lines. An example data file is printed out as an example.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-template-basic-nmr-font">
+<h1><font color="maroon">Template: Basic NMR</font><a class="headerlink" href="#font-color-maroon-template-basic-nmr-font" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/JupyterBook/NMR_template.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<p>To use this template, you need to prepare a text file with NMR relaxation data in it (see HETs_15N.txt or ubi_soln.txt for example). If you intend to run on a local pyDR installation, then you just need to point pyDR to the file. If you want to run in Google Colab, the file needs to be available online somehow. The suggested options are in your Google drive, where we will mount Google drive in the notebook, or via a shareable weblink (for example, also available in Dropbox, Google Drive, etc.).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Setup: Make sure packages are installed in google colab. </span>
@@ -462,165 +491,31 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section id="loading-nmr-data">
-<h2>Loading NMR data<a class="headerlink" href="#loading-nmr-data" title="Permalink to this headline">#</a></h2>
-<p>First, we load a data object and discuss some of its contents, including plotting the experimental data. The contents of the data text file are shown below (entries are truncated for convenient viewing).</p>
+<section id="load-nmr-data">
+<h2>Load NMR Data<a class="headerlink" href="#load-nmr-data" title="Permalink to this headline">#</a></h2>
+<p>If running in Google Colab, we recommend mounting Google Drive and accessing your data via google drive. Other bash/python based methods can be used, however. If running locally, just provide the path to your data.</p>
+<p>Mounting Google Drive will first cause a prompt in this window, followed by a popup window for logging in.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Read-out data text file (only first 6 entries shown for R,Rstd,S2,S2std,label)</span>
-<span class="n">stops</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;Rstd&#39;</span><span class="p">,</span><span class="s1">&#39;S2&#39;</span><span class="p">,</span><span class="s1">&#39;S2std&#39;</span><span class="p">,</span><span class="s1">&#39;label&#39;</span><span class="p">,</span><span class="s1">&#39;END&#39;</span><span class="p">]</span>
-<span class="n">counter</span><span class="o">=-</span><span class="mi">10000</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/HETs_15N.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">:</span><span class="n">counter</span><span class="o">=</span><span class="mi">0</span>           
-        <span class="k">if</span> <span class="n">counter</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-        <span class="k">elif</span> <span class="n">counter</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO
-Type	R1	R1	R1	R1p	R1p	R1p	R1p	R1p
-Nuc	15N	15N	15N	15N	15N	15N	15N	15N
-v0	400	500	850	850	850	850	500	500
-v1	0	0	0	10.8	16.1	24.5	37.6	50.8
-vr	0	0	0	60	60	60	60	60
-dXY	-22293	-22293	-22293	-22293	-22293	-22293	-22293	-22293
-END
-
-DATA
-R
-1.6128e-02	2.3718e-02	2.0059e-02	1.7572e+00	1.5562e+00	1.5255e+00	4.9255e+00	8.1995e+00
-5.1332e-02	3.4098e-02	3.5748e-02	5.2365e+00	4.0751e+00	5.9506e+00	8.6306e+00	7.8626e+00
-4.4656e-02	3.2938e-02	2.7476e-02	2.1590e+00	2.4629e+00	1.7784e+00	1.6129e+00	2.6828e+00
-5.3568e-02	3.4962e-02	4.5654e-02	3.5630e+00	3.2250e+00	2.7737e+00	2.1813e+00	2.7379e+00
-7.8377e-02	5.4420e-02	4.1665e-02	4.8031e+00	4.4480e+00	3.5364e+00	3.4516e+00	3.8330e+00
-...
-
-Rstd
-2.4563e-03	2.9327e-03	1.8676e-03	1.2433e+00	1.0416e+00	3.4144e-01	9.2180e-01	1.9317e+00
-4.8322e-03	5.2921e-03	3.9709e-03	1.4767e+00	1.2874e+00	1.7913e+00	2.0022e+00	2.2384e+00
-1.8399e-03	4.6196e-03	1.8577e-03	1.2188e+00	6.8622e-01	1.4895e-01	2.4250e-01	8.6327e-01
-6.4186e-03	7.5221e-03	5.8902e-03	1.3546e+00	6.5465e-01	6.5107e-01	1.1026e+00	1.4914e+00
-5.5028e-03	8.9836e-03	2.7200e-03	5.8094e-01	4.8034e-01	5.8431e-01	4.4152e-01	6.2103e-01
-...
-
-S2
-0.8799
-0.8360
-0.8974
-0.8703
-0.8437
-...
-
-S2std
-0.0240
-0.0300
-0.0160
-0.0160
-0.0160
-...
-
-label
-224
-226
-227
-228
-229
-...
-
-END
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+    <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;/content/drive/MyDrive&#39;</span><span class="p">,</span><span class="s1">&#39;path_to_data&#39;</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="s1">&#39;data/HETs_15N.txt&#39;</span><span class="p">)</span>  <span class="c1">#Replace with path to data</span>
+    
+<span class="n">proj</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">Project</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>    <span class="c1">#Include a directory to save the data (can be in Google Drive)</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">append_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the data</span>
-<span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="s1">&#39;data/HETs_15N.txt&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<p>First, we discuss the data object briefly to understand the contents of the data object. There are a few key components:</p>
-<ul class="simple">
-<li><p>Relaxation rate constants: <strong>data.R</strong></p></li>
-<li><p>Standard deviation of the relaxation rate constants: <strong>data.Rstd</strong></p></li>
-<li><p>Order parameters, given as <span class="math notranslate nohighlight">\(S^2\)</span> (these are optional): <strong>data.S2</strong></p></li>
-<li><p>Standard deviation of <span class="math notranslate nohighlight">\(S^2\)</span>: <strong>data.S2std</strong></p></li>
-<li><p>Labels for the data: <strong>data.label</strong></p></li>
-<li><p>Sensitivity of the data: <strong>data.sens</strong></p></li>
-<li><p>Detector object for processing the data: <strong>data.detect</strong></p></li>
-<li><p>Experimental parameters: <strong><a class="reference external" href="http://data.info">data.info</a></strong></p>
-<ul>
-<li><p>This is a reference to <a class="reference external" href="http://data.sens.info">data.sens.info</a></p></li>
-</ul>
-</li>
-<li><p>Details on the data / processing so far: <strong>data.details</strong></p></li>
-<li><p>Selection object, which connects data to a pdb of the molecular structure: <strong>data.select</strong></p>
-<ul>
-<li><p>Not required: we’ll connect the data to a pdb later</p></li>
-</ul>
-</li>
-</ul>
-<p>A number of other functions and data objects are also attached to data, but these are for data processing, or analysis of the processing after an initial fit.</p>
-<p>Below, you can investigate these different components. We show <a class="reference external" href="http://data.info">data.info</a>, which provides the various relevant experimental parameters for determining the sensitivities of the 8 experiments. Note that this data set also includes <span class="math notranslate nohighlight">\(S^2\)</span>, which is treated separately and does not show up in <a class="reference external" href="http://data.info">data.info</a>.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                   0           1           2           3           4           5           6           7
-Type              R1          R1          R1         R1p         R1p         R1p         R1p         R1p
-v0               400         500         850         850         850         850         500         500
-v1               0.0         0.0         0.0        10.8        16.1        24.5        37.6        50.8
-vr                 0           0           0          60          60          60          60          60
-offset             0           0           0           0           0           0           0           0
-stdev     0.00249149  0.00554449  0.00208680  1.08759999  0.65464997  0.68395000  0.56901997  1.18330001
-med_val   0.04465600  0.03731900  0.02731099  3.81399989  3.52609992  3.61940002  3.68650007  5.97370004
-Nuc              15N         15N         15N         15N         15N         15N         15N         15N
-Nuc1              1H          1H          1H          1H          1H          1H          1H          1H
-dXY           -22293      -22293      -22293      -22293      -22293      -22293      -22293      -22293
-CSA            113.0       113.0       113.0       113.0       113.0       113.0       113.0       113.0
-eta                0           0           0           0           0           0           0           0
-CSoff              0           0           0           0           0           0           0           0
-QC                 0           0           0           0           0           0           0           0
-etaQ               0           0           0           0           0           0           0           0
-theta           23.0        23.0        23.0        23.0        23.0        23.0        23.0        23.0
-
-[8 experiments with 16 parameters]
-</pre></div>
-</div>
-</div>
-</div>
-<p>The parameters found by default in <a class="reference external" href="http://data.info">data.info</a> (can change if user provides their own sensitivity functions). Not all parameters are required for all experiments.</p>
-<ul class="simple">
-<li><p>v0: External magnetic field, given as the <span class="math notranslate nohighlight">\(^1\)</span>H frequency in MHz</p></li>
-<li><p>v1: Spin-locking strength for <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments (applied to the relaxing nucleus), given in kHz</p></li>
-<li><p>vr: Magic angle spinning frequency, given in kHz</p></li>
-<li><p>offset: Offset applied to the spin-lock, given in kHz</p></li>
-<li><p>stdev: Median standard deviation for data set</p></li>
-<li><p>med_val: Median relaxation rate constant for data set</p></li>
-<li><p>Nuc: Nucleus being relaxed (atomic number, symbol)</p></li>
-<li><p>Nuc1: Nucleus (or list of nuclei) relaxing Nuc via dipole coupling</p></li>
-<li><p>dXY: Dipole coupling (or list of couplings), given in Hz Same length as Nuc1</p>
-<ul>
-<li><p>Given as the full anisotropy of the dipole coupling, which is twice the coupling constant</p></li>
-</ul>
-</li>
-<li><p>CSA: Chemical shift anisotropy of nucleus being relaxed (z-component in ppm)</p></li>
-<li><p>eta: Asymmetry of the CSA, which is unitless</p></li>
-<li><p>CSoff: Unimplemented</p></li>
-<li><p>QC: Quadrupole coupling in Hz</p></li>
-<li><p>etaQ: Asymmetry of the quadrupole coupling</p></li>
-<li><p>theta: Angle between the CSA and dipole couplings (for cross-correlated cross-relaxation)</p></li>
-</ul>
-<p>A graphical summary of the data object is obtained via data.plot (can use various plotting options, such as plot type, etc.). The plt_obj provides a variety of functions for manipulating the plot.</p>
+</section>
+<section id="attach-structure-to-the-data">
+<h2>Attach structure to the data<a class="headerlink" href="#attach-structure-to-the-data" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="plot-the-data">
+<h2>Plot the data<a class="headerlink" href="#plot-the-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt_obj</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
@@ -629,21 +524,26 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_12_0.png" src="_images/Ch3_basic_NMR_12_0.png" />
+<img alt="_images/NMR_template_10_0.png" src="_images/NMR_template_10_0.png" />
 </div>
 </div>
 </section>
-<section id="processing-nmr-experimental-data">
-<h2>Processing NMR experimental data<a class="headerlink" href="#processing-nmr-experimental-data" title="Permalink to this headline">#</a></h2>
-<p>Now, we want to process this data set. To do so, we first must optimize a set of detectors to analyze it with. The detector object is already attached to the data object, data.detect. So, we just need to run the optimization algorithm. We also will include <span class="math notranslate nohighlight">\(S^2\)</span> in the data analysis, which we must also specify. We will use 4 detectors plus one more for <span class="math notranslate nohighlight">\(S^2\)</span> data, to yield 5 total. Once the detector analysis is run, we may simply run the “fit” function to obtain the detector analysis, and finally plot the results. Note that this is essentially the same analysis that appeared</p>
-<p>A. A. Smith, M. Ernst, S. Riniker, B. H. Meier. <a class="reference external" href="https://onlinelibrary.wiley.com/doi/full/10.1002/anie.201901929">Localized and collective motions in HET-s(218-289) Fibrils from Combined NMR Relaxation and MD Simulation.</a> Angew. Chem. Int. Ed. 2019, 58, 9383-9388.</p>
-<p>although a few improvements have been made since the initial analysis.</p>
+<section id="process-nmr-data">
+<h2>Process NMR data<a class="headerlink" href="#process-nmr-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">inclS2</span><span class="p">()</span>  <span class="c1">#Optimize the detectors</span>
-<span class="n">fit</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>  <span class="c1">#Fit the data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>    <span class="c1">#Set number of detectors here</span>
+<span class="c1"># data.detect.inclS2() #Uncomment if including order parameters</span>
 
-<span class="n">plt_obj</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">fit</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>  <span class="c1">#Fit the data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the results</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt_obj</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
 <span class="n">plt_obj</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
 <span class="n">plt_obj</span><span class="o">.</span><span class="n">show_tc</span><span class="p">()</span>
 <span class="n">_</span><span class="o">=</span><span class="n">plt_obj</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Residue&#39;</span><span class="p">)</span>
@@ -651,10 +551,36 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_14_0.png" src="_images/Ch3_basic_NMR_14_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-6-19c0abca0d36&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">plt_obj</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">plt_obj</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">plt_obj</span><span class="o">.</span><span class="n">show_tc</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">_</span><span class="o">=</span><span class="n">plt_obj</span><span class="o">.</span><span class="n">ax</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Residue&#39;</span><span class="p">)</span>
+
+<span class="nn">~/Documents/GitHub/pyDR_tutorial/JupyterBook/../../pyDR/Data/Plotting.py</span> in <span class="ni">show_tc</span><span class="nt">(self, show_z)</span>
+<span class="g g-Whitespace">    </span><span class="mi">157</span>             <span class="n">ylim</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">158</span> 
+<span class="ne">--&gt; </span><span class="mi">159</span>             <span class="n">val</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;z0&#39;</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">160</span>             <span class="n">rhoz</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">rhoz</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+<span class="g g-Whitespace">    </span><span class="mi">161</span>             <span class="k">if</span> <span class="n">rhoz</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">&gt;</span><span class="n">rhoz</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">*</span><span class="mf">0.9</span><span class="p">:</span>  <span class="c1">#Detector sensitive to infinitely short tc</span>
+
+<span class="nn">~/Documents/GitHub/pyDR_tutorial/JupyterBook/../../pyDR/Sens/Info.py</span> in <span class="ni">__getitem__</span><span class="nt">(self, index)</span>
+<span class="g g-Whitespace">    </span><span class="mi">171</span>                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__values</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+<span class="g g-Whitespace">    </span><span class="mi">172</span>             <span class="k">else</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">173</span>                 <span class="k">assert</span> <span class="mi">0</span><span class="p">,</span><span class="s2">&quot;Unknown parameter&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">174</span> 
+<span class="g g-Whitespace">    </span><span class="mi">175</span>     <span class="k">def</span> <span class="nf">_ipython_key_completions_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="ne">AssertionError</span>: Unknown parameter
+</pre></div>
 </div>
 </div>
-<p>Finally, we can check the fit quality by comparing the back-calculated relaxation rate constants to the original experimental relaxation rate constants.</p>
+</div>
+</section>
+<section id="plot-the-fit-quality">
+<h2>Plot the fit quality<a class="headerlink" href="#plot-the-fit-quality" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="o">=</span><span class="n">fit</span><span class="o">.</span><span class="n">plot_fit</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">figure</span>
@@ -663,7 +589,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_16_0.png" src="_images/Ch3_basic_NMR_16_0.png" />
+<img alt="_images/NMR_template_16_0.png" src="_images/NMR_template_16_0.png" />
 </div>
 </div>
 </section>
@@ -748,19 +674,12 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch2_detector_opt.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Ch3_basic_NMR.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Chapter 2: Detector Optimization</font></p>
+            <p class="prev-next-title"><font color="maroon">Chapter 3: A Basic NMR Analysis</font></p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="NMR_template.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon">Template: Basic NMR</font></p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Welcome to your Jupyter Book &#8212; The pyDIFRATE Tutorial</title>
+    <title>Welcome to the pyDIFRATE tutorial &#8212; The pyDIFRATE Tutorial</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 1: A brief introduction to detectors" href="Ch1_detectors_intro.html" />
+    <link rel="next" title="A Brief History of Detectors" href="BriefHistory.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -108,11 +108,23 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1 current active">
                 <a class="reference internal" href="#">
-                    Welcome to your Jupyter Book
+                    Welcome to the pyDIFRATE tutorial
                 </a>
             </li>
         </ul>
-        <p class="caption">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="BriefHistory.html">
+   A Brief History of Detectors
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="References.html">
+   References
+  </a>
+ </li>
+</ul>
+<p class="caption">
  <span class="caption-text">
   Tutorial
  </span>
@@ -132,6 +144,13 @@ const thebe_selector_output = ".output, .cell_output"
    </font>
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch3_basic_NMR.html">
+   <font color="maroon">
+    Chapter 3: A Basic NMR Analysis
+   </font>
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -140,9 +159,9 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch3_basic_NMR.html">
+  <a class="reference internal" href="NMR_template.html">
    <font color="maroon">
-    Chapter 3: A Basic NMR Analysis
+    Template: Basic NMR
    </font>
   </a>
  </li>
@@ -219,7 +238,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://alsinmr.github.io/pyDR_tutorial/"
+        <a href="https://github.com/alsinmr/pyDR_tutorial/"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -236,7 +255,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://alsinmr.github.io/pyDR_tutorial//issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/alsinmr/pyDR_tutorial//issues/new?title=Issue%20on%20page%20%2Fintro.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -313,7 +332,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Welcome to your Jupyter Book</h1>
+                <h1>Welcome to the pyDIFRATE tutorial</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -325,24 +344,29 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-your-jupyter-book">
-<h1>Welcome to your Jupyter Book<a class="headerlink" href="#welcome-to-your-jupyter-book" title="Permalink to this headline">#</a></h1>
-<p>This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out <a class="reference external" href="https://jupyterbook.org">the Jupyter Book documentation</a> for more information.</p>
-<p>Check out the content pages bundled with this sample book to see more.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="welcome-to-the-pydifrate-tutorial">
+<h1>Welcome to the pyDIFRATE tutorial<a class="headerlink" href="#welcome-to-the-pydifrate-tutorial" title="Permalink to this headline">#</a></h1>
+<p>pyDIFRATE is software originally developed for analyzing NMR relaxation rate constants with minimal assumptions about the form of the correlation function. It uses the  “Detectors” approach, to return amplitudes of motion for timescale-specific windows. It has been broadly expanded to also analyze MD simulations. These analyses include direct comparison with NMR results, timescale-specific cross-correlation of motion, and separation of motion via frames (ROMANCE analysis). A principal component analysis module is also underway.</p>
+<p>These features are coupled with powerful visualization methods, including 3D visualization on the structure with <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a>, and with a file management system to keep track of data processing steps and help with data sorting and comparison.</p>
+<p>The tutorial here provides explanation of the detectors motivation, and some basic explanation of the theory, as well as example analyses. A series of templates are also provided into which one may insert ones own data, and can either be downloaded or run on <a class="reference external" href="https://colab.research.google.com/?utm_source=scs-index">Google Colab</a>. Running on Colab means you do not need to provide your data to our servers, nor is it stored by Google beyond the lifetime of the session.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="BriefHistory.html">A Brief History of Detectors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html">References</a></li>
+</ul>
+</div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Tutorial</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Ch1_detectors_intro.html"><font color="maroon"> Chapter 1: A brief introduction to detectors </font></a></li>
 <li class="toctree-l1"><a class="reference internal" href="Ch2_detector_opt.html"><font color="maroon">Chapter 2: Detector Optimization</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch3_basic_NMR.html"><font color="maroon">Chapter 3: A Basic NMR Analysis</font></a></li>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
 <p class="caption"><span class="caption-text">Templates</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Ch3_basic_NMR.html"><font color="maroon">Chapter 3: A Basic NMR Analysis</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="NMR_template.html"><font color="maroon">Template: Basic NMR</font></a></li>
 </ul>
 </div>
 </section>
@@ -374,10 +398,10 @@ It does not go in-depth into any particular topic - check out <a class="referenc
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="Ch1_detectors_intro.html" title="next page">
+    <a class='right-next' id="next-link" href="BriefHistory.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon"> Chapter 1: A brief introduction to detectors </font></p>
+        <p class="prev-next-title">A Brief History of Detectors</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

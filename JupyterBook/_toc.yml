@@ -4,13 +4,18 @@
 format: jb-book
 root: intro
 parts:
+- chapters:
+  - file: BriefHistory
+  - file: References
 - caption: Tutorial
   numbered: false
   chapters:
-  - file: Ch1_detectors_intro.ipynb
-  - file: Ch2_detector_opt.ipynb
+  - file: Ch1_detectors_intro
+  - file: Ch2_detector_opt
+  - file: Ch3_basic_NMR
 
 - caption: Templates
   numbered: false
   chapters:
-  - file: Ch3_basic_NMR.ipynb
+  - file: NMR_template
+  
