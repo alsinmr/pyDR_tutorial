@@ -237,7 +237,7 @@ def copy2colab(filename):
         for cell in cr:
             if cell is None:
                 break
-            elif len(cr.get_source()) and '(hidden on colab)':
+            elif len(cr.get_source()) and '(hidden on colab)' in cr.get_source()[0]:
                 pass
             elif len(cr.get_source()) and 'SETUP pyDR' in cr.get_source()[0]:
                 f.write('\n' if first else ',\n')
