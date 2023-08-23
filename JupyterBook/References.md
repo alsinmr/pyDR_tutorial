@@ -1,4 +1,4 @@
-# References
+# <font color="maroon"> References </font>
 
 Our papers using the Detector analysis
 

@@ -1,4 +1,4 @@
-# A Brief History of Detectors
+# <font color="maroon"> Background </font>
 
 Detectors came about after an extensive analysis of backbone (H–N) motion in HET-s(218-289) fibrils using [model-free](https://doi.org/10.1021/ja00381a009) analysis ([paper](https://link.springer.com/article/10.1007/s10858-016-0047-8)). After what had been quite a lot of work, I had to admit to myself that I had very little idea what the parameters actually meant. Regions of the protein expected to be more flexible had apparently higher ampitude motion on some timescales, but slower motion on other timescales. We didn't have a physical model available to try to explain what seemed like a possible contradiction, so we started running MD simulations to see if that would help. It did not, at first. Model-free parameters from MD were orders of magnitudes different in MD than in NMR. However, after initial disgarding the MD, I later realized that we could calculate relaxation rate constants directly from MD, and found them to be in much better agreement than the model-free parameters themselves.
 
