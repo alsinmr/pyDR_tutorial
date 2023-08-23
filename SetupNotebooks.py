@@ -193,7 +193,7 @@ def write_book_setup(f):
       "import os\\n",
       "os.chdir('..')\\n",
       "import sys\\n",
-      "sys.path.append('../..') # Path to pyDR location"
+      "sys.path.append('../') # Path to pyDR location"
      ]
     }""")
     
@@ -221,9 +221,12 @@ def add_links(f,filename):
      "source": [""")
     f.write(f"""
       "<a href=\\"https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/{filename}\\" target=\\"_blank\\"><img src=\\"https://colab.research.google.com/assets/colab-badge.svg\\"></a>"
-     ]""")
+     """)
+    # f.write(f"""
+    #         "\\n\\n<a href=\\"https://github.com/alsinmr/pyDR_tutorial/raw/main/{filename}\\" target=\\"_blank\\"><img src=\\"Download-button.png\\" width=\\"100\\"></a>"
+    #         """)
     f.write("""
-    }""")
+            ]\n}""")
         
 def copy2colab(filename):
     cr=CellReader(filename)
@@ -234,6 +237,8 @@ def copy2colab(filename):
         for cell in cr:
             if cell is None:
                 break
+            elif len(cr.get_source()) and '(hidden on colab)':
+                pass
             elif len(cr.get_source()) and 'SETUP pyDR' in cr.get_source()[0]:
                 f.write('\n' if first else ',\n')
                 write_colab_setup(f)
@@ -255,6 +260,8 @@ def copy2JupyterBook(filename):
         for k,cell in enumerate(cr):
             if cell is None:
                 break
+            elif len(cr.get_source()) and '(hidden on webpage)' in cr.get_source()[0]:
+                pass
             elif len(cr.get_source()) and 'SETUP pyDR' in cr.get_source()[0]:
                 f.write('\n' if first else ',\n')
                 write_book_setup(f)

@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Template: Basic NMR" href="NMR_template.html" />
+    <link rel="next" title="Template: Basic NMR" href="Tpl_basicNMR.html" />
     <link rel="prev" title="Chapter 2: Detector Optimization" href="Ch2_detector_opt.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -118,12 +118,16 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="BriefHistory.html">
-   A Brief History of Detectors
+   <font color="maroon">
+    Background
+   </font>
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="References.html">
-   References
+   <font color="maroon">
+    References
+   </font>
   </a>
  </li>
 </ul>
@@ -162,9 +166,16 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="NMR_template.html">
+  <a class="reference internal" href="Tpl_basicNMR.html">
    <font color="maroon">
     Template: Basic NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_SolnNMR.html">
+   <font color="maroon">
+    Template: Solution-State NMR
    </font>
   </a>
  </li>
@@ -435,21 +446,15 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-chapter-3-a-basic-nmr-analysis-font">
 <h1><font color="maroon">Chapter 3: A Basic NMR Analysis</font><a class="headerlink" href="#font-color-maroon-chapter-3-a-basic-nmr-analysis-font" title="Permalink to this headline">#</a></h1>
-<p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/JupyterBook/Ch3_basic_NMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch3_basic_NMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>In this example, we load an NMR data set and demonstrate how to go about fitting it. For this, we need a text file with the measured relaxation rates and experimental data in it. This is provided for this example, but one can also upload one’s own data. Make sure to follow the prescribed file format. Entries are separated by tabs within a given line and by carriage returns over multiple lines. An example data file is printed out as an example.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Setup: Make sure packages are installed in google colab. </span>
-<span class="c1">#Also, make sure that we start in the main folder of the tutorial</span>
-<span class="kn">import</span> <span class="nn">sys</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="n">cwd</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
-<span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="o">!</span>git clone https://github.com/alsinmr/pyDR_tutorial.git
-    <span class="kn">from</span> <span class="nn">pyDR_tutorial</span> <span class="kn">import</span> <span class="n">colab_setup</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="s1">&#39;..&#39;</span><span class="p">))</span> <span class="c1">#Go to the JupyterBook directory</span>
-    <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cwd</span><span class="p">,</span><span class="s1">&#39;../..&#39;</span><span class="p">))</span> <span class="c1">#Path to pyDR (make sure this is correct if working locally)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># Path to pyDR location</span>
 </pre></div>
 </div>
 </div>
@@ -465,78 +470,6 @@ title="Print to PDF"
 <section id="loading-nmr-data">
 <h2>Loading NMR data<a class="headerlink" href="#loading-nmr-data" title="Permalink to this headline">#</a></h2>
 <p>First, we load a data object and discuss some of its contents, including plotting the experimental data. The contents of the data text file are shown below (entries are truncated for convenient viewing).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Read-out data text file (only first 6 entries shown for R,Rstd,S2,S2std,label)</span>
-<span class="n">stops</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;Rstd&#39;</span><span class="p">,</span><span class="s1">&#39;S2&#39;</span><span class="p">,</span><span class="s1">&#39;S2std&#39;</span><span class="p">,</span><span class="s1">&#39;label&#39;</span><span class="p">,</span><span class="s1">&#39;END&#39;</span><span class="p">]</span>
-<span class="n">counter</span><span class="o">=-</span><span class="mi">10000</span>
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;data/HETs_15N.txt&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">counter</span><span class="o">+=</span><span class="mi">1</span>
-        <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">:</span><span class="n">counter</span><span class="o">=</span><span class="mi">0</span>           
-        <span class="k">if</span> <span class="n">counter</span><span class="o">&lt;</span><span class="mi">6</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
-        <span class="k">elif</span> <span class="n">counter</span><span class="o">==</span><span class="mi">6</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO
-Type	R1	R1	R1	R1p	R1p	R1p	R1p	R1p
-Nuc	15N	15N	15N	15N	15N	15N	15N	15N
-v0	400	500	850	850	850	850	500	500
-v1	0	0	0	10.8	16.1	24.5	37.6	50.8
-vr	0	0	0	60	60	60	60	60
-dXY	-22293	-22293	-22293	-22293	-22293	-22293	-22293	-22293
-END
-
-DATA
-R
-1.6128e-02	2.3718e-02	2.0059e-02	1.7572e+00	1.5562e+00	1.5255e+00	4.9255e+00	8.1995e+00
-5.1332e-02	3.4098e-02	3.5748e-02	5.2365e+00	4.0751e+00	5.9506e+00	8.6306e+00	7.8626e+00
-4.4656e-02	3.2938e-02	2.7476e-02	2.1590e+00	2.4629e+00	1.7784e+00	1.6129e+00	2.6828e+00
-5.3568e-02	3.4962e-02	4.5654e-02	3.5630e+00	3.2250e+00	2.7737e+00	2.1813e+00	2.7379e+00
-7.8377e-02	5.4420e-02	4.1665e-02	4.8031e+00	4.4480e+00	3.5364e+00	3.4516e+00	3.8330e+00
-...
-
-Rstd
-2.4563e-03	2.9327e-03	1.8676e-03	1.2433e+00	1.0416e+00	3.4144e-01	9.2180e-01	1.9317e+00
-4.8322e-03	5.2921e-03	3.9709e-03	1.4767e+00	1.2874e+00	1.7913e+00	2.0022e+00	2.2384e+00
-1.8399e-03	4.6196e-03	1.8577e-03	1.2188e+00	6.8622e-01	1.4895e-01	2.4250e-01	8.6327e-01
-6.4186e-03	7.5221e-03	5.8902e-03	1.3546e+00	6.5465e-01	6.5107e-01	1.1026e+00	1.4914e+00
-5.5028e-03	8.9836e-03	2.7200e-03	5.8094e-01	4.8034e-01	5.8431e-01	4.4152e-01	6.2103e-01
-...
-
-S2
-0.8799
-0.8360
-0.8974
-0.8703
-0.8437
-...
-
-S2std
-0.0240
-0.0300
-0.0160
-0.0160
-0.0160
-...
-
-label
-224
-226
-227
-228
-229
-...
-
-END
-</pre></div>
-</div>
-</div>
-</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the data</span>
@@ -629,7 +562,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_12_0.png" src="_images/Ch3_basic_NMR_12_0.png" />
+<img alt="_images/Ch3_basic_NMR_11_0.png" src="_images/Ch3_basic_NMR_11_0.png" />
 </div>
 </div>
 </section>
@@ -651,7 +584,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_14_0.png" src="_images/Ch3_basic_NMR_14_0.png" />
+<img alt="_images/Ch3_basic_NMR_13_0.png" src="_images/Ch3_basic_NMR_13_0.png" />
 </div>
 </div>
 <p>Finally, we can check the fit quality by comparing the back-calculated relaxation rate constants to the original experimental relaxation rate constants.</p>
@@ -663,19 +596,20 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_16_0.png" src="_images/Ch3_basic_NMR_16_0.png" />
+<img alt="_images/Ch3_basic_NMR_15_0.png" src="_images/Ch3_basic_NMR_15_0.png" />
 </div>
 </div>
 </section>
 <section id="connecting-data-to-locations-in-a-structure-3d-visualization">
 <h2>Connecting data to locations in a structure, 3D visualization<a class="headerlink" href="#connecting-data-to-locations-in-a-structure-3d-visualization" title="Permalink to this headline">#</a></h2>
 <p>It is often useful to see how relaxation parameters relate to the structure. Also, for sake of comparison of dynamics between methods, one may assign a common set of labels, but alternatively, one may associate dynamics via the structure. For both, we may attach a “selection” object to the data. The selection is a list of atom groups (from the <a class="reference external" href="http://mdanalysis.org/">MDAnalysis</a> software packgage), with the same number of entries as the number of data points in the data object (len(data)).</p>
-<p>We will also include a ‘Project’ here. Projects add a lot of functionality; here they provide us with convenient communcation with <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a>.</p>
+<p>We will also include a ‘Project’ here. Projects add a lot of convient functionality; here they provide us with convenient communcation with <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">Project</span><span class="p">()</span>  <span class="c1">#Project without storage location</span>
 <span class="n">proj</span><span class="o">.</span><span class="n">append_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="c1">#Add data to project</span>
-<span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;data/HETs_2kj3.pdb&#39;</span><span class="p">)</span> <span class="c1">#Add selection to data</span>
+<span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;2kj3&#39;</span><span class="p">)</span> <span class="c1">#Add selection to data</span>
+<span class="c1">#Note: you can use a local file, or download from the pdb database with 4-letter code</span>
 
 <span class="c1"># data.label contains the residue numbers, so we can just point to these. </span>
 <span class="c1">#The pdb contains 3 copies of HET-s (segments A,B,C), so we have to select just one segment</span>
@@ -755,7 +689,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
             <p class="prev-next-title"><font color="maroon">Chapter 2: Detector Optimization</font></p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="NMR_template.html" title="next page">
+    <a class='right-next' id="next-link" href="Tpl_basicNMR.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><font color="maroon">Template: Basic NMR</font></p>

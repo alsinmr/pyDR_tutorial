@@ -3,6 +3,8 @@
 
 # # <font color="maroon">Template: Basic NMR</font>
 
+# <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/NMR_template.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/JupyterBook/NMR_template.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # To use this template, you need to prepare a text file with NMR relaxation data in it (see HETs_15N.txt or ubi_soln.txt for example). If you intend to run on a local pyDR installation, then you just need to point pyDR to the file. If you want to run in Google Colab, the file needs to be available online somehow. The suggested options are in your Google drive, where we will mount Google drive in the notebook, or via a shareable weblink (for example, also available in Dropbox, Google Drive, etc.).

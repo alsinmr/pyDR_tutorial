@@ -3,24 +3,18 @@
 
 # # <font color="maroon">Chapter 3: A Basic NMR Analysis</font>
 
-# <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/JupyterBook/Ch3_basic_NMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+# <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch3_basic_NMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # In this example, we load an NMR data set and demonstrate how to go about fitting it. For this, we need a text file with the measured relaxation rates and experimental data in it. This is provided for this example, but one can also upload one's own data. Make sure to follow the prescribed file format. Entries are separated by tabs within a given line and by carriage returns over multiple lines. An example data file is printed out as an example.
 
 # In[1]:
 
 
-#Setup: Make sure packages are installed in google colab. 
-#Also, make sure that we start in the main folder of the tutorial
-import sys
+# SETUP pyDR
 import os
-cwd=os.getcwd()
-if 'google.colab' in sys.modules:
-    get_ipython().system('git clone https://github.com/alsinmr/pyDR_tutorial.git')
-    from pyDR_tutorial import colab_setup
-else:
-    os.chdir(os.path.join(cwd,'..')) #Go to the JupyterBook directory
-    sys.path.append(os.path.join(cwd,'../..')) #Path to pyDR (make sure this is correct if working locally)
+os.chdir('..')
+import sys
+sys.path.append('../') # Path to pyDR location
 
 
 # In[2]:
@@ -35,22 +29,6 @@ import pyDR
 # First, we load a data object and discuss some of its contents, including plotting the experimental data. The contents of the data text file are shown below (entries are truncated for convenient viewing).
 
 # In[3]:
-
-
-#Read-out data text file (only first 6 entries shown for R,Rstd,S2,S2std,label)
-stops=['R','Rstd','S2','S2std','label','END']
-counter=-10000
-with open('data/HETs_15N.txt','r') as f:
-    for line in f:
-        counter+=1
-        if line.strip() in stops:counter=0           
-        if counter<6:
-            print(line.strip())
-        elif counter==6:
-            print('...\n')
-
-
-# In[4]:
 
 
 # Load the data
@@ -75,7 +53,7 @@ data=pyDR.IO.readNMR('data/HETs_15N.txt')
 # 
 # Below, you can investigate these different components. We show data.info, which provides the various relevant experimental parameters for determining the sensitivities of the 8 experiments. Note that this data set also includes $S^2$, which is treated separately and does not show up in data.info.
 
-# In[5]:
+# In[4]:
 
 
 data.info
@@ -101,7 +79,7 @@ data.info
 
 # A graphical summary of the data object is obtained via data.plot (can use various plotting options, such as plot type, etc.). The plt_obj provides a variety of functions for manipulating the plot.
 
-# In[6]:
+# In[5]:
 
 
 plt_obj=data.plot(style='bar')
@@ -116,7 +94,7 @@ plt_obj.fig.set_size_inches([8,10])
 # 
 # although a few improvements have been made since the initial analysis.
 
-# In[7]:
+# In[6]:
 
 
 data.detect.r_auto(4).inclS2()  #Optimize the detectors
@@ -130,7 +108,7 @@ _=plt_obj.ax[-1].set_xlabel('Residue')
 
 # Finally, we can check the fit quality by comparing the back-calculated relaxation rate constants to the original experimental relaxation rate constants.
 
-# In[8]:
+# In[7]:
 
 
 fig=fit.plot_fit()[0].axes.figure
@@ -141,14 +119,15 @@ fig.set_size_inches([12,10])
 # 
 # It is often useful to see how relaxation parameters relate to the structure. Also, for sake of comparison of dynamics between methods, one may assign a common set of labels, but alternatively, one may associate dynamics via the structure. For both, we may attach a "selection" object to the data. The selection is a list of atom groups (from the [MDAnalysis](http://mdanalysis.org/) software packgage), with the same number of entries as the number of data points in the data object (len(data)).
 # 
-# We will also include a 'Project' here. Projects add a lot of functionality; here they provide us with convenient communcation with [ChimeraX](https://www.cgl.ucsf.edu/chimerax/).
+# We will also include a 'Project' here. Projects add a lot of convient functionality; here they provide us with convenient communcation with [ChimeraX](https://www.cgl.ucsf.edu/chimerax/).
 
-# In[9]:
+# In[8]:
 
 
 proj=pyDR.Project()  #Project without storage location
 proj.append_data(data) #Add data to project
-data.select=pyDR.MolSelect(topo='data/HETs_2kj3.pdb') #Add selection to data
+data.select=pyDR.MolSelect(topo='2kj3') #Add selection to data
+#Note: you can use a local file, or download from the pdb database with 4-letter code
 
 # data.label contains the residue numbers, so we can just point to these. 
 #The pdb contains 3 copies of HET-s (segments A,B,C), so we have to select just one segment
@@ -160,7 +139,7 @@ fit=data.fit()  #Selections are automatically passed from data to fit
 
 # If you are running locally (**Does not work in Google Colab!**), you can view the detector analysis directly on the HET-s molecule. Note, this requires installation of ChimeraX. It also requires providing pyDIFRATE with a path to the ChimeraX executable, although this step only needs to be done once, unless the program is moved, updated, etc.
 
-# In[10]:
+# In[9]:
 
 
 #Set chimera path (only required once)
@@ -172,7 +151,7 @@ proj.chimera.command_line('~show ~/B@N,C,CA') #Send command to chimera
 
 # You can mouse over the different detector names in ChimeraX ($\rho_0$,$\rho_1$,etc.), to view the different detector responses. However, the size of the responses are on different scales, so only $\rho_0$ is visible on the default scale. Run the cells below to view the different responses.
 
-# In[11]:
+# In[10]:
 
 
 proj.chimera.close()
@@ -180,7 +159,7 @@ fit.chimera(rho_index=[1,2])
 proj.chimera.command_line('~show ~/B@N,C,CA')
 
 
-# In[12]:
+# In[11]:
 
 
 proj.chimera.close()

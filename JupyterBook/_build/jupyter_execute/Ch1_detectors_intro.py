@@ -3,6 +3,8 @@
 
 # # <font color="maroon"> Chapter 1: A brief introduction to detectors </font>
 
+# <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch1_detectors_intro.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
+
 # ## Models for decaying correlation functions
 # Experimental and simulated dynamics information is often assumed to be described based on a time-correlation function, which relates the state of some parameter at an initial time to its value at a later time. The time-correlation is the *average* of that relationship. For example, for some parameter which varies with time, $A(\tau)$, the simplest time-correlation function would be
 # 
@@ -103,9 +105,17 @@
 # In[1]:
 
 
-# Import various modules, including the pyDR module
+# SETUP pyDR
+import os
+os.chdir('..')
 import sys
-sys.path.append('../')
+sys.path.append('../') # Path to pyDR location
+
+
+# In[2]:
+
+
+# Import various modules, including the pyDR module
 import pyDR   #Import the pyDR software, which includes functions for calculating NMR relaxation rate constants
 from pyDR.misc.tools import linear_ex #Convenient tool for interpolating between data points
 import numpy as np #Lots of nice linear algebra tools
@@ -347,7 +357,7 @@ _=pyDR.Sens.NMR(Type='R1',Nuc='15N',v0=600).plot_Rz()
 # 
 # The superscript $n$ just indicates that there are multiple possible linear combinations of relaxation rate constants. Each linear combination creates a new window, but most possible windows may not be particularly useful. For example, we take two relaxation rate constants below, and show a random set of linear combinations:
 
-# In[34]:
+# In[10]:
 
 
 nmr=pyDR.Sens.NMR(Type='R1',v0=[40,800],Nuc='15N')
@@ -362,7 +372,7 @@ _=ax.set_ylabel(r'\rho_n(z)')
 
 # However, pyDR is designed to yield the optimal $n$ windows for a given data set, for example, for the two experiments, we get two optimized windows (The number of optimized windows is always less than or equal to the number of experiments)
 
-# In[33]:
+# In[11]:
 
 
 _=nmr.Detector().r_auto(2).plot_rhoz()

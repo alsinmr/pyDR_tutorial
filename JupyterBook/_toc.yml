@@ -17,5 +17,6 @@ parts:
 - caption: Templates
   numbered: false
   chapters:
-  - file: NMR_template
+  - file: Tpl_basicNMR
+  - file: Tpl_SolnNMR
   

@@ -118,12 +118,16 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="BriefHistory.html">
-   A Brief History of Detectors
+   <font color="maroon">
+    Background
+   </font>
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="References.html">
-   References
+   <font color="maroon">
+    References
+   </font>
   </a>
  </li>
 </ul>
@@ -162,9 +166,16 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="NMR_template.html">
+  <a class="reference internal" href="Tpl_basicNMR.html">
    <font color="maroon">
     Template: Basic NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_SolnNMR.html">
+   <font color="maroon">
+    Template: Solution-State NMR
    </font>
   </a>
  </li>
@@ -445,6 +456,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-chapter-1-a-brief-introduction-to-detectors-font">
 <h1><font color="maroon"> Chapter 1: A brief introduction to detectors </font><a class="headerlink" href="#font-color-maroon-chapter-1-a-brief-introduction-to-detectors-font" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch1_detectors_intro.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <section id="models-for-decaying-correlation-functions">
 <h2>Models for decaying correlation functions<a class="headerlink" href="#models-for-decaying-correlation-functions" title="Permalink to this headline">#</a></h2>
 <p>Experimental and simulated dynamics information is often assumed to be described based on a time-correlation function, which relates the state of some parameter at an initial time to its value at a later time. The time-correlation is the <em>average</em> of that relationship. For example, for some parameter which varies with time, <span class="math notranslate nohighlight">\(A(\tau)\)</span>, the simplest time-correlation function would be</p>
@@ -532,9 +544,18 @@ S^2=\lim_{t\rightarrow\infty}C(t)
 <p>Whether we have NMR data, or other dynamics data depending on some form of time-correlation function, we can, in principle, fit the experimental data based on some model of the correlation function. However, the challenge is, if we don’t know the model, how valuable are these fits? We’ll start by taking some example motion, characterized by 3 motions and calculate a few relaxation rate constants for those motions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import various modules, including the pyDR module</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># Path to pyDR location</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import various modules, including the pyDR module</span>
 <span class="kn">import</span> <span class="nn">pyDR</span>   <span class="c1">#Import the pyDR software, which includes functions for calculating NMR relaxation rate constants</span>
 <span class="kn">from</span> <span class="nn">pyDR.misc.tools</span> <span class="kn">import</span> <span class="n">linear_ex</span> <span class="c1">#Convenient tool for interpolating between data points</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1">#Lots of nice linear algebra tools</span>
@@ -561,16 +582,7 @@ S^2=\lim_{t\rightarrow\infty}C(t)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-1-b7716af37fe8&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">sys</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">import</span> <span class="nn">pyDR</span>   <span class="c1">#Import the pyDR software, which includes functions for calculating NMR relaxation rate constants</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">from</span> <span class="nn">pyDR.misc.tools</span> <span class="kn">import</span> <span class="n">linear_ex</span> <span class="c1">#Convenient tool for interpolating between data points</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1">#Lots of nice linear algebra tools</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pyDR&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fd4984e0cf8&gt;
 </pre></div>
 </div>
 </div>
@@ -593,7 +605,7 @@ S^2=\lim_{t\rightarrow\infty}C(t)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_6_0.png" src="_images/Ch1_detectors_intro_6_0.png" />
+<img alt="_images/Ch1_detectors_intro_8_0.png" src="_images/Ch1_detectors_intro_8_0.png" />
 </div>
 </div>
 <p>Now, the question is, can we fit this data based on a model of the correlation function, and does that model have to match the original model. For demonstration purposes, we try a model that only has two correlation times.</p>
@@ -639,7 +651,7 @@ C(t)=1-(A_0+A_1+A_2)+A_0\exp(-t/\tau_0)+A_1\exp(-t/\tau_1)+A_2\exp(-t/\tau_2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error is 1.5334372109582631e-07 (should be small– otherwise adjust initial guess)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error is 6.5735314936268175e-06 (should be small– otherwise adjust initial guess)
 </pre></div>
 </div>
 </div>
@@ -671,8 +683,8 @@ C(t)=1-(A_0+A_1+A_2)+A_0\exp(-t/\tau_0)+A_1\exp(-t/\tau_1)+A_2\exp(-t/\tau_2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_11_0.png" src="_images/Ch1_detectors_intro_11_0.png" />
-<img alt="_images/Ch1_detectors_intro_11_1.png" src="_images/Ch1_detectors_intro_11_1.png" />
+<img alt="_images/Ch1_detectors_intro_13_0.png" src="_images/Ch1_detectors_intro_13_0.png" />
+<img alt="_images/Ch1_detectors_intro_13_1.png" src="_images/Ch1_detectors_intro_13_1.png" />
 </div>
 </div>
 <p>The data is well-fit, but the parameters themselves are not well determined, so we try again with a reduced number of variables, to see what happens.</p>
@@ -687,7 +699,7 @@ C(t)=1-(A_0+A_1+A_2)+A_0\exp(-t/\tau_0)+A_1\exp(-t/\tau_1)+A_2\exp(-t/\tau_2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error is 4.299710895100029e-07 (should be small– otherwise adjust initial guess)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error is 4.299449423051208e-07 (should be small– otherwise adjust initial guess)
 </pre></div>
 </div>
 </div>
@@ -719,8 +731,8 @@ C(t)=1-(A_0+A_1+A_2)+A_0\exp(-t/\tau_0)+A_1\exp(-t/\tau_1)+A_2\exp(-t/\tau_2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_14_0.png" src="_images/Ch1_detectors_intro_14_0.png" />
-<img alt="_images/Ch1_detectors_intro_14_1.png" src="_images/Ch1_detectors_intro_14_1.png" />
+<img alt="_images/Ch1_detectors_intro_16_0.png" src="_images/Ch1_detectors_intro_16_0.png" />
+<img alt="_images/Ch1_detectors_intro_16_1.png" src="_images/Ch1_detectors_intro_16_1.png" />
 </div>
 </div>
 <p>The two fits are nearly equal in quality, whereas only the second yields stable parameters, due to the fewer number of free variables. However, neither fit really reproduces the input correlation times and amplitudes. There isn’t enough information to extract 6 parameters, and so we get parameters that represent some kind of compromise to match the real motion. This is discussed in detail in:</p>
@@ -783,7 +795,7 @@ R_\zeta(z)=2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_17_0.png" src="_images/Ch1_detectors_intro_17_0.png" />
+<img alt="_images/Ch1_detectors_intro_19_0.png" src="_images/Ch1_detectors_intro_19_0.png" />
 </div>
 </div>
 <p>As one sees, measurement of this <span class="math notranslate nohighlight">\(T_1\)</span> lets us characterize dynamics <em>around</em> roughly 1 ns.</p>
@@ -819,7 +831,7 @@ R_\zeta(z)=2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_19_0.png" src="_images/Ch1_detectors_intro_19_0.png" />
+<img alt="_images/Ch1_detectors_intro_21_0.png" src="_images/Ch1_detectors_intro_21_0.png" />
 </div>
 </div>
 <p>However, pyDR is designed to yield the optimal <span class="math notranslate nohighlight">\(n\)</span> windows for a given data set, for example, for the two experiments, we get two optimized windows (The number of optimized windows is always less than or equal to the number of experiments)</p>
@@ -830,7 +842,7 @@ R_\zeta(z)=2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_21_0.png" src="_images/Ch1_detectors_intro_21_0.png" />
+<img alt="_images/Ch1_detectors_intro_23_0.png" src="_images/Ch1_detectors_intro_23_0.png" />
 </div>
 </div>
 <p>Formally, the linear combination of rate constants (or any other parameter depending linearly on the correlation function) is referred to as a <em>detector response</em> (<span class="math notranslate nohighlight">\(\rho_n^{(\theta,S)}\)</span>), and the linear combination of sensitivities of the rate constants as <em>detector sensitivities</em> (<span class="math notranslate nohighlight">\(\rho_n(z)\)</span>). In the next chapter, we discuss how the windows are actually optimized.</p>
@@ -868,7 +880,7 @@ R_\zeta(z)=2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">References</p>
+            <p class="prev-next-title"><font color="maroon"> References </font></p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Ch2_detector_opt.html" title="next page">
