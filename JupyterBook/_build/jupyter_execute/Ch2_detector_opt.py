@@ -43,8 +43,6 @@ sys.path.append('../') # Path to pyDR location
 # In[2]:
 
 
-import sys
-sys.path.append('..')
 import pyDR
 import matplotlib.pyplot as plt
 import numpy as np
