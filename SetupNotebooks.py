@@ -284,10 +284,24 @@ if __name__=='__main__':
     directory='/Users/albertsmith/Documents/GitHub/pyDR_tutorial'
     if not(os.path.exists(directory)):
         directory=directory.replace('GitHub','GitHub.nosync')
-        
-    for filename in os.listdir(directory):
-        if len(filename)>6 and filename[-6:]=='.ipynb':
-            copy2colab(filename)
-            copy2JupyterBook(filename)
+    
+    #Load the file_records (modified times) if it exists
+    file_record={}
+    if os.path.exists('file_record.txt'):
+        with open('file_record.txt','r') as f:
+            for line in f:
+                key,value=line.strip().split('\t')
+                file_record[key]=int(value)
+            
+    with open('file_record.txt','w') as f:
+        for filename in os.listdir(directory):
+            if len(filename)>6 and filename[-6:]=='.ipynb':
+                mt=int(os.path.getmtime(filename))
+                if not(filename in file_record and mt==file_record[filename]):
+                    #new or modified notebooks get copied
+                    copy2colab(filename)
+                    copy2JupyterBook(filename)
+                
+                f.write(f'{filename}\t{mt}\n')
         
         
