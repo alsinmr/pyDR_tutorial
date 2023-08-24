@@ -49,9 +49,11 @@ class CellReader():
         out=[]
         count=1
         for line in f:
-            if '{' in line:count+=1
-            if '}' in line:count-=1
-            if count==0:break
+            count+=line.count('{')
+            count-=line.count('}')
+            # if '{' in line:count+=1
+            # if '}' in line:count-=1
+            if count<1:break
             out.append(line)
         self.last_cell=out
         

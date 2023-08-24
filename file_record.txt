@@ -1,5 +1,5 @@
-Ch1_detectors_intro.ipynb	1692795651
-Tpl_SolnNMR.ipynb	1692803180
-Ch2_detector_opt.ipynb	1692803426
-Tpl_basicNMR.ipynb	1692801625
-Ch3_basic_NMR.ipynb	1692797275
+Ch1_detectors_intro.ipynb	1692805420
+Tpl_SolnNMR.ipynb	1692889044
+Ch2_detector_opt.ipynb	1692805420
+Tpl_basicNMR.ipynb	1692902094
+Ch3_basic_NMR.ipynb	1692895538
