@@ -115,13 +115,19 @@ fig=fit.plot_fit()[0].axes.figure
 fig.set_size_inches([12,10])
 
 
+# In[8]:
+
+
+fit.nglview(1)
+
+
 # ## Connecting data to locations in a structure, 3D visualization
 # 
 # It is often useful to see how relaxation parameters relate to the structure. Also, for sake of comparison of dynamics between methods, one may assign a common set of labels, but alternatively, one may associate dynamics via the structure. For both, we may attach a "selection" object to the data. The selection is a list of atom groups (from the [MDAnalysis](http://mdanalysis.org/) software packgage), with the same number of entries as the number of data points in the data object (len(data)).
 # 
 # We will also include a 'Project' here. Projects add a lot of convient functionality; here they provide us with convenient communcation with [ChimeraX](https://www.cgl.ucsf.edu/chimerax/).
 
-# In[8]:
+# In[11]:
 
 
 proj=pyDR.Project()  #Project without storage location
@@ -139,7 +145,7 @@ fit=data.fit()  #Selections are automatically passed from data to fit
 
 # If you are running locally (**Does not work in Google Colab!**), you can view the detector analysis directly on the HET-s molecule. Note, this requires installation of ChimeraX. It also requires providing pyDIFRATE with a path to the ChimeraX executable, although this step only needs to be done once, unless the program is moved, updated, etc.
 
-# In[9]:
+# In[21]:
 
 
 #Set chimera path (only required once)
@@ -151,7 +157,7 @@ proj.chimera.command_line('~show ~/B@N,C,CA') #Send command to chimera
 
 # You can mouse over the different detector names in ChimeraX ($\rho_0$,$\rho_1$,etc.), to view the different detector responses. However, the size of the responses are on different scales, so only $\rho_0$ is visible on the default scale. Run the cells below to view the different responses.
 
-# In[10]:
+# In[23]:
 
 
 proj.chimera.close()
@@ -159,7 +165,7 @@ fit.chimera(rho_index=[1,2])
 proj.chimera.command_line('~show ~/B@N,C,CA')
 
 
-# In[11]:
+# In[26]:
 
 
 proj.chimera.close()
