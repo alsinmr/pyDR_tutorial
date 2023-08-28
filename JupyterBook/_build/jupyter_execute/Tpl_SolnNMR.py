@@ -135,6 +135,7 @@ fit=data.fit()
 # In[11]:
 
 
+proj.close_fig('all')
 plt_obj=fit.plot(style='bar')
 plt_obj.fig.set_size_inches([8,10])
 plt_obj.show_tc()
@@ -148,4 +149,12 @@ _=plt_obj.ax[-1].set_xlabel('Residue')
 
 fig=fit.plot_fit()[0].axes.figure
 fig.set_size_inches([12,10])
+
+
+# ## Visualize with NGL Viewer
+
+# In[13]:
+
+
+fit.nglview(1,scaling=5)
 
