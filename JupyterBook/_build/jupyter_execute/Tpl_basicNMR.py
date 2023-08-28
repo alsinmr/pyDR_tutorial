@@ -151,35 +151,5 @@ fig.set_size_inches([12,10])
 # In[13]:
 
 
-fit.nglview(1)
-
-
-# In[14]:
-
-
-v=fit.nglview(1)
-
-
-# In[15]:
-
-
-v.download_image('ngl_image.png')
-
-
-# In[16]:
-
-
-pwd
-
-
-# In[17]:
-
-
-v
-
-
-# In[ ]:
-
-
-
+fit.nglview(0)
 

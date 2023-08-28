@@ -127,7 +127,6 @@ plt_obj.fig.set_size_inches([8,10])
 
 data.detect.r_auto(4)    #Set number of detectors here
 fit=data.fit()  #Fit the data
-fit=data.fit()
 
 
 # ## Plot the results
@@ -156,5 +155,5 @@ fig.set_size_inches([12,10])
 # In[13]:
 
 
-fit.nglview(1,scaling=5)
+fit.nglview(1)
 
