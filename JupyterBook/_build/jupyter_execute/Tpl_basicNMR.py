@@ -148,8 +148,14 @@ fig.set_size_inches([12,10])
 
 # ## Visualize with NGL viewer
 
-# In[13]:
+# In[20]:
 
 
-fit.nglview(0)
+fit.nglview(4,scaling=100)
+
+
+# In[ ]:
+
+
+
 

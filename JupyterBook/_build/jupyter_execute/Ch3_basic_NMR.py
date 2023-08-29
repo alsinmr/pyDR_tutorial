@@ -153,7 +153,7 @@ proj.chimera.command_line('~show ~/B@N,C,CA') #Send command to chimera
 
 # You can mouse over the different detector names in ChimeraX ($\rho_0$,$\rho_1$,etc.), to view the different detector responses. However, the size of the responses are on different scales, so only $\rho_0$ is visible on the default scale (often a problem with rigid proteins). Run the cells below to view the different responses.
 
-# In[10]:
+# In[23]:
 
 
 proj.chimera.close()
@@ -161,7 +161,7 @@ fit.chimera(rho_index=[1,2])
 proj.chimera.command_line('~show ~/B@N,C,CA')
 
 
-# In[11]:
+# In[26]:
 
 
 proj.chimera.close()
@@ -171,13 +171,13 @@ proj.chimera.command_line('~show ~/B@N,C,CA')
 
 # ### Visualization with [NGL Viewer](https://nglviewer.org/)
 
-# In[12]:
+# In[10]:
 
 
 fit.nglview(0)  #Just provide the index of the detector to view
 
 
-# In[13]:
+# In[11]:
 
 
 fit.nglview(1)

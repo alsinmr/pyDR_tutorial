@@ -283,7 +283,7 @@ def copy2JupyterBook(filename):
   
 
 if __name__=='__main__':
-    from SetupNotebooks import copy2colab,copy2JupyterBook
+    from SetupNotebooks import *
     
     directory='/Users/albertsmith/Documents/GitHub/pyDR_tutorial'
     if not(os.path.exists(directory)):

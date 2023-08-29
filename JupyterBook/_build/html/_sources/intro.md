@@ -9,8 +9,8 @@ The tutorial here provides explanation of the detectors motivation, and some bas
 ```{tableofcontents}
 ```
 
-**HET-s(218-289) Dynamics (~6 ns)**
-*NMR data analyzed via detector analysis and plotted with [NGLview](http://nglviewer.org/) (built into pyDR)*
+**HET-s(218-289) Dynamics**
+*NMR data analyzed via detector analysis and plotted with [NGLview](http://nglviewer.org/) (built into pyDR). The detector near 6 ns is shown*
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.0/jquery-ui.css">
 
