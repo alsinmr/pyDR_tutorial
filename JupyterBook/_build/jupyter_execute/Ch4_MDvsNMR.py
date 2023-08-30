@@ -33,6 +33,7 @@ import pyDR
 
 
 #Download MD files if running in Colab
+import sys
 if 'google.colab' in sys.modules:
     from gdown import download
     ID='1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW'   #HETs xtc file

@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Template: Basic NMR" href="Tpl_basicNMR.html" />
+    <link rel="next" title="Chapter 5: Anatomy of pyDIFRATE" href="Ch5_pyDRstruct.html" />
     <link rel="prev" title="Chapter 3: A Basic NMR Analysis" href="Ch3_basic_NMR.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -162,6 +162,13 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="current reference internal" href="#">
    <font color="maroon">
     Chapter 4: Comparing MD and NMR Results
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch5_pyDRstruct.html">
+   <font color="maroon">
+    Chapter 5: Anatomy of pyDIFRATE
    </font>
   </a>
  </li>
@@ -584,6 +591,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Download MD files if running in Colab</span>
+<span class="kn">import</span> <span class="nn">sys</span>
 <span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">gdown</span> <span class="kn">import</span> <span class="n">download</span>
     <span class="n">ID</span><span class="o">=</span><span class="s1">&#39;1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW&#39;</span>   <span class="c1">#HETs xtc file</span>
@@ -653,7 +661,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fae987f04e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f8591681390&gt;
 </pre></div>
 </div>
 </div>
@@ -688,7 +696,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:MD:backboneB with 70 data points
-&lt;pyDR.Data.Data.Data object at 0x7faea937f0b8&gt;
+&lt;pyDR.Data.Data.Data object at 0x7f8570100128&gt;
 </pre></div>
 </div>
 </div>
@@ -780,7 +788,7 @@ n12:MD:backboneB
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
 pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7faeb9986550&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f85c03945c0&gt;
 
 Titles:
 n12:MD:backboneB
@@ -929,10 +937,10 @@ n12:MD:backboneB
             <p class="prev-next-title"><font color="maroon">Chapter 3: A Basic NMR Analysis</font></p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Tpl_basicNMR.html" title="next page">
+    <a class='right-next' id="next-link" href="Ch5_pyDRstruct.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon">Template: Basic NMR</font></p>
+        <p class="prev-next-title"><font color="maroon">Chapter 5: Anatomy of pyDIFRATE</font></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

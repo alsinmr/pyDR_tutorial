@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -157,6 +155,20 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="Ch3_basic_NMR.html">
    <font color="maroon">
     Chapter 3: A Basic NMR Analysis
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch4_MDvsNMR.html">
+   <font color="maroon">
+    Chapter 4: Comparing MD and NMR Results
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch5_pyDRstruct.html">
+   <font color="maroon">
+    Chapter 5: Anatomy of pyDIFRATE
    </font>
   </a>
  </li>
@@ -377,7 +389,7 @@ title="Print to PDF"
 <p><strong>So, is it ‘detectors’ or DIFRATE?</strong></p>
 <p>Detectors is the name of the method. DIFRATE is the name of the original MATLAB software <a class="reference external" href="http://difrate.sourceforge.io/">package</a>, and pyDIFRATE is the Python implementation (although the pyDIFRATE package on GitHub is superceded by <a class="reference external" href="http://github.com/alsinmr/pyDR">pyDR</a>). DIFRATE stands for DIstortion Free Relaxation Analysis TEchnique, and one essentially end up taking sums and differences of relaxation rate constants, so it was complete with a double meaning. However, being distortion <em>free</em> was too big a claim to be made in a peer-reviewed paper, so only the software and not the method ended up being named DIFRATE (I would maintain that it is distortion free as long as the correlation function is monoexponential, although I would not make this claim about solution-state NMR data).</p>
 <p><strong>Major contributors</strong>
-Aside from myself, Beat Meier and Matthias Ernst helped clarify a lot of the important ideas for detector analysis and explain its necessity, and Fabien Ferrage was critical in repurposing for solution-state NMR. Collaboration with Daniel Huster has been a champion for pushing for its application beyond model proteins and looking at more biologically relevant systems. Kai Zumpfe has contributed significantly to the software itself.</p>
+Aside from myself, Beat Meier and Matthias Ernst helped clarify a lot of the important ideas for detector analysis and explain its necessity, and Fabien Ferrage was critical in repurposing for solution-state NMR. Daniel Huster has been a champion for pushing for its application beyond model proteins and looking at more biologically relevant systems. Kai Zumpfe has contributed significantly to the software itself.</p>
 </section>
 
     <script type="text/x-thebe-config">

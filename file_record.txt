@@ -1,7 +1,8 @@
-Ch4_MDvsNMR.ipynb	1693321658
+Ch4_MDvsNMR.ipynb	1693402755
 Ch1_detectors_intro.ipynb	1692795651
 Tpl_SolnNMR.ipynb	1693313599
 Untitled.ipynb	1693221893
 Ch2_detector_opt.ipynb	1692803426
 Tpl_basicNMR.ipynb	1693313599
 Ch3_basic_NMR.ipynb	1692968036
+Ch5_pyDRstruct.ipynb	1693415278
