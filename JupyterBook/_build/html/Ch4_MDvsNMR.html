@@ -661,7 +661,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f8591681390&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f91306e6518&gt;
 </pre></div>
 </div>
 </div>
@@ -676,18 +676,6 @@ p5:NMR:1w_0cR6ykj
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sel</span><span class="o">.</span><span class="n">traj</span><span class="o">.</span><span class="n">ProgressBar</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sel</span><span class="o">.</span><span class="n">traj</span><span class="o">.</span><span class="n">step</span><span class="o">=</span><span class="mi">10</span>  <span class="c1">#Take every tenth point for MD calculation (set to 1 for more accurate calculation)</span>
 <span class="n">pyDR</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#Turns of the Progress bar (screws up webpage compilation)</span>
 <span class="n">pyDR</span><span class="o">.</span><span class="n">md2data</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="c1">#Calculate the MD correlation functions (automatically goes to proj)</span>
@@ -696,7 +684,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:MD:backboneB with 70 data points
-&lt;pyDR.Data.Data.Data object at 0x7f8570100128&gt;
+&lt;pyDR.Data.Data.Data object at 0x7f91307213c8&gt;
 </pre></div>
 </div>
 </div>
@@ -709,7 +697,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch4_MDvsNMR_17_0.png" src="_images/Ch4_MDvsNMR_17_0.png" />
+<img alt="_images/Ch4_MDvsNMR_16_0.png" src="_images/Ch4_MDvsNMR_16_0.png" />
 </div>
 </div>
 </section>
@@ -750,7 +738,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch4_MDvsNMR_21_0.png" src="_images/Ch4_MDvsNMR_21_0.png" />
+<img alt="_images/Ch4_MDvsNMR_20_0.png" src="_images/Ch4_MDvsNMR_20_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -768,7 +756,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch4_MDvsNMR_22_0.png" src="_images/Ch4_MDvsNMR_22_0.png" />
+<img alt="_images/Ch4_MDvsNMR_21_0.png" src="_images/Ch4_MDvsNMR_21_0.png" />
 </div>
 </div>
 <p>Above, we obtain reasonably good reproduction with <span class="math notranslate nohighlight">\(n=9\)</span> for detectors 0-2 (ns/ps range). The latter 2 detectors (<span class="math notranslate nohighlight">\(\mu\)</span>s range) are poorly reproduced because the 2 <span class="math notranslate nohighlight">\(\mu\)</span>s trajectory is insufficient for reproducing microsecond dynamics.</p>
@@ -788,7 +776,7 @@ n12:MD:backboneB
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
 pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f85c03945c0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f9122d034e0&gt;
 
 Titles:
 n12:MD:backboneB
@@ -806,7 +794,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch4_MDvsNMR_26_0.png" src="_images/Ch4_MDvsNMR_26_0.png" />
+<img alt="_images/Ch4_MDvsNMR_25_0.png" src="_images/Ch4_MDvsNMR_25_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -845,7 +833,7 @@ n12:MD:backboneB
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 1 data objects
 </pre></div>
 </div>
-<img alt="_images/Ch4_MDvsNMR_30_1.png" src="_images/Ch4_MDvsNMR_30_1.png" />
+<img alt="_images/Ch4_MDvsNMR_29_1.png" src="_images/Ch4_MDvsNMR_29_1.png" />
 </div>
 </div>
 </section>
@@ -895,7 +883,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch4_MDvsNMR_35_0.png" src="_images/Ch4_MDvsNMR_35_0.png" />
+<img alt="_images/Ch4_MDvsNMR_34_0.png" src="_images/Ch4_MDvsNMR_34_0.png" />
 </div>
 </div>
 <p>No MD data is plotted for the last detector, since the detector sensitivies were very different. Note that typically MD-derived microsecond motion is difficult to reproduce. Also, note that this data set is better reproduced with longer, optimized MD trajectories.</p>

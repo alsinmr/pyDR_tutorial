@@ -97,12 +97,6 @@ sel.select_bond('N',segids='B')
 # In[6]:
 
 
-sel.traj.ProgressBar
-
-
-# In[7]:
-
-
 sel.traj.step=10  #Take every tenth point for MD calculation (set to 1 for more accurate calculation)
 pyDR.Defaults['ProgressBar']=False #Turns of the Progress bar (screws up webpage compilation)
 pyDR.md2data(sel) #Calculate the MD correlation functions (automatically goes to proj)
@@ -110,7 +104,7 @@ pyDR.md2data(sel) #Calculate the MD correlation functions (automatically goes to
 
 # Below, we view the sensitivies of the MD correlation function (only a selection of the 40000 sensitivities are shown)
 
-# In[8]:
+# In[7]:
 
 
 _=proj['MD']['raw'][0].sens.plot_rhoz()
@@ -121,7 +115,7 @@ _=proj['MD']['raw'][0].sens.plot_rhoz()
 # 
 # The solution is to use a large (12-15) number of *unoptimized* detectors. Data from unoptimized detectors is difficult to interpret directly, but can be subsequently reprocessed to ideal detectors, and allows us to try different processing approaches without dealing with the large correlation functions with every attempt.
 
-# In[9]:
+# In[8]:
 
 
 proj['MD'].detect.r_no_opt(12)  #Calculate 12 unoptimized detectors
@@ -132,14 +126,14 @@ print(proj)
 # ### Detector Optimization
 # We can optimize the MD detectors for comparison to NMR data, or simply for analysis of the MD alone. The latter approach provides better information on the dynamics in the MD, but cannot be quantitatively compared to the NMR results.
 
-# In[10]:
+# In[9]:
 
 
 #Optimize 7 detectors, plot the resulting sensitivities
 _=proj['MD']['no_opt'].detect.r_auto(7).plot_rhoz()
 
 
-# In[11]:
+# In[10]:
 
 
 #Optimize detectors to match NMR data
@@ -158,7 +152,7 @@ _=proj['NMR']['proc'].sens.plot_rhoz(ax=ax,color='black',linestyle=':')
 # ### Process and plot MD data
 # We'll start by processing the MD data for evaluation without comparison to NMR.
 
-# In[12]:
+# In[11]:
 
 
 #Optimize 7 detectors
@@ -167,7 +161,7 @@ proj['MD']['no_opt'].detect.r_auto(7)
 proj['MD']['no_opt'].fit()
 
 
-# In[13]:
+# In[12]:
 
 
 #Plot the results (be careful that we don't have open windows)
@@ -176,14 +170,14 @@ proj['MD']['proc'].plot()
 proj.plot_obj.fig.set_size_inches([8,12])
 
 
-# In[14]:
+# In[13]:
 
 
 #Show the results for selected detectors in NGLviewer (may fail in Google Colab)
 # proj['MD']['proc'][0].nglview(rho_index=1,scaling=30)
 
 
-# In[15]:
+# In[14]:
 
 
 #Show the results in ChimeraX (only works locally)
@@ -196,7 +190,7 @@ if 'google.colab' not in sys.modules:
 
 # The low amplitude "waves" in the detector sensitivies can be removed if desired. The waves may capture some motion significantly faster or slower than the detector's mean position, and so are less than ideal. However, their removal can in principle distort the data, although our experiences is that this effect is usually unlikely.
 
-# In[16]:
+# In[15]:
 
 
 # Optimize the MD fit and cleanup the sensitivity "waves"
@@ -211,7 +205,7 @@ proj.plot_obj.fig.set_size_inches([8,12])
 
 # ### Optimize MD detectors to match NMR detectors
 
-# In[17]:
+# In[16]:
 
 
 target=proj['NMR']['proc'].sens.rhoz
@@ -232,7 +226,7 @@ _=proj['MD']['no_opt'].fit()
 # ```
 # This behavior is usually convenient. However, in Jupyter notebooks, if one already has an open plot in a previous cell, it will not show up in a new cell by default (thus why we start plotting by closing all plots). Furthermore, if data with very different sensitivies are plotted into the same plot object, the second data set may not plot at all.
 
-# In[18]:
+# In[17]:
 
 
 proj.close_fig('all')
