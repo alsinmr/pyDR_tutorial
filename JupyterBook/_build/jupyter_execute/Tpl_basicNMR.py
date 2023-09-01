@@ -5,9 +5,35 @@
 
 # <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Tpl_basicNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
-# To use this template, you need to prepare a text file with NMR relaxation data in it (see [HETs_15N.txt](https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt) or [ubi_soln.txt](https://github.com/alsinmr/pyDR_tutorial/raw/main/data/ubi_soln.txt) for example). If you intend to run on a local pyDR installation, then you just need to point pyDR to the file. If you want to run in Google Colab, the file needs to be available online somehow. The suggested options are in your Google drive, where we will mount Google drive in the notebook, or via a shareable weblink (for example, also available in Dropbox, Google Drive, etc.).
+# To use this template, you need to prepare a text file with NMR relaxation data in it (see [HETs_15N.txt](https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt) or [ubi_soln.txt](https://github.com/alsinmr/pyDR_tutorial/raw/main/data/ubi_soln.txt) for example). If you intend to run on a local pyDR installation, then you just need to point pyDR to the file. If you want to run in Google Colab, the file needs to be available online somehow. My recommendation is to use a shared link from Google drive or something similar. 
+# 
+# One can also mount Google drive in Google Colab. Note that this poses [security risks](https://medium.com/mlearning-ai/careful-who-you-colab-with-fa8001f933e7). Basically, once Google Drive is mounted, the Python software could in principle send files in it to us, or we could delete things. We promise not to do that! However, I think it's worth mentioning that this in general poses a risk and you shouldn't mount Google Drive using untrusted notebooks.
+
+# ## Parameters
+# Below, you find the parameters you would typically change for your own analysis
 
 # In[1]:
+
+
+#Where's  your data??
+path_to_nmr_data='data/HETs_15N.txt'  #Data stored locally
+# path_to_nmr_data='https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt' #Github raw link
+# path_to_nmr_data='https://drive.google.com/file/d/1w_0cR6ykjL7xvdxU2W90fRXvZ8XfLFc3/view?usp=share_link' #Google drive share link
+
+# How many detectors
+n=4
+
+#Is there a PDB ID or saved topology file associated with your structure? 
+#(set =None if no structure)
+topo='2KJ3'
+
+#What Nucleus did you measure? (see below for more explanation)
+Nuc='N'  #This refers to the backbone nitrogen, specifically
+segids='B' # The example data (HETs) has 3 copies of the molecule, so we need to specify this
+# You will probably want to set segids=None
+
+
+# In[2]:
 
 
 # SETUP pyDR
@@ -17,7 +43,7 @@ import sys
 sys.path.append('../') # Path to pyDR location
 
 
-# In[2]:
+# In[3]:
 
 
 #Imports
@@ -29,52 +55,17 @@ import pyDR
 # 
 #  Note that you can use commands such as 'ls', 'cd', and 'pwd' if you're confused where your files are.
 
-# ### Loading data v1: Running locally
-# 
-# Just point to file
-
-# In[3]:
-
-
-data=pyDR.IO.readNMR('data/HETs_15N.txt')  #Change path to your file
-
-
-# ### Loading data v2: Download from online source
-# Just point to a url online. Note: except for Google Drive, the url needs to be the actual file and not a html viewer showing the file. For example, this [GitHub webpage](https://github.com/alsinmr/pyDR_tutorial/blob/main/data/HETs_15N.txt) shows our HET-s data. However, it is a viewer for the data, and not directly useable as a text file. However, the button in the upper right of the data viewer that says "raw" can be used to obtain the actual [text file](https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt).
-# 
-# For Google Drive, pyDR corrects the link internally, so you can just provide the share link. Note that without mounting Google drive, the file must be viewable to anyone with the link.
-
 # In[4]:
 
 
-# Example: raw file from Github
-data=pyDR.IO.readNMR('https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt')
-
-
-# In[5]:
-
-
-#Example: Google Drive share link
-data=pyDR.IO.readNMR('https://drive.google.com/file/d/1w_0cR6ykjL7xvdxU2W90fRXvZ8XfLFc3/view?usp=share_link')
-
-
-# ### Loading data v3: Colab with mounted drive
-# Mounting Google Drive will first cause a prompt in this window, followed by a popup window for logging in. An advantage here is you can save results/figures to Google Drive.
-
-# In[6]:
-
-
-if 'google.colab' in sys.modules:
-    from google.colab import drive
-    drive.mount('/content/drive')
-    data=pyDR.IO.readNMR(os.path.join('/content/drive/MyDrive','path_to_data'))
+data=pyDR.IO.readNMR(path_to_nmr_data)
 
 
 # ## Put data into a project
 # 
-# Projects are convenient ways to manage a lot of data, and provide convenient tools for overlaying data in 2D plots, as well as visualizing data in 3D in ChimeraX (ChimeraX doesn't work on Colab).
+# Projects are convenient ways to manage a lot of data, and provide convenient tools for overlaying data in 2D plots, as well as visualizing data in 3D in ChimeraX. Not used extensively in this template.
 
-# In[7]:
+# In[5]:
 
 
 proj=pyDR.Project(directory=None)    #Include a directory to save the project
@@ -98,16 +89,17 @@ proj.append_data(data)
 # 
 # We can also filter based on residues, segments, and a filter string ([MDAnalysis](https://docs.mdanalysis.org/stable/documentation_pages/selections.html) format).
 
-# In[8]:
+# In[6]:
 
 
-data.select=pyDR.MolSelect(topo='2KJ3')
-data.select.select_bond(Nuc='N',resids=data.label,segids='B')
+if topo is not None and Nuc is not None:
+    data.select=pyDR.MolSelect(topo=topo)
+    data.select.select_bond(Nuc=Nuc,resids=data.label,segids=segids)
 
 
 # ## Plot the data
 
-# In[9]:
+# In[7]:
 
 
 plt_obj=data.plot(style='bar')
@@ -116,18 +108,19 @@ plt_obj.fig.set_size_inches([8,10])
 
 # ## Process NMR data
 
-# In[10]:
+# In[8]:
 
 
-data.detect.r_auto(4)    #Set number of detectors here
-data.detect.inclS2() #Uncomment if including order parameters
+data.detect.r_auto(n)    #Set number of detectors here
+if data.S2 is not None:
+    data.detect.inclS2() #Include order parameters
 
 fit=data.fit()  #Fit the data
 
 
 # ## Plot the results
 
-# In[11]:
+# In[9]:
 
 
 proj.close_fig('all')
@@ -139,7 +132,7 @@ _=plt_obj.ax[-1].set_xlabel('Residue')
 
 # ## Plot the fit quality
 
-# In[12]:
+# In[10]:
 
 
 fig=fit.plot_fit()[0].axes.figure
@@ -148,14 +141,16 @@ fig.set_size_inches([12,10])
 
 # ## Visualize with NGL viewer
 
-# In[20]:
+# In[11]:
 
 
-fit.nglview(4,scaling=100)
+fit.nglview(1)
 
 
-# In[ ]:
+# ## Visualize with ChimeraX
+
+# In[12]:
 
 
-
+fit.chimera()
 
