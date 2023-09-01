@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Template: Solution-State NMR" href="Tpl_SolnNMR.html" />
-    <link rel="prev" title="Chapter 4: Comparing MD and NMR Results" href="Ch4_MDvsNMR.html" />
+    <link rel="next" title="Template: Basic NMR" href="Tpl_SolnNMR.html" />
+    <link rel="prev" title="Chapter 6: Cross-Correlated Dynamics via iRED" href="Ch6_CCana.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -165,6 +165,20 @@ const thebe_selector_output = ".output, .cell_output"
    </font>
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch5_pyDRstruct.html">
+   <font color="maroon">
+    Chapter 5: Anatomy of pyDIFRATE
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch6_CCana.html">
+   <font color="maroon">
+    Chapter 6: Cross-Correlated Dynamics via iRED
+   </font>
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -182,7 +196,14 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="Tpl_SolnNMR.html">
    <font color="maroon">
-    Template: Solution-State NMR
+    Template: Basic NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_CCana.html">
+   <font color="maroon">
+    Template: Cross-Correlated Dynamics via iRED
    </font>
   </a>
  </li>
@@ -393,26 +414,14 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameters">
+   Parameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-nmr-data">
    Load NMR Data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loading-data-v1-running-locally">
-     Loading data v1: Running locally
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loading-data-v2-download-from-online-source">
-     Loading data v2: Download from online source
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loading-data-v3-colab-with-mounted-drive">
-     Loading data v3: Colab with mounted drive
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#put-data-into-a-project">
@@ -447,6 +456,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#visualize-with-ngl-viewer">
    Visualize with NGL viewer
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-with-chimerax">
+   Visualize with ChimeraX
   </a>
  </li>
 </ul>
@@ -469,26 +483,14 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#parameters">
+   Parameters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#load-nmr-data">
    Load NMR Data
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loading-data-v1-running-locally">
-     Loading data v1: Running locally
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loading-data-v2-download-from-online-source">
-     Loading data v2: Download from online source
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loading-data-v3-colab-with-mounted-drive">
-     Loading data v3: Colab with mounted drive
-    </a>
-   </li>
-  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#put-data-into-a-project">
@@ -525,6 +527,11 @@ title="Print to PDF"
    Visualize with NGL viewer
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualize-with-chimerax">
+   Visualize with ChimeraX
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -538,7 +545,33 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-template-basic-nmr-font">
 <h1><font color="maroon">Template: Basic NMR</font><a class="headerlink" href="#font-color-maroon-template-basic-nmr-font" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Tpl_basicNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>To use this template, you need to prepare a text file with NMR relaxation data in it (see <a class="reference external" href="https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt">HETs_15N.txt</a> or <a class="reference external" href="https://github.com/alsinmr/pyDR_tutorial/raw/main/data/ubi_soln.txt">ubi_soln.txt</a> for example). If you intend to run on a local pyDR installation, then you just need to point pyDR to the file. If you want to run in Google Colab, the file needs to be available online somehow. The suggested options are in your Google drive, where we will mount Google drive in the notebook, or via a shareable weblink (for example, also available in Dropbox, Google Drive, etc.).</p>
+<p>To use this template, you need to prepare a text file with NMR relaxation data in it (see <a class="reference external" href="https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt">HETs_15N.txt</a> or <a class="reference external" href="https://github.com/alsinmr/pyDR_tutorial/raw/main/data/ubi_soln.txt">ubi_soln.txt</a> for example). If you intend to run on a local pyDR installation, then you just need to point pyDR to the file. If you want to run in Google Colab, the file needs to be available online somehow. My recommendation is to use a shared link from Google drive or something similar.</p>
+<p>One can also mount Google drive in Google Colab. Note that this poses <a class="reference external" href="https://medium.com/mlearning-ai/careful-who-you-colab-with-fa8001f933e7">security risks</a>. Basically, once Google Drive is mounted, the Python software could in principle send files in it to us, or we could delete things. We promise not to do that! However, I think it’s worth mentioning that this in general poses a risk and you shouldn’t mount Google Drive using untrusted notebooks.</p>
+<section id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h2>
+<p>Below, you find the parameters you would typically change for your own analysis</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Where&#39;s  your data??</span>
+<span class="n">path_to_nmr_data</span><span class="o">=</span><span class="s1">&#39;data/HETs_15N.txt&#39;</span>  <span class="c1">#Data stored locally</span>
+<span class="c1"># path_to_nmr_data=&#39;https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt&#39; #Github raw link</span>
+<span class="c1"># path_to_nmr_data=&#39;https://drive.google.com/file/d/1w_0cR6ykjL7xvdxU2W90fRXvZ8XfLFc3/view?usp=share_link&#39; #Google drive share link</span>
+
+<span class="c1"># How many detectors</span>
+<span class="n">n</span><span class="o">=</span><span class="mi">4</span>
+
+<span class="c1">#Is there a PDB ID or saved topology file associated with your structure? </span>
+<span class="c1">#(set =None if no structure)</span>
+<span class="n">topo</span><span class="o">=</span><span class="s1">&#39;2KJ3&#39;</span>
+
+<span class="c1">#What Nucleus did you measure? (see below for more explanation)</span>
+<span class="n">Nuc</span><span class="o">=</span><span class="s1">&#39;N&#39;</span>  <span class="c1">#This refers to the backbone nitrogen, specifically</span>
+<span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span> <span class="c1"># The example data (HETs) has 3 copies of the molecule, so we need to specify this</span>
+<span class="c1"># You will probably want to set segids=None</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
@@ -558,60 +591,22 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+</section>
 <section id="load-nmr-data">
 <h2>Load NMR Data<a class="headerlink" href="#load-nmr-data" title="Permalink to this headline">#</a></h2>
 <p>The best way to get load your data depends if you’re running locally (just point to the file) or if you’re running online (download from somewhere, mount Google Drive)</p>
 <p>Note that you can use commands such as ‘ls’, ‘cd’, and ‘pwd’ if you’re confused where your files are.</p>
-<section id="loading-data-v1-running-locally">
-<h3>Loading data v1: Running locally<a class="headerlink" href="#loading-data-v1-running-locally" title="Permalink to this headline">#</a></h3>
-<p>Just point to file</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="s1">&#39;data/HETs_15N.txt&#39;</span><span class="p">)</span>  <span class="c1">#Change path to your file</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="n">path_to_nmr_data</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="loading-data-v2-download-from-online-source">
-<h3>Loading data v2: Download from online source<a class="headerlink" href="#loading-data-v2-download-from-online-source" title="Permalink to this headline">#</a></h3>
-<p>Just point to a url online. Note: except for Google Drive, the url needs to be the actual file and not a html viewer showing the file. For example, this <a class="reference external" href="https://github.com/alsinmr/pyDR_tutorial/blob/main/data/HETs_15N.txt">GitHub webpage</a> shows our HET-s data. However, it is a viewer for the data, and not directly useable as a text file. However, the button in the upper right of the data viewer that says “raw” can be used to obtain the actual <a class="reference external" href="https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt">text file</a>.</p>
-<p>For Google Drive, pyDR corrects the link internally, so you can just provide the share link. Note that without mounting Google drive, the file must be viewable to anyone with the link.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example: raw file from Github</span>
-<span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="s1">&#39;https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Example: Google Drive share link</span>
-<span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="s1">&#39;https://drive.google.com/file/d/1w_0cR6ykjL7xvdxU2W90fRXvZ8XfLFc3/view?usp=share_link&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="loading-data-v3-colab-with-mounted-drive">
-<h3>Loading data v3: Colab with mounted drive<a class="headerlink" href="#loading-data-v3-colab-with-mounted-drive" title="Permalink to this headline">#</a></h3>
-<p>Mounting Google Drive will first cause a prompt in this window, followed by a popup window for logging in. An advantage here is you can save results/figures to Google Drive.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
-    <span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
-    <span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s1">&#39;/content/drive/MyDrive&#39;</span><span class="p">,</span><span class="s1">&#39;path_to_data&#39;</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
 </section>
 <section id="put-data-into-a-project">
 <h2>Put data into a project<a class="headerlink" href="#put-data-into-a-project" title="Permalink to this headline">#</a></h2>
-<p>Projects are convenient ways to manage a lot of data, and provide convenient tools for overlaying data in 2D plots, as well as visualizing data in 3D in ChimeraX (ChimeraX doesn’t work on Colab).</p>
+<p>Projects are convenient ways to manage a lot of data, and provide convenient tools for overlaying data in 2D plots, as well as visualizing data in 3D in ChimeraX. Not used extensively in this template.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">Project</span><span class="p">(</span><span class="n">directory</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>    <span class="c1">#Include a directory to save the project</span>
@@ -640,40 +635,9 @@ title="Print to PDF"
 <p>We can also filter based on residues, segments, and a filter string (<a class="reference external" href="https://docs.mdanalysis.org/stable/documentation_pages/selections.html">MDAnalysis</a> format).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;2KJ3&#39;</span><span class="p">)</span>
-<span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="n">Nuc</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">label</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-8-43d1ea3f237d&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;2KJ3&#39;</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="n">Nuc</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">label</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/Selection/MolSys.py</span> in <span class="ni">select_bond</span><span class="nt">(self, Nuc, resids, segids, filter_str, label)</span>
-<span class="g g-Whitespace">    </span><span class="mi">521</span> 
-<span class="g g-Whitespace">    </span><span class="mi">522</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">523</span>             <span class="bp">self</span><span class="o">.</span><span class="n">sel1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sel2</span><span class="o">=</span><span class="n">selt</span><span class="o">.</span><span class="n">protein_defaults</span><span class="p">(</span><span class="n">Nuc</span><span class="o">=</span><span class="n">Nuc</span><span class="p">,</span><span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">resids</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="n">segids</span><span class="p">,</span><span class="n">filter_str</span><span class="o">=</span><span class="n">filter_str</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span> 
-<span class="g g-Whitespace">    </span><span class="mi">525</span>         <span class="n">_mdmode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_mdmode</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/Selection/select_tools.py</span> in <span class="ni">protein_defaults</span><span class="nt">(Nuc, mol, resids, segids, filter_str)</span>
-<span class="g g-Whitespace">    </span><span class="mi">250</span>     <span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">251</span><span class="sd"> </span>
-<span class="ne">--&gt; </span><span class="mi">252</span><span class="sd">     sel0=sel0_filter(mol,resids,segids,filter_str)</span>
-<span class="g g-Whitespace">    </span><span class="mi">253</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span><span class="sd">     if Nuc.lower()==&#39;15n&#39; or Nuc.lower()==&#39;n&#39; or Nuc.lower()==&#39;n15&#39;:</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/Selection/select_tools.py</span> in <span class="ni">sel0_filter</span><span class="nt">(mol, resids, segids, filter_str)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="s1">&#39;uni&#39;</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>         <span class="n">sel0</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">uni</span><span class="o">.</span><span class="n">atoms</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="s1">&#39;atoms&#39;</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span>         <span class="n">sel0</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">atoms</span>
-
-<span class="ne">AttributeError</span>: &#39;NoneType&#39; object has no attribute &#39;atoms&#39;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">topo</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">Nuc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="n">topo</span><span class="p">)</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="n">Nuc</span><span class="o">=</span><span class="n">Nuc</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">label</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="n">segids</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -689,7 +653,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Tpl_basicNMR_18_0.png" src="_images/Tpl_basicNMR_18_0.png" />
+<img alt="_images/Tpl_basicNMR_14_0.png" src="_images/Tpl_basicNMR_14_0.png" />
 </div>
 </div>
 </section>
@@ -697,8 +661,9 @@ title="Print to PDF"
 <h2>Process NMR data<a class="headerlink" href="#process-nmr-data" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>    <span class="c1">#Set number of detectors here</span>
-<span class="n">data</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">inclS2</span><span class="p">()</span> <span class="c1">#Uncomment if including order parameters</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>    <span class="c1">#Set number of detectors here</span>
+<span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">S2</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">inclS2</span><span class="p">()</span> <span class="c1">#Include order parameters</span>
 
 <span class="n">fit</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>  <span class="c1">#Fit the data</span>
 </pre></div>
@@ -719,7 +684,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Tpl_basicNMR_22_0.png" src="_images/Tpl_basicNMR_22_0.png" />
+<img alt="_images/Tpl_basicNMR_18_0.png" src="_images/Tpl_basicNMR_18_0.png" />
 </div>
 </div>
 </section>
@@ -733,7 +698,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Tpl_basicNMR_24_0.png" src="_images/Tpl_basicNMR_24_0.png" />
+<img alt="_images/Tpl_basicNMR_20_0.png" src="_images/Tpl_basicNMR_20_0.png" />
 </div>
 </div>
 </section>
@@ -741,14 +706,26 @@ title="Print to PDF"
 <h2>Visualize with NGL viewer<a class="headerlink" href="#visualize-with-ngl-viewer" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="o">.</span><span class="n">nglview</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">scaling</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="o">.</span><span class="n">nglview</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "a38e17d746674ebfa4a309f36e3d76fb", "version_major": 2, "version_minor": 0}
+{"version_major": 2, "version_minor": 0, "model_id": "7919e896d1c54806acb257985cb20277"}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "aaf9c5b9ab634843bb7227bbce3a828c"}
 </script></div>
+</div>
+</section>
+<section id="visualize-with-chimerax">
+<h2>Visualize with ChimeraX<a class="headerlink" href="#visualize-with-chimerax" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -780,17 +757,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch4_MDvsNMR.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Ch6_CCana.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Chapter 4: Comparing MD and NMR Results</font></p>
+            <p class="prev-next-title"><font color="maroon">Chapter 6: Cross-Correlated Dynamics via iRED</font></p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Tpl_SolnNMR.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon">Template: Solution-State NMR</font></p>
+        <p class="prev-next-title"><font color="maroon">Template: Basic NMR</font></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

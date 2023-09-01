@@ -15,10 +15,12 @@ parts:
   - file: Ch3_basic_NMR
   - file: Ch4_MDvsNMR
   - file: Ch5_pyDRstruct
+  - file: Ch6_CCana
 
 - caption: Templates
   numbered: false
   chapters:
   - file: Tpl_basicNMR
   - file: Tpl_SolnNMR
+  - file: Tpl_CCana
   

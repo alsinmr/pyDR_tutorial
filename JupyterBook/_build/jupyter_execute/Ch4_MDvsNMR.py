@@ -80,7 +80,9 @@ if 'google.colab' in sys.modules:
     #Create a selection object with trajectory data
     sel=pyDR.MolSelect(topo='HETs_md.pdb',traj_files='HETs_md.xtc',project=proj)
 else:
-    sel=pyDR.MolSelect(topo='../pyDR/examples/HETs15N/backboneB.pdb',traj_files='../pyDR/examples/HETs15N/backboneB.xtc',project=proj)
+    sel=pyDR.MolSelect(topo='../pyDR/examples/HETs15N/backboneB.pdb',
+                       traj_files='../pyDR/examples/HETs15N/backboneB.xtc',
+                       project=proj)
 
 # Specify the bond select to analyze for MD
 sel.select_bond('N',segids='B')
@@ -152,7 +154,7 @@ _=proj['NMR']['proc'].sens.plot_rhoz(ax=ax,color='black',linestyle=':')
 # ### Process and plot MD data
 # We'll start by processing the MD data for evaluation without comparison to NMR.
 
-# In[11]:
+# In[12]:
 
 
 #Optimize 7 detectors
@@ -161,7 +163,7 @@ proj['MD']['no_opt'].detect.r_auto(7)
 proj['MD']['no_opt'].fit()
 
 
-# In[12]:
+# In[13]:
 
 
 #Plot the results (be careful that we don't have open windows)
@@ -170,14 +172,14 @@ proj['MD']['proc'].plot()
 proj.plot_obj.fig.set_size_inches([8,12])
 
 
-# In[13]:
+# In[23]:
 
 
 #Show the results for selected detectors in NGLviewer (may fail in Google Colab)
 # proj['MD']['proc'][0].nglview(rho_index=1,scaling=30)
 
 
-# In[14]:
+# In[15]:
 
 
 #Show the results in ChimeraX (only works locally)
@@ -190,7 +192,7 @@ if 'google.colab' not in sys.modules:
 
 # The low amplitude "waves" in the detector sensitivies can be removed if desired. The waves may capture some motion significantly faster or slower than the detector's mean position, and so are less than ideal. However, their removal can in principle distort the data, although our experiences is that this effect is usually unlikely.
 
-# In[15]:
+# In[16]:
 
 
 # Optimize the MD fit and cleanup the sensitivity "waves"
@@ -205,7 +207,7 @@ proj.plot_obj.fig.set_size_inches([8,12])
 
 # ### Optimize MD detectors to match NMR detectors
 
-# In[16]:
+# In[17]:
 
 
 target=proj['NMR']['proc'].sens.rhoz
@@ -226,7 +228,7 @@ _=proj['MD']['no_opt'].fit()
 # ```
 # This behavior is usually convenient. However, in Jupyter notebooks, if one already has an open plot in a previous cell, it will not show up in a new cell by default (thus why we start plotting by closing all plots). Furthermore, if data with very different sensitivies are plotted into the same plot object, the second data set may not plot at all.
 
-# In[17]:
+# In[18]:
 
 
 proj.close_fig('all')

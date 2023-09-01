@@ -172,6 +172,13 @@ const thebe_selector_output = ".output, .cell_output"
    </font>
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch6_CCana.html">
+   <font color="maroon">
+    Chapter 6: Cross-Correlated Dynamics via iRED
+   </font>
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -653,7 +660,9 @@ p5:NMR:1w_0cR6ykj
     <span class="c1">#Create a selection object with trajectory data</span>
     <span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;HETs_md.pdb&#39;</span><span class="p">,</span><span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;HETs_md.xtc&#39;</span><span class="p">,</span><span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.pdb&#39;</span><span class="p">,</span><span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.xtc&#39;</span><span class="p">,</span><span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+    <span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.pdb&#39;</span><span class="p">,</span>
+                       <span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.xtc&#39;</span><span class="p">,</span>
+                       <span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
 
 <span class="c1"># Specify the bond select to analyze for MD</span>
 <span class="n">sel</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
@@ -661,7 +670,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f91306e6518&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fab810a0550&gt;
 </pre></div>
 </div>
 </div>
@@ -684,7 +693,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:MD:backboneB with 70 data points
-&lt;pyDR.Data.Data.Data object at 0x7f91307213c8&gt;
+&lt;pyDR.Data.Data.Data object at 0x7fab90b16518&gt;
 </pre></div>
 </div>
 </div>
@@ -756,7 +765,18 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch4_MDvsNMR_21_0.png" src="_images/Ch4_MDvsNMR_21_0.png" />
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-10-c8e641fa4e75&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_target</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1">#Plot the resulting detector, and compare to the original NMR detectors</span>
+<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">ax</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">plot_rhoz</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">plot_rhoz</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: &#39;AxesSubplot&#39; object is not subscriptable
+</pre></div>
+</div>
+<img alt="_images/Ch4_MDvsNMR_21_1.png" src="_images/Ch4_MDvsNMR_21_1.png" />
 </div>
 </div>
 <p>Above, we obtain reasonably good reproduction with <span class="math notranslate nohighlight">\(n=9\)</span> for detectors 0-2 (ns/ps range). The latter 2 detectors (<span class="math notranslate nohighlight">\(\mu\)</span>s range) are poorly reproduced because the 2 <span class="math notranslate nohighlight">\(\mu\)</span>s trajectory is insufficient for reproducing microsecond dynamics.</p>
@@ -776,7 +796,7 @@ n12:MD:backboneB
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
 pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f9122d034e0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f8d71bd83c8&gt;
 
 Titles:
 n12:MD:backboneB
