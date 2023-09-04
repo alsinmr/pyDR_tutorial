@@ -246,7 +246,7 @@ proj.chimera.command_line(['~show ~@N,C,CA','set bgColor white','lighting soft']
 # proj.update_info()  
 # ```
 
-# In[18]:
+# In[38]:
 
 
 print(data.source.status)
@@ -260,7 +260,7 @@ print(data.title)  #This references data.source.title
 
 # data.source also keeps a detailed, plain text processing history (data.source.details). It can also be accessed from data.details. This particular data set was obtained using averages over 3 MD trajectories and each trajectory was chunked by residue into 5 parts, so there are 15 combined data objects, making the details much longer than usual. We print part of the details here.
 
-# In[19]:
+# In[47]:
 
 
 for k in range(10):print(data.details[k])
@@ -274,7 +274,7 @@ for k in range(-10,0):print(data.details[k])
 # 
 # We can see what's in a project, just by typing the variable name:
 
-# In[20]:
+# In[48]:
 
 
 proj
@@ -300,13 +300,13 @@ proj
 # ```
 # yields the data in the selected data object
 
-# In[21]:
+# In[60]:
 
 
 proj['.+AvOb.+apo']
 
 
-# In[22]:
+# In[61]:
 
 
 proj['opt_fit']['.+apo']
@@ -314,13 +314,13 @@ proj['opt_fit']['.+apo']
 
 # As mentioned above, subprojects with only one data object automatically obtain attributes of that data object (unless project already has the attribute– e.g., a subproject always uses the proj.chimera object, rather than the data.chimera function. Usually, the user will not notice the difference, but occasionally this can become important. Here we demonstrate how the full project has no attribute 'R', but a subproject with a single element does have 'R'.
 
-# In[23]:
+# In[8]:
 
 
 hasattr(proj,'R')
 
 
-# In[24]:
+# In[9]:
 
 
 hasattr(proj['opt_fit']['.+apo'],'R')
@@ -329,7 +329,7 @@ hasattr(proj['opt_fit']['.+apo'],'R')
 # ### Project batch processing
 # The functions .fit, .opt2dist, and .modes2bonds (iRED) can be applied to a (sub-)project and will be applied to all data within. Also, proj.detect allows batch optimization of detectors. In fact, the project will test to see if some of the detector objects are originating from identical sensitivities and will replace them with a unified object if so, avoiding redundant detector optimization. We'll show the procedure for re-fitting some of the no-opt data.
 
-# In[25]:
+# In[4]:
 
 
 proj['no_opt']['AvOb'].detect.r_auto(8)  #OPtimize detectors
@@ -338,7 +338,7 @@ _=proj['no_opt']['AvOb'].fit()
 
 # We can check and see that indeed the detector objects in the subproject are now the same object, thus removing the need to optimize both.
 
-# In[26]:
+# In[5]:
 
 
 proj['no_opt']['AvOb'][0].detect is proj['no_opt']['AvOb'][1].detect
@@ -346,7 +346,7 @@ proj['no_opt']['AvOb'][0].detect is proj['no_opt']['AvOb'][1].detect
 
 # In most cases, this will not cause the user any problems, but one needs to be aware that subsequent detector optimizations of either of the detectors will automatically be applied to both. This behavior can be avoided by enforcing *unique detectors*
 
-# In[27]:
+# In[6]:
 
 
 proj['no_opt']['AvOb'].detect.unique_detect()
@@ -368,7 +368,7 @@ proj['no_opt']['AvOb'][0].detect is proj['no_opt']['AvOb'][1].detect
 # ```
 # Plots may also be saved outside the project folder by providing the full path.
 
-# In[28]:
+# In[7]:
 
 
 proj.close_fig('all')
@@ -378,7 +378,7 @@ proj['o7'].plot(style='bar').show_tc().fig.set_size_inches([8,12])
 
 # In the above plot, it is difficult to see the differences between the two data objects (data sets are differentiated by hashes on the bars), so we can instead plot them with two different plot types (plot types are line plots: 'p', bar plots: 'b', and scatter plots: 's')
 
-# In[29]:
+# In[16]:
 
 
 proj.close_fig('all')
@@ -398,7 +398,7 @@ proj['o7.+apo'].plot(style='plot')
 # .chimera.close           :  Close the specified model in chimera (or leave blank for all models)
 # 
 
-# In[30]:
+# In[14]:
 
 
 proj['o7'].chimera()  #Show two data sets in chimera
@@ -423,7 +423,7 @@ proj.chimera.command_line('~show ~@N,C,CA')  #Just show the backbone
 # 
 # NMR data is already prepared and stored in a text file. Then, we may either load the data object and then append to a project, or just provide the path/link to the project directly. We'll make an empty project to test this.
 
-# In[31]:
+# In[10]:
 
 
 proj=pyDR.Project()  #Project (without directory)
@@ -437,14 +437,14 @@ proj
 
 # The second way we get data into a project is by processing data already stored in a project
 
-# In[32]:
+# In[11]:
 
 
 proj[0].detect.r_auto(4)
 proj[0].fit()
 
 
-# In[33]:
+# In[9]:
 
 
 proj
@@ -454,7 +454,7 @@ proj
 # 
 # For MD data, we first create a selection object. The simplest way to get MD data to a project is to add the project to the original selection object, which will cause any data produced from that selection object to go automatically into the project. We may also use proj.append_data after the data creation if desired.
 
-# In[34]:
+# In[17]:
 
 
 sel=pyDR.MolSelect(topo='../pyDR/examples/HETs15N/backboneB.pdb',
@@ -468,7 +468,7 @@ pyDR.md2data(sel)
 
 # If we check, we find indeed that the raw data has now appeared in the project
 
-# In[35]:
+# In[18]:
 
 
 proj

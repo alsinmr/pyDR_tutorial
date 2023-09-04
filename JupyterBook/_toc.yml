@@ -5,6 +5,7 @@ format: jb-book
 root: intro
 parts:
 - chapters:
+  - file: GettingStarted
   - file: BriefHistory
   - file: References
 - caption: Tutorial
@@ -16,6 +17,8 @@ parts:
   - file: Ch4_MDvsNMR
   - file: Ch5_pyDRstruct
   - file: Ch6_CCana
+  - file: Ch7_ROMANCE_CH3
+  - file: Ch8_ROMANCE_backbone
 
 - caption: Templates
   numbered: false

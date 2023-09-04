@@ -117,6 +117,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="GettingStarted.html">
+   <font color="maroon">
+    Getting Started
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="BriefHistory.html">
    <font color="maroon">
     Background
@@ -179,6 +186,20 @@ const thebe_selector_output = ".output, .cell_output"
    </font>
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7_ROMANCE_CH3.html">
+   <font color="maroon">
+    Chapter 7: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 8: ROMANCE Analysis of Backbone Motion
+   </font>
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -197,6 +218,13 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="Tpl_SolnNMR.html">
    <font color="maroon">
     Template: Solution-State NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_CCana.html">
+   <font color="maroon">
+    Template: Cross-Correlated Dynamics via iRED
    </font>
   </a>
  </li>
@@ -665,41 +693,6 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-8-15aedfbb91bd&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="c1"># data.label contains the residue numbers, so we can just point to these.</span>
-<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="c1">#The pdb contains 3 copies of HET-s (segments A,B,C), so we have to select just one segment</span>
-<span class="ne">----&gt; </span><span class="mi">8</span> <span class="n">_</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="n">Nuc</span><span class="o">=</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">label</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span> <span class="c1">#Define the selection</span>
-<span class="g g-Whitespace">      </span><span class="mi">9</span> 
-<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">fit</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>  <span class="c1">#Selections are automatically passed from data to fit</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/Selection/MolSys.py</span> in <span class="ni">select_bond</span><span class="nt">(self, Nuc, resids, segids, filter_str, label)</span>
-<span class="g g-Whitespace">    </span><span class="mi">521</span> 
-<span class="g g-Whitespace">    </span><span class="mi">522</span>         <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">523</span>             <span class="bp">self</span><span class="o">.</span><span class="n">sel1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">sel2</span><span class="o">=</span><span class="n">selt</span><span class="o">.</span><span class="n">protein_defaults</span><span class="p">(</span><span class="n">Nuc</span><span class="o">=</span><span class="n">Nuc</span><span class="p">,</span><span class="n">mol</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">resids</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="n">segids</span><span class="p">,</span><span class="n">filter_str</span><span class="o">=</span><span class="n">filter_str</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">524</span> 
-<span class="g g-Whitespace">    </span><span class="mi">525</span>         <span class="n">_mdmode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_mdmode</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/Selection/select_tools.py</span> in <span class="ni">protein_defaults</span><span class="nt">(Nuc, mol, resids, segids, filter_str)</span>
-<span class="g g-Whitespace">    </span><span class="mi">250</span>     <span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">251</span><span class="sd"> </span>
-<span class="ne">--&gt; </span><span class="mi">252</span><span class="sd">     sel0=sel0_filter(mol,resids,segids,filter_str)</span>
-<span class="g g-Whitespace">    </span><span class="mi">253</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">254</span><span class="sd">     if Nuc.lower()==&#39;15n&#39; or Nuc.lower()==&#39;n&#39; or Nuc.lower()==&#39;n15&#39;:</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/Selection/select_tools.py</span> in <span class="ni">sel0_filter</span><span class="nt">(mol, resids, segids, filter_str)</span>
-<span class="g g-Whitespace">     </span><span class="mi">25</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">     </span><span class="mi">26</span>     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="s1">&#39;uni&#39;</span><span class="p">):</span>
-<span class="ne">---&gt; </span><span class="mi">27</span>         <span class="n">sel0</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">uni</span><span class="o">.</span><span class="n">atoms</span>
-<span class="g g-Whitespace">     </span><span class="mi">28</span>     <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span><span class="s1">&#39;atoms&#39;</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">29</span>         <span class="n">sel0</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">atoms</span>
-
-<span class="ne">AttributeError</span>: &#39;NoneType&#39; object has no attribute &#39;atoms&#39;
-</pre></div>
-</div>
-</div>
 </div>
 <p>Detector analysis can be viewed directly on the molecule, with detector responses represented as color intensity and atom radius. This works externally from Jupyter notebooks via ChimeraX (must be separately installed, and the path provided below), or within the Jupyter notebook, via NGLviewer (must be installed in Python).</p>
 <section id="visualization-via-chimerax">
@@ -711,6 +704,33 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 
 <span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
 <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">(</span><span class="s1">&#39;~show ~/B@N,C,CA&#39;</span><span class="p">)</span> <span class="c1">#Send command to chimera</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-9-189842587d6b&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">pyDR</span><span class="o">.</span><span class="n">chimeraX</span><span class="o">.</span><span class="n">chimeraX_funs</span><span class="o">.</span><span class="n">set_chimera_path</span><span class="p">(</span><span class="s1">&#39;/Applications/ChimeraX-1.5.app/Contents/MacOS/ChimeraX&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">(</span><span class="s1">&#39;~show ~/B@N,C,CA&#39;</span><span class="p">)</span> <span class="c1">#Send command to chimera</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/Data/Data.py</span> in <span class="ni">chimera</span><span class="nt">(self, index, rho_index, scaling)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> 
+<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="c1"># CMXRemote.send_command(ID,&#39;close&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span>         <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot; maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
+<span class="g g-Whitespace">    </span><span class="mi">369</span>         <span class="n">tr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
