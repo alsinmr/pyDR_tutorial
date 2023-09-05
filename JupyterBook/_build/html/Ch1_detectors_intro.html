@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -633,11 +631,21 @@ S^2=\lim_{t\rightarrow\infty}C(t)
 <span class="n">nmr</span><span class="o">.</span><span class="n">new_exper</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;S2&#39;</span><span class="p">)</span>
 <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="sa">r</span><span class="s1">&#39;$R_1$(400 MHz)&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$R_1$(600 MHz)&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$R_1$(800 MHz)&#39;</span><span class="p">,</span>
         <span class="sa">r</span><span class="s1">&#39;$R_{1\rho}$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$1-S^2$&#39;</span><span class="p">]</span>
-
-<span class="n">ax</span><span class="o">=</span><span class="n">nmr</span><span class="o">.</span><span class="n">plot_Rz</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span> <span class="c1">#Plot the 9 relaxation rate constants (normalized to max of 1) vs tc</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">nmr</span><span class="o">.</span><span class="n">plot_Rz</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span> <span class="c1">#Plot the 9 relaxation rate constants (normalized to max of 1) vs tc</span>
 <span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span><span class="o">.</span><span class="n">figure</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch1_detectors_intro_7_0.png" src="_images/Ch1_detectors_intro_7_0.png" />
 </div>
 </div>
 <p>Now we can construct the relaxation rate constants for the seven experiments above, by simply summing over the three correlation times and amplitudes</p>
@@ -658,7 +666,7 @@ S^2=\lim_{t\rightarrow\infty}C(t)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_8_0.png" src="_images/Ch1_detectors_intro_8_0.png" />
+<img alt="_images/Ch1_detectors_intro_9_0.png" src="_images/Ch1_detectors_intro_9_0.png" />
 </div>
 </div>
 <p>Now, the question is, can we fit this data based on a model of the correlation function, and does that model have to match the original model. For demonstration purposes, we try a model that only has two correlation times.</p>
@@ -736,8 +744,8 @@ C(t)=1-(A_0+A_1+A_2)+A_0\exp(-t/\tau_0)+A_1\exp(-t/\tau_1)+A_2\exp(-t/\tau_2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_13_0.png" src="_images/Ch1_detectors_intro_13_0.png" />
-<img alt="_images/Ch1_detectors_intro_13_1.png" src="_images/Ch1_detectors_intro_13_1.png" />
+<img alt="_images/Ch1_detectors_intro_14_0.png" src="_images/Ch1_detectors_intro_14_0.png" />
+<img alt="_images/Ch1_detectors_intro_14_1.png" src="_images/Ch1_detectors_intro_14_1.png" />
 </div>
 </div>
 <p>The data is well-fit, but the parameters themselves are not well determined, so we try again with a reduced number of variables, to see what happens.</p>
@@ -784,8 +792,8 @@ C(t)=1-(A_0+A_1+A_2)+A_0\exp(-t/\tau_0)+A_1\exp(-t/\tau_1)+A_2\exp(-t/\tau_2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_16_0.png" src="_images/Ch1_detectors_intro_16_0.png" />
-<img alt="_images/Ch1_detectors_intro_16_1.png" src="_images/Ch1_detectors_intro_16_1.png" />
+<img alt="_images/Ch1_detectors_intro_17_0.png" src="_images/Ch1_detectors_intro_17_0.png" />
+<img alt="_images/Ch1_detectors_intro_17_1.png" src="_images/Ch1_detectors_intro_17_1.png" />
 </div>
 </div>
 <p>The two fits are nearly equal in quality, whereas only the second yields stable parameters, due to the fewer number of free variables. However, neither fit really reproduces the input correlation times and amplitudes. There isn’t enough information to extract 6 parameters, and so we get parameters that represent some kind of compromise to match the real motion. This is discussed in detail in:</p>
@@ -848,7 +856,7 @@ R_\zeta(z)=2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_19_0.png" src="_images/Ch1_detectors_intro_19_0.png" />
+<img alt="_images/Ch1_detectors_intro_20_0.png" src="_images/Ch1_detectors_intro_20_0.png" />
 </div>
 </div>
 <p>As one sees, measurement of this <span class="math notranslate nohighlight">\(T_1\)</span> lets us characterize dynamics <em>around</em> roughly 1 ns.</p>
@@ -884,7 +892,7 @@ R_\zeta(z)=2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_21_0.png" src="_images/Ch1_detectors_intro_21_0.png" />
+<img alt="_images/Ch1_detectors_intro_22_0.png" src="_images/Ch1_detectors_intro_22_0.png" />
 </div>
 </div>
 <p>However, pyDR is designed to yield the optimal <span class="math notranslate nohighlight">\(n\)</span> windows for a given data set, for example, for the two experiments, we get two optimized windows (The number of optimized windows is always less than or equal to the number of experiments)</p>
@@ -895,7 +903,7 @@ R_\zeta(z)=2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch1_detectors_intro_23_0.png" src="_images/Ch1_detectors_intro_23_0.png" />
+<img alt="_images/Ch1_detectors_intro_24_0.png" src="_images/Ch1_detectors_intro_24_0.png" />
 </div>
 </div>
 <p>Formally, the linear combination of rate constants (or any other parameter depending linearly on the correlation function) is referred to as a <em>detector response</em> (<span class="math notranslate nohighlight">\(\rho_n^{(\theta,S)}\)</span>), and the linear combination of sensitivities of the rate constants as <em>detector sensitivities</em> (<span class="math notranslate nohighlight">\(\rho_n(z)\)</span>). In the next chapter, we discuss how the windows are actually optimized.</p>
