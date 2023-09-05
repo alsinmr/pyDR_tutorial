@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -886,6 +884,9 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Detector reoptimization failed
+</pre></div>
+</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 7.05541598e-02,  1.31131795e-02,  1.56836598e-02, ...,
          2.72427192e-12,  9.10197174e-13,  9.64890409e-14],
        [ 7.06657670e-02, -6.53508201e-03,  2.49433414e-02, ...,
@@ -927,8 +928,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data already in project (index=12)
-Relative error
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relative error
 Detector w/ bounds w/o bounds
   rho0: 0.0024    1.5e-08
   rho1: 0.0018    2.1e-08
@@ -976,6 +976,32 @@ Detector w/ bounds w/o bounds
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pyDR.chimeraX.chimeraX_funs.set_chimera_path(&#39;path_to_executable&#39;) #Needs to be run once</span>
 <span class="n">data</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
 <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;~show ~@N,C,CA&#39;</span><span class="p">,</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">])</span>  <span class="c1">#Send a command to ChimeraX to adjust the view</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-17-c0912388f5d8&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># pyDR.chimeraX.chimeraX_funs.set_chimera_path(&#39;path_to_executable&#39;) #Needs to be run once</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">data</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;~show ~@N,C,CA&#39;</span><span class="p">,</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">])</span>  <span class="c1">#Send a command to ChimeraX to adjust the view</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/Data/Data.py</span> in <span class="ni">chimera</span><span class="nt">(self, index, rho_index, scaling)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> 
+<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="c1"># CMXRemote.send_command(ID,&#39;close&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span>         <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot; maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="k">return</span> <span class="mi">0</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

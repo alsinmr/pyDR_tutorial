@@ -39,7 +39,7 @@ Nuc='N'  #This refers to the backbone nitrogen, specifically
 segids=None # Usually, segment does not need to be specified
 
 
-# In[ ]:
+# In[2]:
 
 
 # SETUP pyDR
@@ -153,7 +153,7 @@ fit.nglview(1,scaling=None)
 
 # ## Visualize with ChimeraX
 
-# In[13]:
+# In[12]:
 
 
 fit.chimera()

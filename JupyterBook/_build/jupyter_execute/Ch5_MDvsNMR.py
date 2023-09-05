@@ -9,7 +9,7 @@
 
 # ## Setup and data downloads
 
-# In[ ]:
+# In[1]:
 
 
 # SETUP pyDR
@@ -154,7 +154,7 @@ _=proj['NMR']['proc'].sens.plot_rhoz(ax=ax,color='black',linestyle=':')
 # ### Process and plot MD data
 # We'll start by processing the MD data for evaluation without comparison to NMR.
 
-# In[12]:
+# In[11]:
 
 
 #Optimize 7 detectors
@@ -163,7 +163,7 @@ proj['MD']['no_opt'].detect.r_auto(7)
 proj['MD']['no_opt'].fit()
 
 
-# In[13]:
+# In[12]:
 
 
 #Plot the results (be careful that we don't have open windows)
@@ -172,14 +172,14 @@ proj['MD']['proc'].plot()
 proj.plot_obj.fig.set_size_inches([8,12])
 
 
-# In[23]:
+# In[13]:
 
 
 #Show the results for selected detectors in NGLviewer (may fail in Google Colab)
 # proj['MD']['proc'][0].nglview(rho_index=1,scaling=30)
 
 
-# In[15]:
+# In[14]:
 
 
 #Show the results in ChimeraX (only works locally)

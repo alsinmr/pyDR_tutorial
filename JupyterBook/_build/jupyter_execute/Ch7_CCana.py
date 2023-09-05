@@ -10,7 +10,7 @@
 # ## Setup and data downloads
 # Since we've learned now how pyDR is organized and allows us to manage larger data sets, we'll now use the full project functionality.
 
-# In[ ]:
+# In[1]:
 
 
 # SETUP pyDR
@@ -27,7 +27,7 @@ sys.path.append('../') # Path to pyDR location
 import pyDR
 
 
-# In[29]:
+# In[3]:
 
 
 # Project Creation and File loading
@@ -46,7 +46,7 @@ sel.select_bond('N')
 # 
 # Note that we'll do a rank 1 calculation here for iRED, since it simplifies the orientational dependence.
 
-# In[30]:
+# In[4]:
 
 
 sel.traj.step=10  #Take every tenth point for MD calculation (set to 1 for more accurate calculation)
@@ -59,7 +59,7 @@ ired.iRED2data() #Send iRED results to proj
 
 # Next, we set up the detectors for the raw data. We'll do a pre-processing with 10 unoptimized detectors.
 
-# In[31]:
+# In[5]:
 
 
 proj['raw'].detect.r_no_opt(10)
@@ -68,7 +68,7 @@ proj['raw'].fit()
 
 # Next, we use 7 optimized detectors, and finally conclude with an optimization of the results, including cleanup of the detector sensitivities.
 
-# In[32]:
+# In[6]:
 
 
 proj['no_opt'].detect.r_auto(6)
@@ -79,14 +79,14 @@ proj['no_opt'].fit().opt2dist(rhoz_cleanup=True)
 
 # ## Plot the results
 
-# In[33]:
+# In[7]:
 
 
 proj.close_fig('all')
 proj['opt_fit']['MD'].plot().fig.set_size_inches([8,10])
 
 
-# In[34]:
+# In[8]:
 
 
 proj.close_fig('all')
@@ -98,13 +98,13 @@ proj['opt_fit']['iREDmode'].plot().fig.set_size_inches([8,10])
 # 
 # Modes are converted to bonds using .modes2bonds. We will run this and then overlay the results with the direct calculation.
 
-# In[35]:
+# In[9]:
 
 
 proj['opt_fit'].modes2bonds()
 
 
-# In[37]:
+# In[10]:
 
 
 proj.close_fig('all')
@@ -122,7 +122,7 @@ proj['opt_fit']['iREDbond'].plot()
 # ### Plotting cross-correlation matrix
 # We first plot the cross-correlation matrices (using the absolute normalized cross-correlation, ranging from 0 to 1).
 
-# In[38]:
+# In[11]:
 
 
 import numpy as np
@@ -134,7 +134,7 @@ fig.tight_layout()
 # ### 3D Representations in ChimeraX
 # Finally, if running locally, we can plot in ChimeraX. In ChimeraX, we can select a given bond (or atom in the bond/representative selection), and then mouse over one of the detectors in the upper right corner to view the cross-correlation to the selected bond.
 
-# In[39]:
+# In[12]:
 
 
 # proj.chimera.close()

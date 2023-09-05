@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -713,6 +711,33 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 
 <span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
 <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">(</span><span class="s1">&#39;~show ~/B@N,C,CA&#39;</span><span class="p">)</span> <span class="c1">#Send command to chimera</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-9-189842587d6b&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">pyDR</span><span class="o">.</span><span class="n">chimeraX</span><span class="o">.</span><span class="n">chimeraX_funs</span><span class="o">.</span><span class="n">set_chimera_path</span><span class="p">(</span><span class="s1">&#39;/Applications/ChimeraX-1.5.app/Contents/MacOS/ChimeraX&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">(</span><span class="s1">&#39;~show ~/B@N,C,CA&#39;</span><span class="p">)</span> <span class="c1">#Send command to chimera</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/Data/Data.py</span> in <span class="ni">chimera</span><span class="nt">(self, index, rho_index, scaling)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> 
+<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="c1"># CMXRemote.send_command(ID,&#39;close&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span>         <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot; maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
+<span class="g g-Whitespace">    </span><span class="mi">369</span>         <span class="n">tr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

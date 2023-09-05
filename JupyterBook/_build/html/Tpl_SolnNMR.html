@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Template: Cross-Correlated Dynamics via iRED" href="Tpl_CCana.html" />
@@ -742,9 +740,9 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "06a9ec2a0a0c4a6990eebbaf97f523fe", "version_major": 2, "version_minor": 0}
+{"version_major": 2, "version_minor": 0, "model_id": "bdd68763c49b49c1b52d9cc38fa4d316"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "9b587e42417c417e820ad3d65fcb7e96", "version_major": 2, "version_minor": 0}
+{"version_major": 2, "version_minor": 0, "model_id": "4a80f7fefc1f4906a2fccdfaf277e248"}
 </script></div>
 </div>
 </section>
@@ -753,6 +751,51 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-12-392063d7e204&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/Data/Data.py</span> in <span class="ni">chimera</span><span class="nt">(self, index, rho_index, scaling)</span>
+<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="c1"># CMXRemote.send_command(ID,&#39;close&#39;)</span>
+<span class="g g-Whitespace">    </span><span class="mi">454</span>         <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">455</span>         <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot; maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">457</span>             <span class="k">pass</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">send_command</span><span class="nt">(cls, ID, string)</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span> 
+<span class="g g-Whitespace">    </span><span class="mi">201</span>         <span class="n">out</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;curl http://127.0.0.1:</span><span class="si">{0}</span><span class="s1">/run?command=</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">rc_port0</span><span class="o">+</span><span class="n">ID</span><span class="p">,</span><span class="n">string</span><span class="p">),</span><span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">202</span>                             <span class="n">stderr</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span> 
+<span class="g g-Whitespace">    </span><span class="mi">204</span>         <span class="k">return</span> <span class="n">out</span>
+
+<span class="nn">~/anaconda3/lib/python3.7/subprocess.py</span> in <span class="ni">check_output</span><span class="nt">(timeout, *popenargs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">393</span> 
+<span class="g g-Whitespace">    </span><span class="mi">394</span>     <span class="k">return</span> <span class="n">run</span><span class="p">(</span><span class="o">*</span><span class="n">popenargs</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">395</span>                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span>
+<span class="g g-Whitespace">    </span><span class="mi">396</span> 
+<span class="g g-Whitespace">    </span><span class="mi">397</span> 
+
+<span class="nn">~/anaconda3/lib/python3.7/subprocess.py</span> in <span class="ni">run</span><span class="nt">(input, capture_output, timeout, check, *popenargs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">472</span>     <span class="k">with</span> <span class="n">Popen</span><span class="p">(</span><span class="o">*</span><span class="n">popenargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">process</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">473</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">474</span>             <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">475</span>         <span class="k">except</span> <span class="n">TimeoutExpired</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span>             <span class="n">process</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+
+<span class="nn">~/anaconda3/lib/python3.7/subprocess.py</span> in <span class="ni">communicate</span><span class="nt">(self, input, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">924</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">_stdin_write</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">925</span>             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">926</span>                 <span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">928</span>             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
