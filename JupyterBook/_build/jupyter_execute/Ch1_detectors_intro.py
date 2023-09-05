@@ -137,7 +137,7 @@ labels=[r'$R_1$(400 MHz)',r'$R_1$(600 MHz)',r'$R_1$(800 MHz)',
         r'$R_{1\rho}$',r'$1-S^2$']
 
 ax=nmr.plot_Rz(norm=True)[0].axes #Plot the 9 relaxation rate constants (normalized to max of 1) vs tc
-ax.legend(labels)
+_=ax.legend(labels)
 
 
 # Now we can construct the relaxation rate constants for the seven experiments above, by simply summing over the three correlation times and amplitudes

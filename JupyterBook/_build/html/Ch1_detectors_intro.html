@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -175,7 +177,7 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="Ch5_MDvsNMR.html">
    <font color="maroon">
-    Chapter 6: Comparing MD and NMR Results
+    Chapter 5: Comparing MD and NMR Results
    </font>
   </a>
  </li>
@@ -633,12 +635,7 @@ S^2=\lim_{t\rightarrow\infty}C(t)
         <span class="sa">r</span><span class="s1">&#39;$R_{1\rho}$&#39;</span><span class="p">,</span><span class="sa">r</span><span class="s1">&#39;$1-S^2$&#39;</span><span class="p">]</span>
 
 <span class="n">ax</span><span class="o">=</span><span class="n">nmr</span><span class="o">.</span><span class="n">plot_Rz</span><span class="p">(</span><span class="n">norm</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axes</span> <span class="c1">#Plot the 9 relaxation rate constants (normalized to max of 1) vs tc</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fb69b273d68&gt;
+<span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

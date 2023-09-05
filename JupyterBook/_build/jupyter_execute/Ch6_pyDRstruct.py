@@ -14,7 +14,7 @@
 # ## The Data Object
 # Central to pyDR functionality is the data object, which is responsible for storage of experimental and simulated data, as well as data produced by detector analysis. We will select a data object out of a recent project investigating Growth Hormone Secretagogue Receptor using MD simulation ([source](https://doi.org/10.1002/anie.202302003)). 
 
-# In[1]:
+# In[ ]:
 
 
 # SETUP pyDR
@@ -157,13 +157,13 @@ _=r1.plot_rhoz()  #Plot the results
 # ```
 # A comparison of the back-calculated data and the original data may be obtained with data.plot_fit(). In this example, the source data was the result of first fitting to 15 unoptimized detectors and subsequently fitting with seven optimized detectors. The result is that the first 7 unoptimized detectors are almost perfectly fit (with small error due to bounds placed on the result– eliminating the bounds will eliminate the error), but the latter 8 detectors are not fit at all. This comes about because the 7 optimized detectors use exactly the first 7 singular values to fit the data, and discard the latter 8. 
 
-# In[13]:
+# In[10]:
 
 
 data.Rc
 
 
-# In[14]:
+# In[5]:
 
 
 data.plot_fit()[0].figure.set_size_inches([12,12])
@@ -171,7 +171,7 @@ data.plot_fit()[0].figure.set_size_inches([12,12])
 
 # Below, we print the median relative error for each detector. Note that there is some error for the first seven detectors. This comes because non-exponentiality in the correlation functions (from noise or other sources) may lead to an unphysical set of unoptimized detectors, where bounds on the optimized detectors eliminates some of this unphysicality, but results in mis-fit of the unoptimized detectors. This error can be eliminated by not enforcing the bounds (as done below in fit_nobounds).
 
-# In[15]:
+# In[9]:
 
 
 fit_nobounds=data.src_data.fit(bounds=False)
@@ -192,7 +192,7 @@ for k,(R,Rc,Rcnb) in enumerate(zip(data.src_data.R.T,data.Rc.T,fit_nobounds.Rc.T
 # ```
 # We show data.plot below. ChimeraX will only work locally. It can be launched from Jupyter, but runs as a separate program, whereas Colab does not support its running separately from the Colab notebook. NGL viewer runs in both Jupyter and Colab cells, but rendering in Colab often fails partway through. This appears to be a Colab problem, rather than an NGLview or pyDR problem (since it works locally).
 
-# In[16]:
+# In[10]:
 
 
 proj.close_fig('all')
@@ -201,7 +201,7 @@ data.plot().fig.set_size_inches([8,12])
 
 # Below, we execute chimera (won't work in Colab). Once the molecule is open in ChimeraX, you can mouse over the different detectors in the upper right corner to see the different detector responses.
 
-# In[17]:
+# In[7]:
 
 
 # pyDR.chimeraX.chimeraX_funs.set_chimera_path('path_to_executable') #Needs to be run once

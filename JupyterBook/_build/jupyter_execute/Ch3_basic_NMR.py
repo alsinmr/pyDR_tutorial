@@ -7,7 +7,7 @@
 
 # In this example, we load an NMR data set and demonstrate how to go about fitting it. For this, we need a text file with the measured relaxation rates and experimental data in it. This is provided for this example, but one can also upload one's own data. Make sure to follow the prescribed file format. Entries are separated by tabs within a given line and by carriage returns over multiple lines. An example data file is printed out as an example.
 
-# In[1]:
+# In[ ]:
 
 
 # SETUP pyDR
@@ -53,7 +53,7 @@ data=pyDR.IO.readNMR('data/HETs_15N.txt')
 # 
 # Below, you can investigate these different components. We show data.info, which provides the various relevant experimental parameters for determining the sensitivities of the 8 experiments. Note that this data set also includes $S^2$, which is treated separately and does not show up in data.info.
 
-# In[4]:
+# In[5]:
 
 
 data.info
@@ -79,7 +79,7 @@ data.info
 
 # A graphical summary of the data object is obtained via data.plot (can use various plotting options, such as plot type, etc.). The plt_obj provides a variety of functions for manipulating the plot.
 
-# In[5]:
+# In[4]:
 
 
 plt_obj=data.plot(style='bar')
@@ -94,7 +94,7 @@ plt_obj.fig.set_size_inches([8,10])
 # 
 # although a few improvements have been made since the initial analysis.
 
-# In[6]:
+# In[5]:
 
 
 data.detect.r_auto(4).inclS2()  #Optimize the detectors
@@ -108,7 +108,7 @@ _=plt_obj.ax[-1].set_xlabel('Residue')
 
 # Finally, we can check the fit quality by comparing the back-calculated relaxation rate constants to the original experimental relaxation rate constants.
 
-# In[7]:
+# In[6]:
 
 
 fig=fit.plot_fit()[0].axes.figure

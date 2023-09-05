@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font color="maroon">Chapter 6: Comparing MD and NMR Results</font>
+# # <font color="maroon">Chapter 5: Comparing MD and NMR Results</font>
 
 # <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch5_MDvsNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
@@ -9,7 +9,7 @@
 
 # ## Setup and data downloads
 
-# In[1]:
+# In[ ]:
 
 
 # SETUP pyDR
@@ -145,7 +145,7 @@ target[0][99:]=0 #Zero out rho0 for better MD performance
 #Increase n for better reproduction, but note that large n yield more noise
 proj['MD']['no_opt'].detect.r_target(target,n=9)
 #Plot the resulting detector, and compare to the original NMR detectors
-ax=proj['MD']['no_opt'].detect.plot_rhoz(index=range(5))[0].axes
+ax=proj['MD']['no_opt'].detect.plot_rhoz(index=range(5))
 _=proj['NMR']['proc'].sens.plot_rhoz(ax=ax,color='black',linestyle=':')
 
 
