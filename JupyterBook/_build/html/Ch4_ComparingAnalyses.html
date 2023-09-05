@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -757,16 +755,22 @@ title="Print to PDF"
 </section>
 <section id="spectral-density-mapping">
 <h2>Spectral Density Mapping<a class="headerlink" href="#spectral-density-mapping" title="Permalink to this headline">#</a></h2>
-<p>Spectral density mapping is achieved simply by calculating linear combinations of the experimental relaxation rate constants at one field, as follows:
+<p>Spectral density mapping is achieved simply by calculating linear combinations of the experimental relaxation rate constants at one field, as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{eqnarray}
-J(0)&amp;=&amp;\frac{R_2-R_1/2-0.454\sigma_\mathrm{IS}}{\delta_\mathrm{IS}^2/2+2(\Delta\sigma_\mathrm{I}\omega_\mathrm{I})^2} \
-J(\omega_\mathrm{I})&amp;=&amp;\frac{R_1-1.249\sigma_\mathrm{IS}}{3(\delta_\mathrm{IS}/4)^2+(\Delta\sigma_\mathrm{I}\omega_\mathrm{I})^2/3} \
+J(0)&amp;=&amp;\frac{R_2-R_1/2-0.454\sigma_\mathrm{IS}}{\delta_\mathrm{IS}^2/2+2(\Delta\sigma_\mathrm{I}\omega_\mathrm{I})^2} \\
+J(\omega_\mathrm{I})&amp;=&amp;\frac{R_1-1.249\sigma_\mathrm{IS}}{3(\delta_\mathrm{IS}/4)^2+(\Delta\sigma_\mathrm{I}\omega_\mathrm{I})^2/3} \\
 J(0.870\omega_\mathrm{S})&amp;=&amp;\frac{16\sigma_\mathrm{IS}}{5\delta_\mathrm{IS}^2}
-\end{eqnarray}</p>
-<p>This results in the following windows, resulting from the spectral density calculated for a given value of <span class="math notranslate nohighlight">\(\tau_c\)</span> and <span class="math notranslate nohighlight">\((1–S^2)=1\)</span>.
+\end{eqnarray}
+\end{split}\]</div>
+<p>This results in the following windows, resulting from the spectral density calculated for a given value of <span class="math notranslate nohighlight">\(\tau_c\)</span> and <span class="math notranslate nohighlight">\((1–S^2)=1\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
 \begin{equation}
 J(\omega,\tau_c)=\frac25\frac{\tau_c}{1+(\omega\tau_c)^2}
-\end{equation}</p>
+\end{equation}
+\]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span><span class="n">ax</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
@@ -855,18 +859,24 @@ J(\omega,\tau_c)=\frac25\frac{\tau_c}{1+(\omega\tau_c)^2}
 </section>
 <section id="lemaster-s-approach">
 <h2>LeMaster’s Approach<a class="headerlink" href="#lemaster-s-approach" title="Permalink to this headline">#</a></h2>
-<p>LeMaster uses a similar approach, but fits the data to a model spectral density, which allows one to separate out the influence of tumbling from the internal motion.
+<p>LeMaster uses a similar approach, but fits the data to a model spectral density, which allows one to separate out the influence of tumbling from the internal motion.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{eqnarray}
 J(\omega)=
-&amp;\frac25&amp;\left[\frac{\tau_M}{1+(\omega\tau_M)^2}+(1-S_f^2)\left(-\frac{\tau_M}{1+(\omega\tau_M)^2}\right)+\right.\
+&amp;\frac25&amp;\left[\frac{\tau_M}{1+(\omega\tau_M)^2}+(1-S_f^2)\left(-\frac{\tau_M}{1+(\omega\tau_M)^2}\right)+\right.\\
 &amp;&amp;\left.S_f^2(1-S_H^2)\left(\frac{\tau_H}{1+(\omega\tau_H)^2}-\frac{\tau_M}{1+(\omega\tau_M)^2}\right)+S_f^2S_H^2(1-S_N^2)\left(\frac{\tau_N}{1+(\omega\tau_N)^2}-\frac{\tau_M}{1+(\omega\tau_M)^2}\right)\right]
 \end{eqnarray}
-with
+\end{split}\]</div>
+<p>with</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{eqnarray}
-\tau_H&amp;=&amp;(\omega_H+\omega_N)^{-1} \
+\tau_H&amp;=&amp;(\omega_H+\omega_N)^{-1} \\
 \tau_N&amp;=&amp;|\omega_N|^{-1}
 \end{eqnarray}
-Then, the parameters <span class="math notranslate nohighlight">\(1-S_f^2\)</span>, <span class="math notranslate nohighlight">\(S_f^2(1-S_H^2)\)</span>, and <span class="math notranslate nohighlight">\(S_f^2S_H^2(1-S_N^2)\)</span> can be used to fit the relaxation rate constants or the spectral densities directly in a linear fit.</p>
+\end{split}\]</div>
+<p>Then, the parameters <span class="math notranslate nohighlight">\(1-S_f^2\)</span>, <span class="math notranslate nohighlight">\(S_f^2(1-S_H^2)\)</span>, and <span class="math notranslate nohighlight">\(S_f^2S_H^2(1-S_N^2)\)</span> can be used to fit the relaxation rate constants or the spectral densities directly in a linear fit.</p>
 <p>We’ll use the results from the SDM, rather than trying to do the fits directly from the raw data.</p>
 <p>We know from previously published results (Charlier et al.) that the rotational correlation time, <span class="math notranslate nohighlight">\(\tau_M\)</span>, is 4.84 ns</p>
 <section id="plot-results-from-lemaster-s-approach">
@@ -915,12 +925,15 @@ Then, the parameters <span class="math notranslate nohighlight">\(1-S_f^2\)</spa
 </section>
 <section id="impact-analysis-of-full-data-set">
 <h2>IMPACT Analysis of full data set<a class="headerlink" href="#impact-analysis-of-full-data-set" title="Permalink to this headline">#</a></h2>
-<p>IMPACT assumes a correlation function which is a sum of several correlation times, where the sum of weights for the terms is 1. We will assume four correlation times here, such that
+<p>IMPACT assumes a correlation function which is a sum of several correlation times, where the sum of weights for the terms is 1. We will assume four correlation times here, such that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{eqnarray}
-C(t)&amp;=&amp;\frac25\sum\limits_{i=1}^4{A_ie^{-t/\tau_i}} \
-1&amp;=&amp;\sum\limits_{i=1}^4{A_i} \
+C(t)&amp;=&amp;\frac25\sum\limits_{i=1}^4{A_ie^{-t/\tau_i}} \\
+1&amp;=&amp;\sum\limits_{i=1}^4{A_i} \\
 0&amp;\le&amp;A_i\le1
-\end{eqnarray}</p>
+\end{eqnarray}
+\end{split}\]</div>
 <section id="plot-impact-amplitudes">
 <h3>Plot IMPACT amplitudes<a class="headerlink" href="#plot-impact-amplitudes" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">

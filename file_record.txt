@@ -8,5 +8,5 @@ Ch7_CCana.ipynb	1693907937
 Tpl_basicNMR.ipynb	1693820715
 Ch9_ROMANCE_backbone.ipynb	1693902728
 Ch3_basic_NMR.ipynb	1693820681
-Ch4_ComparingAnalyses.ipynb	1693902693
+Ch4_ComparingAnalyses.ipynb	1693915202
 Ch5_MDvsNMR.ipynb	1693906251

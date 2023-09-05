@@ -107,16 +107,23 @@ fig.tight_layout()
 
 # ## Spectral Density Mapping
 # Spectral density mapping is achieved simply by calculating linear combinations of the experimental relaxation rate constants at one field, as follows:
+# 
+# $$
 # \begin{eqnarray}
 # J(0)&=&\frac{R_2-R_1/2-0.454\sigma_\mathrm{IS}}{\delta_\mathrm{IS}^2/2+2(\Delta\sigma_\mathrm{I}\omega_\mathrm{I})^2} \\
 # J(\omega_\mathrm{I})&=&\frac{R_1-1.249\sigma_\mathrm{IS}}{3(\delta_\mathrm{IS}/4)^2+(\Delta\sigma_\mathrm{I}\omega_\mathrm{I})^2/3} \\
 # J(0.870\omega_\mathrm{S})&=&\frac{16\sigma_\mathrm{IS}}{5\delta_\mathrm{IS}^2}
 # \end{eqnarray}
+# $$
 # 
 # This results in the following windows, resulting from the spectral density calculated for a given value of $\tau_c$ and $(1–S^2)=1$.
+# 
+# $$
 # \begin{equation}
 # J(\omega,\tau_c)=\frac25\frac{\tau_c}{1+(\omega\tau_c)^2}
 # \end{equation}
+# $$
+# 
 
 # In[4]:
 
@@ -191,16 +198,24 @@ fig.tight_layout()
 
 # ## LeMaster's Approach
 # LeMaster uses a similar approach, but fits the data to a model spectral density, which allows one to separate out the influence of tumbling from the internal motion.
+# 
+# $$
 # \begin{eqnarray}
 # J(\omega)=
 # &\frac25&\left[\frac{\tau_M}{1+(\omega\tau_M)^2}+(1-S_f^2)\left(-\frac{\tau_M}{1+(\omega\tau_M)^2}\right)+\right.\\
 # &&\left.S_f^2(1-S_H^2)\left(\frac{\tau_H}{1+(\omega\tau_H)^2}-\frac{\tau_M}{1+(\omega\tau_M)^2}\right)+S_f^2S_H^2(1-S_N^2)\left(\frac{\tau_N}{1+(\omega\tau_N)^2}-\frac{\tau_M}{1+(\omega\tau_M)^2}\right)\right]
 # \end{eqnarray}
+# $$
+# 
 # with
+# 
+# $$
 # \begin{eqnarray}
 # \tau_H&=&(\omega_H+\omega_N)^{-1} \\
 # \tau_N&=&|\omega_N|^{-1}
 # \end{eqnarray}
+# $$
+# 
 # Then, the parameters $1-S_f^2$, $S_f^2(1-S_H^2)$, and $S_f^2S_H^2(1-S_N^2)$ can be used to fit the relaxation rate constants or the spectral densities directly in a linear fit.
 # 
 # We'll use the results from the SDM, rather than trying to do the fits directly from the raw data.
@@ -247,11 +262,15 @@ fig.tight_layout()
 
 # ## IMPACT Analysis of full data set
 # IMPACT assumes a correlation function which is a sum of several correlation times, where the sum of weights for the terms is 1. We will assume four correlation times here, such that
+# 
+# $$
 # \begin{eqnarray}
 # C(t)&=&\frac25\sum\limits_{i=1}^4{A_ie^{-t/\tau_i}} \\
 # 1&=&\sum\limits_{i=1}^4{A_i} \\
 # 0&\le&A_i\le1
 # \end{eqnarray}
+# $$
+# 
 
 # ### Plot IMPACT amplitudes
 
