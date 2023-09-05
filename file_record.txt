@@ -1,11 +1,12 @@
-Ch4_MDvsNMR.ipynb	1693820686
-Ch6_CCana.ipynb	1693820701
+Ch6_pyDRstruct.ipynb	1693902773
 Ch1_detectors_intro.ipynb	1693820671
 Tpl_CCana.ipynb	1693820719
 Tpl_SolnNMR.ipynb	1693820723
 Ch2_detector_opt.ipynb	1693820677
+Ch8_ROMANCE_CH3.ipynb	1693902737
+Ch7_CCana.ipynb	1693902757
 Tpl_basicNMR.ipynb	1693820715
-Ch8_ROMANCE_backbone.ipynb	1693821222
+Ch9_ROMANCE_backbone.ipynb	1693902728
 Ch3_basic_NMR.ipynb	1693820681
-Ch5_pyDRstruct.ipynb	1693820696
-Ch7_ROMANCE_CH3.ipynb	1693820706
+Ch4_ComparingAnalyses.ipynb	1693902693
+Ch5_MDvsNMR.ipynb	1693902791

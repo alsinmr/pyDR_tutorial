@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Template: Solution-State NMR" href="Tpl_SolnNMR.html" />
-    <link rel="prev" title="Chapter 8: ROMANCE Analysis of Backbone Motion" href="Ch8_ROMANCE_backbone.html" />
+    <link rel="prev" title="Chapter 9: ROMANCE Analysis of Backbone Motion" href="Ch9_ROMANCE_backbone.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -164,37 +164,44 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_MDvsNMR.html">
+  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
    <font color="maroon">
-    Chapter 4: Comparing MD and NMR Results
+    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_pyDRstruct.html">
+  <a class="reference internal" href="Ch5_MDvsNMR.html">
    <font color="maroon">
-    Chapter 5: Anatomy of pyDIFRATE
+    Chapter 6: Comparing MD and NMR Results
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_CCana.html">
+  <a class="reference internal" href="Ch6_pyDRstruct.html">
    <font color="maroon">
-    Chapter 6: Cross-Correlated Dynamics via iRED
+    Chapter 6: Anatomy of pyDIFRATE
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch7_ROMANCE_CH3.html">
+  <a class="reference internal" href="Ch7_CCana.html">
    <font color="maroon">
-    Chapter 7: ROMANCE Analysis of Methyl Groups
+    Chapter 7: Cross-Correlated Dynamics via iRED
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
+  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
    <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Backbone Motion
+    Chapter 8: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 9: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -731,9 +738,9 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "f608722e5f2a408abd0541ab23926547"}
+{"version_major": 2, "version_minor": 0, "model_id": "ab5b755ffc8545c1ae43bc77fc7c3797"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "69c29dd933bf4d06b551fc8a8a444d5a"}
+{"version_major": 2, "version_minor": 0, "model_id": "9a5fcf04dbf847ba8e1711d68a8e38a8"}
 </script></div>
 </div>
 </section>
@@ -759,11 +766,11 @@ title="Print to PDF"
 <span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
 
 <span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
-<span class="g g-Whitespace">    </span><span class="mi">369</span>         <span class="n">tr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="k">return</span> <span class="mi">0</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -800,11 +807,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch8_ROMANCE_backbone.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Ch9_ROMANCE_backbone.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Chapter 8: ROMANCE Analysis of Backbone Motion</font></p>
+            <p class="prev-next-title"><font color="maroon">Chapter 9: ROMANCE Analysis of Backbone Motion</font></p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Tpl_SolnNMR.html" title="next page">
@@ -823,7 +830,7 @@ title="Print to PDF"
   
     By Albert Smith<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>

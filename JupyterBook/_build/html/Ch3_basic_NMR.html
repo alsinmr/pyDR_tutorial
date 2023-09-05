@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Chapter 4: Comparing MD and NMR Results" href="Ch4_MDvsNMR.html" />
+    <link rel="next" title="Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors" href="Ch4_ComparingAnalyses.html" />
     <link rel="prev" title="Chapter 2: Detector Optimization" href="Ch2_detector_opt.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -166,37 +166,44 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_MDvsNMR.html">
+  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
    <font color="maroon">
-    Chapter 4: Comparing MD and NMR Results
+    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_pyDRstruct.html">
+  <a class="reference internal" href="Ch5_MDvsNMR.html">
    <font color="maroon">
-    Chapter 5: Anatomy of pyDIFRATE
+    Chapter 6: Comparing MD and NMR Results
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_CCana.html">
+  <a class="reference internal" href="Ch6_pyDRstruct.html">
    <font color="maroon">
-    Chapter 6: Cross-Correlated Dynamics via iRED
+    Chapter 6: Anatomy of pyDIFRATE
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch7_ROMANCE_CH3.html">
+  <a class="reference internal" href="Ch7_CCana.html">
    <font color="maroon">
-    Chapter 7: ROMANCE Analysis of Methyl Groups
+    Chapter 7: Cross-Correlated Dynamics via iRED
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
+  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
    <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Backbone Motion
+    Chapter 8: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 9: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -724,11 +731,11 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 <span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
 
 <span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
-<span class="g g-Whitespace">    </span><span class="mi">369</span>         <span class="n">tr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 <span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="k">return</span> <span class="mi">0</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -817,10 +824,10 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
             <p class="prev-next-title"><font color="maroon">Chapter 2: Detector Optimization</font></p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Ch4_MDvsNMR.html" title="next page">
+    <a class='right-next' id="next-link" href="Ch4_ComparingAnalyses.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon">Chapter 4: Comparing MD and NMR Results</font></p>
+        <p class="prev-next-title"><font color="maroon">Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors</font></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -833,7 +840,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
   
     By Albert Smith<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>

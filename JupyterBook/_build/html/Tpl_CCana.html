@@ -163,37 +163,44 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_MDvsNMR.html">
+  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
    <font color="maroon">
-    Chapter 4: Comparing MD and NMR Results
+    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_pyDRstruct.html">
+  <a class="reference internal" href="Ch5_MDvsNMR.html">
    <font color="maroon">
-    Chapter 5: Anatomy of pyDIFRATE
+    Chapter 6: Comparing MD and NMR Results
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_CCana.html">
+  <a class="reference internal" href="Ch6_pyDRstruct.html">
    <font color="maroon">
-    Chapter 6: Cross-Correlated Dynamics via iRED
+    Chapter 6: Anatomy of pyDIFRATE
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch7_ROMANCE_CH3.html">
+  <a class="reference internal" href="Ch7_CCana.html">
    <font color="maroon">
-    Chapter 7: ROMANCE Analysis of Methyl Groups
+    Chapter 7: Cross-Correlated Dynamics via iRED
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
+  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
    <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Backbone Motion
+    Chapter 8: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 9: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -658,7 +665,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fcdf0333358&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fcefa1ff390&gt;
 </pre></div>
 </div>
 </div>
@@ -686,7 +693,7 @@ title="Print to PDF"
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:IREDMODE:rk1:backboneB with 70 data points
-&lt;pyDR.iRED.iRED.Data_iRED object at 0x7fce100e0c88&gt;
+&lt;pyDR.iRED.iRED.Data_iRED object at 0x7fced87c8320&gt;
 </pre></div>
 </div>
 </div>
@@ -705,7 +712,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fcdf033ecc0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7fcefa20cb38&gt;
 
 Titles:
 n15:MD:rk1:backboneB
@@ -730,7 +737,7 @@ n15:IREDMODE:rk1:backboneB
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fce0237b5f8&gt;
+&lt;pyDR.Project.Project.Project object at 0x7fcf0a35b6d8&gt;
 
 Titles:
 o6:MD:rk1:backboneB
@@ -751,7 +758,7 @@ o6:IREDMODE:rk1:backboneB
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted 1 iRED data objects from modes to bonds
 pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fcdf033deb8&gt;
+&lt;pyDR.Project.Project.Project object at 0x7fced8b40898&gt;
 
 Titles:
 o6:IREDBOND:rk1:backboneB
@@ -833,18 +840,39 @@ o6:IREDBOND:rk1:backboneB
 <span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">,</span><span class="s1">&#39;~show ~@N,C,CA,H,N&#39;</span><span class="p">])</span>
 
 <span class="nn">~/Documents/GitHub/pyDR/iRED/iRED.py</span> in <span class="ni">CCchimera</span><span class="nt">(self, index, rho_index, indexCC, scaling, norm)</span>
-<span class="g g-Whitespace">    </span><span class="mi">823</span>         <span class="k">else</span><span class="p">:</span>
 <span class="g g-Whitespace">    </span><span class="mi">824</span>             <span class="c1"># mn=CMXRemote.how_many_models(ID)+1</span>
-<span class="ne">--&gt; </span><span class="mi">825</span>             <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">826</span>             <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot;  maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">825</span>             <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">826</span>             <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot;  maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
 <span class="g g-Whitespace">    </span><span class="mi">827</span>             <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">828</span>                 <span class="k">pass</span>
 
-<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
-<span class="g g-Whitespace">    </span><span class="mi">369</span>         <span class="n">tr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">send_command</span><span class="nt">(cls, ID, string)</span>
+<span class="g g-Whitespace">    </span><span class="mi">200</span> 
+<span class="g g-Whitespace">    </span><span class="mi">201</span>         <span class="n">out</span> <span class="o">=</span> <span class="n">check_output</span><span class="p">(</span><span class="s1">&#39;curl http://127.0.0.1:</span><span class="si">{0}</span><span class="s1">/run?command=</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">rc_port0</span><span class="o">+</span><span class="n">ID</span><span class="p">,</span><span class="n">string</span><span class="p">),</span><span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">202</span>                             <span class="n">stderr</span><span class="o">=</span><span class="n">DEVNULL</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">203</span> 
+<span class="g g-Whitespace">    </span><span class="mi">204</span>         <span class="k">return</span> <span class="n">out</span>
+
+<span class="nn">~/anaconda3/lib/python3.7/subprocess.py</span> in <span class="ni">check_output</span><span class="nt">(timeout, *popenargs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">393</span> 
+<span class="g g-Whitespace">    </span><span class="mi">394</span>     <span class="k">return</span> <span class="n">run</span><span class="p">(</span><span class="o">*</span><span class="n">popenargs</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">,</span> <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="ne">--&gt; </span><span class="mi">395</span>                <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">stdout</span>
+<span class="g g-Whitespace">    </span><span class="mi">396</span> 
+<span class="g g-Whitespace">    </span><span class="mi">397</span> 
+
+<span class="nn">~/anaconda3/lib/python3.7/subprocess.py</span> in <span class="ni">run</span><span class="nt">(input, capture_output, timeout, check, *popenargs, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">472</span>     <span class="k">with</span> <span class="n">Popen</span><span class="p">(</span><span class="o">*</span><span class="n">popenargs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="k">as</span> <span class="n">process</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">473</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">474</span>             <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">475</span>         <span class="k">except</span> <span class="n">TimeoutExpired</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">476</span>             <span class="n">process</span><span class="o">.</span><span class="n">kill</span><span class="p">()</span>
+
+<span class="nn">~/anaconda3/lib/python3.7/subprocess.py</span> in <span class="ni">communicate</span><span class="nt">(self, input, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">924</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">_stdin_write</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">925</span>             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">926</span>                 <span class="n">stdout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">927</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">928</span>             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="p">:</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
@@ -898,7 +926,7 @@ o6:IREDBOND:rk1:backboneB
   
     By Albert Smith<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>
