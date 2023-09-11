@@ -42,14 +42,14 @@ sel.select_bond('N')
 
 
 # ## Load and process MD without and with iRED
-# When using iRED, it's important to compare the dynamics obtained with iRED and with a direct calculation of the detector responses. iRED works by determining modes of reorientational motion that are independent from each other. Then, the cross-correlation between modes is, by definition, zero at the initial time. However, there is no guarantee that the modes remain independent at a later time. If the direct and iRED calculations are in good agreement for a given bond, then the majority of motion for that bond results from independent mode motions which remain mostly independent. However, if not, then the total motion of that bond may have significant contributions from [time-lagged cross-correlation](https://pubs.aip.org/aip/jcp/article/139/1/015102/192538/Identification-of-slow-molecular-order-parameters) between modes, and the iRED analysis is especially representative of its total motion.
+# When using iRED, it's important to compare the dynamics obtained with iRED and with a direct calculation of the detector responses. iRED works by determining modes of reorientational motion that are independent from each other. Then, the cross-correlation between modes is, by definition, zero at the initial time. However, there is no guarantee that the modes remain independent at a later time. If the direct and iRED calculations are in good agreement for a given bond, then the majority of motion for that bond results from independent mode motions which remain mostly independent. However, if not, then the total motion of that bond may have significant contributions from [time-lagged cross-correlation](https://pubs.aip.org/aip/jcp/article/139/1/015102/192538/Identification-of-slow-molecular-order-parameters) between modes, and the iRED analysis is not necessarily a good representation of its total motion.
 # 
-# Note that we'll do a rank 1 calculation here for iRED, since it simplifies the orientational dependence of iRED.
+# Note that we'll do a rank 1 calculation here for iRED, since it simplifies the orientational dependence.
 
 # In[4]:
 
 
-sel.traj.step=20  #Take every tenth point for MD calculation (set to 1 for more accurate calculation)
+sel.traj.step=10  #Take every tenth point for MD calculation (set to 1 for more accurate calculation)
 pyDR.Defaults['ProgressBar']=False #Turns off the Progress bar (screws up webpage compilation)
 
 pyDR.md2data(sel,rank=1) #Direct calculation
@@ -101,7 +101,7 @@ proj['opt_fit']['iREDmode'].plot().fig.set_size_inches([8,10])
 # In[9]:
 
 
-proj['opt_fit'].modes2bonds(includeOverall=True)
+proj['opt_fit'].modes2bonds()
 
 
 # In[10]:
@@ -114,6 +114,10 @@ proj['opt_fit']['iREDbond'].plot()
 
 
 # In particularly flexible regions, there is some disagreement between the two analyses, but otherwise we have done fairly well with the iRED mode decomposition. In these flexible regions, we should keep in mind that mode dynamics yields an incomplete description of the total motion and the cross-correlation coefficients are not representing the full motion.
+# 
+# Note that iRED adds an isotropic average over all motions (*isotropic* Reorientational Eigenmode Dynamics), which usually manifests as some overall motion in the 3 or 5 (rank-1,2) largest eigenvalues. We remove the overall isotropic motion by removing these 3-5 modes when running .modes2bonds (although we don't have to, set inclOverall=True), which has the result that $\rho^{(\theta,S)}_5$ does not capture the static component of each bond, whereas the direct calculation does. Then, $\rho^{(\theta,S)}_5$ of the direct calculation is large, but it becomes almost zero in the iRED calculation. This should not be considered disagreement between the methods, but rather an artifact of the analysis.
+# 
+# This artifact also means that one should not run .opt2dist on iREDbond data, since part of the motion is missing and therefore the distribution cannot be corrected (anyway, we have already run opt2dist on the mode data, so we don't gain anything by running it again).
 
 # ### Plotting cross-correlation matrix
 # We first plot the cross-correlation matrices (using the absolute normalized cross-correlation, ranging from 0 to 1).
@@ -134,7 +138,7 @@ fig.tight_layout()
 
 
 # proj.chimera.close()
-proj['iREDbond'].CCchimera()
+proj['iREDbond'][-1].CCchimera()
 proj.chimera.command_line(['set bgColor white','lighting soft','~show ~@N,C,CA,H,N'])
 
 

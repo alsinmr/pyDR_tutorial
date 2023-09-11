@@ -50,12 +50,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Template: Basic NMR" href="Tpl_SolnNMR.html" />
-    <link rel="prev" title="Chapter 6: Cross-Correlated Dynamics via iRED" href="Ch6_CCana.html" />
+    <link rel="next" title="Template: Solution-State NMR" href="Tpl_SolnNMR.html" />
+    <link rel="prev" title="Chapter 9: ROMANCE Analysis of Backbone Motion" href="Ch9_ROMANCE_backbone.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -117,6 +115,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="GettingStarted.html">
+   <font color="maroon">
+    Getting Started
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="BriefHistory.html">
    <font color="maroon">
     Background
@@ -159,23 +164,44 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_MDvsNMR.html">
+  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
    <font color="maroon">
-    Chapter 4: Comparing MD and NMR Results
+    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_pyDRstruct.html">
+  <a class="reference internal" href="Ch5_MDvsNMR.html">
    <font color="maroon">
-    Chapter 5: Anatomy of pyDIFRATE
+    Chapter 5: Comparing MD and NMR Results
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_CCana.html">
+  <a class="reference internal" href="Ch6_pyDRstruct.html">
    <font color="maroon">
-    Chapter 6: Cross-Correlated Dynamics via iRED
+    Chapter 6: Anatomy of pyDIFRATE
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7_CCana.html">
+   <font color="maroon">
+    Chapter 7: Cross-Correlated Dynamics via iRED
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
+   <font color="maroon">
+    Chapter 8: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 9: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -196,7 +222,7 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="Tpl_SolnNMR.html">
    <font color="maroon">
-    Template: Basic NMR
+    Template: Solution-State NMR
    </font>
   </a>
  </li>
@@ -712,9 +738,9 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "7919e896d1c54806acb257985cb20277"}
+{"version_major": 2, "version_minor": 0, "model_id": "d1ad56d66167493bb4d103c6dcf88cc8"}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "aaf9c5b9ab634843bb7227bbce3a828c"}
+{"version_major": 2, "version_minor": 0, "model_id": "471408df471f4abab9d65f372bc2a98b"}
 </script></div>
 </div>
 </section>
@@ -723,6 +749,30 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-12-392063d7e204&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/Data/Data.py</span> in <span class="ni">chimera</span><span class="nt">(self, index, rho_index, scaling)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> 
+<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="c1"># CMXRemote.send_command(ID,&#39;close&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span>         <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot; maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
+<span class="g g-Whitespace">    </span><span class="mi">369</span>         <span class="n">tr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -757,17 +807,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch6_CCana.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Ch9_ROMANCE_backbone.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Chapter 6: Cross-Correlated Dynamics via iRED</font></p>
+            <p class="prev-next-title"><font color="maroon">Chapter 9: ROMANCE Analysis of Backbone Motion</font></p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Tpl_SolnNMR.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><font color="maroon">Template: Basic NMR</font></p>
+        <p class="prev-next-title"><font color="maroon">Template: Solution-State NMR</font></p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -780,7 +830,7 @@ title="Print to PDF"
   
     By Albert Smith<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>

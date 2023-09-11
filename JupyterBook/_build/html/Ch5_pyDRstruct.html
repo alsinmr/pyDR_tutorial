@@ -117,6 +117,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="GettingStarted.html">
+   <font color="maroon">
+    Getting Started
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="BriefHistory.html">
    <font color="maroon">
     Background
@@ -179,6 +186,20 @@ const thebe_selector_output = ".output, .cell_output"
    </font>
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7_ROMANCE_CH3.html">
+   <font color="maroon">
+    Chapter 7: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 8: ROMANCE Analysis of Backbone Motion
+   </font>
+  </a>
+ </li>
 </ul>
 <p class="caption">
  <span class="caption-text">
@@ -197,6 +218,13 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="Tpl_SolnNMR.html">
    <font color="maroon">
     Template: Solution-State NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_CCana.html">
+   <font color="maroon">
+    Template: Cross-Correlated Dynamics via iRED
    </font>
   </a>
  </li>
@@ -944,6 +972,32 @@ Detector w/ bounds w/o bounds
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-17-c0912388f5d8&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># pyDR.chimeraX.chimeraX_funs.set_chimera_path(&#39;path_to_executable&#39;) #Needs to be run once</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">data</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;~show ~@N,C,CA&#39;</span><span class="p">,</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">])</span>  <span class="c1">#Send a command to ChimeraX to adjust the view</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/Data/Data.py</span> in <span class="ni">chimera</span><span class="nt">(self, index, rho_index, scaling)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> 
+<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="c1"># CMXRemote.send_command(ID,&#39;close&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span>         <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot; maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="k">return</span> <span class="mi">0</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="selections-in-data-object">
@@ -1057,7 +1111,7 @@ Data fit optimized with opt2dist (rhoz_cleanup:True)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDIFRATE project with 13 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fa13970fe80&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f84e0b91ef0&gt;
 
 Titles:
 n15:FRAMES:WT-apo_run1_0.1ns_just_protein
@@ -1072,7 +1126,7 @@ p7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 p7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
 o7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
-p7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
+o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein1
 </pre></div>
 </div>
 </div>
@@ -1103,14 +1157,13 @@ p7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDIFRATE project with 4 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fa13b362898&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDIFRATE project with 3 data sets
+&lt;pyDR.Project.Project.Project object at 0x7f850a37d828&gt;
 
 Titles:
 n15:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 p7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 o7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
-p7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 </pre></div>
 </div>
 </div>
@@ -1123,7 +1176,7 @@ p7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fa16a308e48&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f850a37cb70&gt;
 
 Titles:
 o7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
@@ -1289,7 +1342,7 @@ o7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fa16a0eacf8&gt;
+&lt;pyDR.Project.Project.Project object at 0x7fe1b0b80d30&gt;
 
 Titles:
 r:NMR:ubi_soln
@@ -1308,7 +1361,7 @@ r:NMR:1w_0cR6ykj
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>p4:NMR:ubi_soln with 63 data points
-&lt;pyDR.Data.Data.Data object at 0x7fa16a6dd550&gt;
+&lt;pyDR.Data.Data.Data object at 0x7fe1b0b74f10&gt;
 </pre></div>
 </div>
 </div>
@@ -1321,7 +1374,7 @@ r:NMR:1w_0cR6ykj
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDIFRATE project with 3 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fa16a0eacf8&gt;
+&lt;pyDR.Project.Project.Project object at 0x7fe1b0b80280&gt;
 
 Titles:
 r:NMR:ubi_soln
@@ -1347,7 +1400,7 @@ p4:NMR:ubi_soln
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:MD:backboneB with 70 data points
-&lt;pyDR.Data.Data.Data object at 0x7fa1590c4828&gt;
+&lt;pyDR.Data.Data.Data object at 0x7fa982ba4c18&gt;
 </pre></div>
 </div>
 </div>
@@ -1360,13 +1413,24 @@ p4:NMR:ubi_soln
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDIFRATE project with 4 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fa16a0eacf8&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>pyDIFRATE project with 15 data sets
+&lt;pyDR.Project.Project.Project object at 0x7fa97104d908&gt;
 
 Titles:
-r:NMR:ubi_soln
-r:NMR:1w_0cR6ykj
-p4:NMR:ubi_soln
+n15:FRAMES:WT-apo_run1_0.1ns_just_protein
+n15:FRAMES:WT-apo_run2_0.1ns_just_protein
+n15:FRAMES:WT-apo_run3_0.1ns_just_protein
+n15:FRAMES:WT-ghrelin_run1_0.1ns_just_protein
+n15:FRAMES:WT-ghrelin_run2_0.1ns_just_protein
+n15:FRAMES:WT-ghrelin_run3_0.1ns_just_protein
+n15:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
+n15:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
+p7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
+p7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
+o7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
+o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
+p8:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
+p8:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
 r:MD:backboneB
 </pre></div>
 </div>

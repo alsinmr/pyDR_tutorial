@@ -1,0 +1,1037 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Chapter 5: Comparing MD and NMR Results &#8212; pyDIFRATE Tutorial</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Chapter 6: Anatomy of pyDIFRATE" href="Ch6_pyDRstruct.html" />
+    <link rel="prev" title="Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors" href="Ch4_ComparingAnalyses.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">pyDIFRATE Tutorial</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Welcome to the pyDIFRATE tutorial
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="GettingStarted.html">
+   <font color="maroon">
+    Getting Started
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="BriefHistory.html">
+   <font color="maroon">
+    Background
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="References.html">
+   <font color="maroon">
+    References
+   </font>
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Tutorial
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch1_detectors_intro.html">
+   <font color="maroon">
+    Chapter 1: A brief introduction to detectors
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch2_detector_opt.html">
+   <font color="maroon">
+    Chapter 2: Detector Optimization
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch3_basic_NMR.html">
+   <font color="maroon">
+    Chapter 3: A Basic NMR Analysis
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
+   <font color="maroon">
+    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   <font color="maroon">
+    Chapter 5: Comparing MD and NMR Results
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch6_pyDRstruct.html">
+   <font color="maroon">
+    Chapter 6: Anatomy of pyDIFRATE
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7_CCana.html">
+   <font color="maroon">
+    Chapter 7: Cross-Correlated Dynamics via iRED
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
+   <font color="maroon">
+    Chapter 8: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 9: ROMANCE Analysis of Backbone Motion
+   </font>
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Templates
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_basicNMR.html">
+   <font color="maroon">
+    Template: Basic NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_SolnNMR.html">
+   <font color="maroon">
+    Template: Solution-State NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_CCana.html">
+   <font color="maroon">
+    Template: Cross-Correlated Dynamics via iRED
+   </font>
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/alsinmr/pyDR_tutorial/master?urlpath=tree/JupyterBook/Ch5_MDvsNMR.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/alsinmr/pyDR_tutorial/"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/alsinmr/pyDR_tutorial//issues/new?title=Issue%20on%20page%20%2FCh5_MDvsNMR.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/Ch5_MDvsNMR.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup-and-data-downloads">
+   Setup and data downloads
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downloading-from-google-drive-to-google-colab">
+     Downloading from Google Drive to Google Colab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-and-process-nmr">
+   Load and Process NMR
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-md-and-process-md">
+   Load MD and Process MD
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#open-md-trajectory-specify-bonds">
+     Open MD trajectory, specify bonds
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculate-the-md-correlation-functions">
+     Calculate the MD correlation functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#md-preprocessing-fit-with-no-opt-detectors">
+     MD Preprocessing (fit with no_opt detectors)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#detector-optimization">
+     Detector Optimization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#process-and-plot-md-data">
+     Process and plot MD data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-nmr-results-to-md-results">
+   Compare NMR results to MD results
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimize-md-detectors-to-match-nmr-detectors">
+     Optimize MD detectors to match NMR detectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-comparison-between-nmr-and-md">
+     Plot the comparison between NMR and MD
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1><font color="maroon">Chapter 5: Comparing MD and NMR Results</font></h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup-and-data-downloads">
+   Setup and data downloads
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downloading-from-google-drive-to-google-colab">
+     Downloading from Google Drive to Google Colab
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-and-process-nmr">
+   Load and Process NMR
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#load-md-and-process-md">
+   Load MD and Process MD
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#open-md-trajectory-specify-bonds">
+     Open MD trajectory, specify bonds
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculate-the-md-correlation-functions">
+     Calculate the MD correlation functions
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#md-preprocessing-fit-with-no-opt-detectors">
+     MD Preprocessing (fit with no_opt detectors)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#detector-optimization">
+     Detector Optimization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#process-and-plot-md-data">
+     Process and plot MD data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compare-nmr-results-to-md-results">
+   Compare NMR results to MD results
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#optimize-md-detectors-to-match-nmr-detectors">
+     Optimize MD detectors to match NMR detectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-comparison-between-nmr-and-md">
+     Plot the comparison between NMR and MD
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-chapter-5-comparing-md-and-nmr-results-font">
+<h1><font color="maroon">Chapter 5: Comparing MD and NMR Results</font><a class="headerlink" href="#font-color-maroon-chapter-5-comparing-md-and-nmr-results-font" title="Permalink to this headline">#</a></h1>
+<p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch5_MDvsNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
+<p>One of the biggest advantages of the <em>Detectors</em> approach is our ability to compare data from different sources. In this tutorial, we will look at comparing dynamics from NMR and MD data. However, we will also use detectors to compare, for example, the total motion in MD data to motion separated via reference frames (<a class="reference external" href="https://doi.org/10.1016/j.jmro.2022.100045">ROMANCE</a>) and the total motion vs. detector analysis of the cross correlation of motion.</p>
+<section id="setup-and-data-downloads">
+<h2>Setup and data downloads<a class="headerlink" href="#setup-and-data-downloads" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># Path to pyDR location</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Imports</span>
+<span class="kn">import</span> <span class="nn">pyDR</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="downloading-from-google-drive-to-google-colab">
+<h3>Downloading from Google Drive to Google Colab<a class="headerlink" href="#downloading-from-google-drive-to-google-colab" title="Permalink to this headline">#</a></h3>
+<p>In the tutorial, we will use files that are already stored as part of pyDR/examples. If you are working locally, you can just download outside of the Jupyter notebook and then tell pyDR later where the files are. However, in Google Colab, you need to get the files to the Colab server somehow. Here, we show how to download them from file IDs from Google Drive (these need to be viewable to anyone with the share link in your the share settings).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Download MD files if running in Colab</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">gdown</span> <span class="kn">import</span> <span class="n">download</span>
+    <span class="n">ID</span><span class="o">=</span><span class="s1">&#39;1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW&#39;</span>   <span class="c1">#HETs xtc file</span>
+    <span class="c1">#Just grab this string out of the google drive share link &#39;https://drive.google.com/file/d/1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW/view?usp=share_link&#39;</span>
+    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;https://drive.google.com/uc?id=</span><span class="si">{</span><span class="n">ID</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;HETs_md.xtc&#39;</span><span class="p">)</span>
+    <span class="n">ID</span><span class="o">=</span><span class="s1">&#39;1qkgKhQ7QMS8PAWS1AxyoaZUYej2qm_xT&#39;</span>   <span class="c1">#HETs pdb (topology)</span>
+    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;https://drive.google.com/uc?id=</span><span class="si">{</span><span class="n">ID</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;HETs_md.pdb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="load-and-process-nmr">
+<h2>Load and Process NMR<a class="headerlink" href="#load-and-process-nmr" title="Permalink to this headline">#</a></h2>
+<p>We’ll do this in just a few lines. See the previous examples for processing NMR</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Empty pyDR project (specify directory if you want to save later)</span>
+<span class="n">proj</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">Project</span><span class="p">()</span>
+
+<span class="c1"># Download raw NMR data, store in project</span>
+<span class="n">nmr_link</span><span class="o">=</span><span class="s1">&#39;https://drive.google.com/file/d/1w_0cR6ykjL7xvdxU2W90fRXvZ8XfLFc3/view?usp=share_link&#39;</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">append_data</span><span class="p">(</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="n">nmr_link</span><span class="p">))</span>
+
+<span class="c1"># Specify the bond selection for the NMR data</span>
+<span class="c1"># Note, we access select via the project. len(proj[&#39;NMR&#39;])&gt;1, this won&#39;t work, and we need to be more specific</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">select</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;HETs_md.pdb&#39;</span><span class="p">)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+
+<span class="c1">#Setup detectors for NMR data (4 detectors, use S2 data)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">inclS2</span><span class="p">()</span>
+
+<span class="c1">#Fit the NMR data using the optimized detectors</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
+pyDIFRATE project with 2 data sets
+
+titles:
+r:NMR:1w_0cR6ykj
+p5:NMR:1w_0cR6ykj
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-md-and-process-md">
+<h2>Load MD and Process MD<a class="headerlink" href="#load-md-and-process-md" title="Permalink to this headline">#</a></h2>
+<section id="open-md-trajectory-specify-bonds">
+<h3>Open MD trajectory, specify bonds<a class="headerlink" href="#open-md-trajectory-specify-bonds" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+    <span class="c1">#Create a selection object with trajectory data</span>
+    <span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;HETs_md.pdb&#39;</span><span class="p">,</span><span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;HETs_md.xtc&#39;</span><span class="p">,</span><span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.pdb&#39;</span><span class="p">,</span>
+                       <span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.xtc&#39;</span><span class="p">,</span>
+                       <span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+
+<span class="c1"># Specify the bond select to analyze for MD</span>
+<span class="n">sel</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fef68f71860&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculate-the-md-correlation-functions">
+<h3>Calculate the MD correlation functions<a class="headerlink" href="#calculate-the-md-correlation-functions" title="Permalink to this headline">#</a></h3>
+<p>To speed up the tutorial, we take only every tenth point out of the MD trajectory (50 ps timesteps). Ideally, we would use all time points.</p>
+<p>To calculate the rank-2 reorientational correlation functions, we use the md2data function on a selection object, which then exports the results to an MD data object</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyDR</span><span class="o">.</span><span class="n">md2data</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sel</span><span class="o">.</span><span class="n">traj</span><span class="o">.</span><span class="n">step</span><span class="o">=</span><span class="mi">10</span>  <span class="c1">#Take every tenth point for MD calculation (set to 1 for more accurate calculation)</span>
+<span class="n">pyDR</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#Turns of the Progress bar (screws up webpage compilation)</span>
+<span class="n">pyDR</span><span class="o">.</span><span class="n">md2data</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="c1">#Calculate the MD correlation functions (automatically goes to proj)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:MD:backboneB with 70 data points
+&lt;pyDR.Data.Data.Data object at 0x7fef5923ccc0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Below, we view the sensitivies of the MD correlation function (only a selection of the 40000 sensitivities are shown)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;raw&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">plot_rhoz</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch5_MDvsNMR_16_0.png" src="_images/Ch5_MDvsNMR_16_0.png" />
+</div>
+</div>
+</section>
+<section id="md-preprocessing-fit-with-no-opt-detectors">
+<h3>MD Preprocessing (fit with no_opt detectors)<a class="headerlink" href="#md-preprocessing-fit-with-no-opt-detectors" title="Permalink to this headline">#</a></h3>
+<p>When working with MD simulations, we produce a very large data set (here, the data object has 70x40000 data points, and if we hadn’t skipped points in the trajectory, it would be 70x400000, and we have trajectories with 70x2000000 data points). We would rather not save that data, but would also like to avoid re-processing every time we need a change to the analysis.</p>
+<p>The solution is to use a large (12-15) number of <em>unoptimized</em> detectors. Data from unoptimized detectors is difficult to interpret directly, but can be subsequently reprocessed to ideal detectors, and allows us to try different processing approaches without dealing with the large correlation functions with every attempt.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_no_opt</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>  <span class="c1">#Calculate 12 unoptimized detectors</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>  <span class="c1">#Fit all raw MD data in the project (here, this is just the one data set)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">proj</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
+pyDIFRATE project with 4 data sets
+
+titles:
+r:NMR:1w_0cR6ykj
+p5:NMR:1w_0cR6ykj
+r:MD:backboneB
+n12:MD:backboneB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="detector-optimization">
+<h3>Detector Optimization<a class="headerlink" href="#detector-optimization" title="Permalink to this headline">#</a></h3>
+<p>We can optimize the MD detectors for comparison to NMR data, or simply for analysis of the MD alone. The latter approach provides better information on the dynamics in the MD, but cannot be quantitatively compared to the NMR results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Optimize 7 detectors, plot the resulting sensitivities</span>
+<span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">.</span><span class="n">plot_rhoz</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch5_MDvsNMR_20_0.png" src="_images/Ch5_MDvsNMR_20_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Optimize detectors to match NMR data</span>
+<span class="n">target</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">rhoz</span>
+<span class="n">target</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">99</span><span class="p">:]</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#Zero out rho0 for better MD performance</span>
+<span class="c1">#Optimize the MD detectors to target (NMR sensitivies).</span>
+<span class="c1">#Increase n for better reproduction, but note that large n yield more noise</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_target</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="c1">#Plot the resulting detector, and compare to the original NMR detectors</span>
+<span class="n">ax</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">plot_rhoz</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">plot_rhoz</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch5_MDvsNMR_21_0.png" src="_images/Ch5_MDvsNMR_21_0.png" />
+</div>
+</div>
+<p>Above, we obtain reasonably good reproduction with <span class="math notranslate nohighlight">\(n=9\)</span> for detectors 0-2 (ns/ps range). The latter 2 detectors (<span class="math notranslate nohighlight">\(\mu\)</span>s range) are poorly reproduced because the 2 <span class="math notranslate nohighlight">\(\mu\)</span>s trajectory is insufficient for reproducing microsecond dynamics.</p>
+</section>
+<section id="process-and-plot-md-data">
+<h3>Process and plot MD data<a class="headerlink" href="#process-and-plot-md-data" title="Permalink to this headline">#</a></h3>
+<p>We’ll start by processing the MD data for evaluation without comparison to NMR.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Optimize 7 detectors</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="c1">#Fit the data with those 7 detectors</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
+pyDIFRATE project with 1 data sets
+&lt;pyDR.Project.Project.Project object at 0x7fef28a5bb70&gt;
+
+Titles:
+p7:MD:backboneB
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Plot the results (be careful that we don&#39;t have open windows)</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">plot_obj</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch5_MDvsNMR_25_0.png" src="_images/Ch5_MDvsNMR_25_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show the results for selected detectors in NGLviewer (may fail in Google Colab)</span>
+<span class="c1"># proj[&#39;MD&#39;][&#39;proc&#39;][0].nglview(rho_index=1,scaling=30)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show the results in ChimeraX (only works locally)</span>
+<span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
+<span class="c1">#    #The path to chimeraX needs to be defined the first time this is run!!</span>
+<span class="c1">#     pyDR.chimeraX.chimeraX_funs.set_chimera_path(&#39;path_to_executable&#39;)</span>
+
+    <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">chimera</span><span class="p">(</span><span class="n">scaling</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span> <span class="c1">#Adjust scaling to improve visibility for some detectors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-14-fa21a555788f&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="c1">#     pyDR.chimeraX.chimeraX_funs.set_chimera_path(&#39;path_to_executable&#39;)</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+<span class="ne">----&gt; </span><span class="mi">6</span>     <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">chimera</span><span class="p">(</span><span class="n">scaling</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span> <span class="c1">#Adjust scaling to improve visibility for some detectors</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/Project/Project.py</span> in <span class="ni">__call__</span><span class="nt">(self, index, rho_index, scaling, offset)</span>
+<span class="g g-Whitespace">    </span><span class="mi">571</span>                 <span class="n">ax</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">offset</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">572</span>                 <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">573</span>             <span class="n">d</span><span class="o">.</span><span class="n">chimera</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">,</span><span class="n">rho_index</span><span class="o">=</span><span class="n">rho_index</span><span class="p">,</span><span class="n">scaling</span><span class="o">=</span><span class="n">scaling</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">574</span> 
+<span class="g g-Whitespace">    </span><span class="mi">575</span>             <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/Data/Data.py</span> in <span class="ni">chimera</span><span class="nt">(self, index, rho_index, scaling)</span>
+<span class="g g-Whitespace">    </span><span class="mi">452</span> 
+<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="c1"># CMXRemote.send_command(ID,&#39;close&#39;)</span>
+<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">455</span>         <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot; maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
+<span class="g g-Whitespace">    </span><span class="mi">369</span>         <span class="n">tr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="ne">--&gt; </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The low amplitude “waves” in the detector sensitivies can be removed if desired. The waves may capture some motion significantly faster or slower than the detector’s mean position, and so are less than ideal. However, their removal can in principle distort the data, although our experiences is that this effect is usually unlikely.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize the MD fit and cleanup the sensitivity &quot;waves&quot;</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">opt2dist</span><span class="p">(</span><span class="n">rhoz_cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Plot the new fit</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">plot_obj</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 1 data objects
+</pre></div>
+</div>
+<img alt="_images/Ch5_MDvsNMR_29_1.png" src="_images/Ch5_MDvsNMR_29_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="compare-nmr-results-to-md-results">
+<h2>Compare NMR results to MD results<a class="headerlink" href="#compare-nmr-results-to-md-results" title="Permalink to this headline">#</a></h2>
+<section id="optimize-md-detectors-to-match-nmr-detectors">
+<h3>Optimize MD detectors to match NMR detectors<a class="headerlink" href="#optimize-md-detectors-to-match-nmr-detectors" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">rhoz</span>
+<span class="n">target</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">99</span><span class="p">:]</span><span class="o">=</span><span class="mi">0</span> <span class="c1">#Zero out rho0 for better MD performance</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_target</span><span class="p">(</span><span class="n">target</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="c1">#Fit the MD data to detectors optimized for comparison to NMR</span>
+<span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-comparison-between-nmr-and-md">
+<h3>Plot the comparison between NMR and MD<a class="headerlink" href="#plot-the-comparison-between-nmr-and-md" title="Permalink to this headline">#</a></h3>
+<p>pyDR compares detector sensitivies between data sets to decide which detector windows are most comparable. Furthermore, it determines bases on select/label what positions should be plotted on top of each other. Therefore, we do not need to do anything but specify what should be plotted.</p>
+<p>Note that the project manages the plotting. It will always try to plot into the previous plot, unless we set the current plot.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">current_plot</span><span class="o">=</span><span class="mi">2</span> <span class="c1">#counting starts at 1, which is the default</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span> <span class="c1">#Close figure by number, or specify &#39;all&#39;</span>
+</pre></div>
+</div>
+<p>This behavior is usually convenient. However, in Jupyter notebooks, if one already has an open plot in a previous cell, it will not show up in a new cell by default (thus why we start plotting by closing all plots). Furthermore, if data with very different sensitivies are plotted into the same plot object, the second data set may not plot at all.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="c1">#Plot the NMR data</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="c1">#Plot the MD data, that was matched to the NMR (p9 refers to the n=9 detectors)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;p9.&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+
+<span class="n">proj</span><span class="o">.</span><span class="n">plot_obj</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">proj</span><span class="o">.</span><span class="n">plot_obj</span><span class="o">.</span><span class="n">ax</span><span class="p">:</span><span class="n">a</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="n">a</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()[</span><span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch5_MDvsNMR_34_0.png" src="_images/Ch5_MDvsNMR_34_0.png" />
+</div>
+</div>
+<p>No MD data is plotted for the last detector, since the detector sensitivies were very different. Note that typically MD-derived microsecond motion is difficult to reproduce. Also, note that this data set is better reproduced with longer, optimized MD trajectories.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="Ch4_ComparingAnalyses.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><font color="maroon">Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors</font></p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Ch6_pyDRstruct.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Albert Smith<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

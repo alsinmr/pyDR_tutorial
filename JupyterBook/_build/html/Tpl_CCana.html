@@ -50,11 +50,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Template: Basic NMR" href="Tpl_SolnNMR.html" />
+    <link rel="prev" title="Template: Solution-State NMR" href="Tpl_SolnNMR.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -116,6 +114,13 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <ul class="nav bd-sidenav">
  <li class="toctree-l1">
+  <a class="reference internal" href="GettingStarted.html">
+   <font color="maroon">
+    Getting Started
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="BriefHistory.html">
    <font color="maroon">
     Background
@@ -158,23 +163,44 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_MDvsNMR.html">
+  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
    <font color="maroon">
-    Chapter 4: Comparing MD and NMR Results
+    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_pyDRstruct.html">
+  <a class="reference internal" href="Ch5_MDvsNMR.html">
    <font color="maroon">
-    Chapter 5: Anatomy of pyDIFRATE
+    Chapter 5: Comparing MD and NMR Results
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_CCana.html">
+  <a class="reference internal" href="Ch6_pyDRstruct.html">
    <font color="maroon">
-    Chapter 6: Cross-Correlated Dynamics via iRED
+    Chapter 6: Anatomy of pyDIFRATE
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7_CCana.html">
+   <font color="maroon">
+    Chapter 7: Cross-Correlated Dynamics via iRED
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
+   <font color="maroon">
+    Chapter 8: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 9: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -195,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="Tpl_SolnNMR.html">
    <font color="maroon">
-    Template: Basic NMR
+    Template: Solution-State NMR
    </font>
   </a>
  </li>
@@ -426,15 +452,42 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#load-and-process-md-without-and-with-ired">
    Load and process MD without and with iRED
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-raw-data">
+     Create raw data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-to-unoptimized-detectors">
+     Fit to unoptimized detectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-to-optimized-detectors-optimized-fit">
+     Fit to optimized detectors + optimized fit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-modes-to-bonds">
+     Convert modes to bonds
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-results">
-   Plot the results
+  <a class="reference internal nav-link" href="#plots">
+   Plots
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#converting-modes-to-bonds">
-     Converting modes to bonds
+    <a class="reference internal nav-link" href="#plot-mode-analysis">
+     Plot mode analysis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compare-ired-to-direct-analysis">
+     Compare iRED to direct analysis
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -482,15 +535,42 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#load-and-process-md-without-and-with-ired">
    Load and process MD without and with iRED
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-raw-data">
+     Create raw data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-to-unoptimized-detectors">
+     Fit to unoptimized detectors
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fit-to-optimized-detectors-optimized-fit">
+     Fit to optimized detectors + optimized fit
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#convert-modes-to-bonds">
+     Convert modes to bonds
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-results">
-   Plot the results
+  <a class="reference internal nav-link" href="#plots">
+   Plots
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#converting-modes-to-bonds">
-     Converting modes to bonds
+    <a class="reference internal nav-link" href="#plot-mode-analysis">
+     Plot mode analysis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#compare-ired-to-direct-analysis">
+     Compare iRED to direct analysis
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
@@ -533,6 +613,9 @@ title="Print to PDF"
 
 <span class="c1"># How many detectors</span>
 <span class="n">n</span><span class="o">=</span><span class="mi">6</span>
+
+<span class="c1"># iRED rank (1 or 2)</span>
+<span class="n">rank</span><span class="o">=</span><span class="mi">1</span>
 
 <span class="c1">#What Nucleus did you measure?</span>
 <span class="n">bond</span><span class="o">=</span><span class="s1">&#39;N&#39;</span>  <span class="c1">#This refers to the backbone nitrogen, specifically</span>
@@ -582,7 +665,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fe8e9b802b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f9d11897320&gt;
 </pre></div>
 </div>
 </div>
@@ -592,13 +675,15 @@ title="Print to PDF"
 <h2>Load and process MD without and with iRED<a class="headerlink" href="#load-and-process-md-without-and-with-ired" title="Permalink to this headline">#</a></h2>
 <p>When using iRED, it’s important to compare the dynamics obtained with iRED and with a direct calculation of the detector responses. iRED works by determining modes of reorientational motion that are independent from each other. Then, the cross-correlation between modes is, by definition, zero at the initial time. However, there is no guarantee that the modes remain independent at a later time. If the direct and iRED calculations are in good agreement for a given bond, then the majority of motion for that bond results from independent mode motions which remain mostly independent. However, if not, then the total motion of that bond may have significant contributions from <a class="reference external" href="https://pubs.aip.org/aip/jcp/article/139/1/015102/192538/Identification-of-slow-molecular-order-parameters">time-lagged cross-correlation</a> between modes, and the iRED analysis is especially representative of its total motion.</p>
 <p>Note that we’ll do a rank 1 calculation here for iRED, since it simplifies the orientational dependence of iRED.</p>
+<section id="create-raw-data">
+<h3>Create raw data<a class="headerlink" href="#create-raw-data" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sel</span><span class="o">.</span><span class="n">traj</span><span class="o">.</span><span class="n">step</span><span class="o">=</span><span class="n">step</span>  <span class="c1">#Take every tenth point for MD calculation (set to 1 for more accurate calculation)</span>
 <span class="n">pyDR</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#Turns off the Progress bar (screws up webpage compilation)</span>
 
-<span class="n">pyDR</span><span class="o">.</span><span class="n">md2data</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span><span class="n">rank</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#Direct calculation</span>
-<span class="n">ired</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">md2iRED</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span><span class="n">rank</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1">#iRED object</span>
+<span class="n">pyDR</span><span class="o">.</span><span class="n">md2data</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span><span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">)</span> <span class="c1">#Direct calculation</span>
+<span class="n">ired</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">md2iRED</span><span class="p">(</span><span class="n">sel</span><span class="p">,</span><span class="n">rank</span><span class="o">=</span><span class="n">rank</span><span class="p">)</span>  <span class="c1">#iRED object</span>
 <span class="n">ired</span><span class="o">.</span><span class="n">iRED2data</span><span class="p">()</span> <span class="c1">#Send iRED results to proj</span>
 </pre></div>
 </div>
@@ -608,12 +693,15 @@ title="Print to PDF"
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:IREDMODE:rk1:backboneB with 70 data points
-&lt;pyDR.iRED.iRED.Data_iRED object at 0x7fe8e9b8d0b8&gt;
+&lt;pyDR.iRED.iRED.Data_iRED object at 0x7f9d61a578d0&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <p>Next, we set up the detectors for the raw data. We’ll do a pre-processing with 10 unoptimized detectors.</p>
+</section>
+<section id="fit-to-unoptimized-detectors">
+<h3>Fit to unoptimized detectors<a class="headerlink" href="#fit-to-unoptimized-detectors" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_no_opt</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
@@ -624,7 +712,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fe8a8605860&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f9d118a49b0&gt;
 
 Titles:
 n15:MD:rk1:backboneB
@@ -633,7 +721,9 @@ n15:IREDMODE:rk1:backboneB
 </div>
 </div>
 </div>
-<p>Next, we use 7 optimized detectors, and finally conclude with an optimization of the results, including cleanup of the detector sensitivities.</p>
+</section>
+<section id="fit-to-optimized-detectors-optimized-fit">
+<h3>Fit to optimized detectors + optimized fit<a class="headerlink" href="#fit-to-optimized-detectors-optimized-fit" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -647,7 +737,7 @@ n15:IREDMODE:rk1:backboneB
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fe8ea2f9588&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f9d11b96630&gt;
 
 Titles:
 o6:MD:rk1:backboneB
@@ -656,21 +746,32 @@ o6:IREDMODE:rk1:backboneB
 </div>
 </div>
 </div>
-<p>We now plot the results of the direct and iRED analysis.</p>
 </section>
-<section id="plot-the-results">
-<h2>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">#</a></h2>
+<section id="convert-modes-to-bonds">
+<h3>Convert modes to bonds<a class="headerlink" href="#convert-modes-to-bonds" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
-<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;MD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">modes2bonds</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Tpl_CCana_17_0.png" src="_images/Tpl_CCana_17_0.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted 1 iRED data objects from modes to bonds
+pyDIFRATE project with 1 data sets
+&lt;pyDR.Project.Project.Project object at 0x7f9d118a4a90&gt;
+
+Titles:
+o6:IREDBOND:rk1:backboneB
+</pre></div>
 </div>
 </div>
+</div>
+</section>
+</section>
+<section id="plots">
+<h2>Plots<a class="headerlink" href="#plots" title="Permalink to this headline">#</a></h2>
+<section id="plot-mode-analysis">
+<h3>Plot mode analysis<a class="headerlink" href="#plot-mode-analysis" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
@@ -679,41 +780,22 @@ o6:IREDMODE:rk1:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Tpl_CCana_18_0.png" src="_images/Tpl_CCana_18_0.png" />
+<img alt="_images/Tpl_CCana_20_0.png" src="_images/Tpl_CCana_20_0.png" />
 </div>
 </div>
-<section id="converting-modes-to-bonds">
-<h3>Converting modes to bonds<a class="headerlink" href="#converting-modes-to-bonds" title="Permalink to this headline">#</a></h3>
-<p>The second plot is completely different than the first. So what’s happening? In fact, this is the detector analysis of the iRED modes, where those modes still need to be projected onto the bonds. The modes are sorted by size, from smallest to largest, where the tendency is that larger modes are also slower, although this is certainly not an absolute rule.</p>
-<p>Modes are converted to bonds using .modes2bonds. We will run this and then overlay the results with the direct calculation.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">modes2bonds</span><span class="p">(</span><span class="n">includeOverall</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted 1 iRED data objects from modes to bonds
-pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fe8b909e400&gt;
-
-Titles:
-o6:IREDBOND:rk1:backboneB
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section id="compare-ired-to-direct-analysis">
+<h3>Compare iRED to direct analysis<a class="headerlink" href="#compare-ired-to-direct-analysis" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
 <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;MD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
 <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;iREDbond&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
-<span class="c1"># for a in proj.plot_obj.ax:a.set_ylim([0,.05])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Tpl_CCana_21_0.png" src="_images/Tpl_CCana_21_0.png" />
+<img alt="_images/Tpl_CCana_22_0.png" src="_images/Tpl_CCana_22_0.png" />
 </div>
 </div>
 <p>In particularly flexible regions, there is some disagreement between the two analyses, but otherwise we have done fairly well with the iRED mode decomposition. In these flexible regions, we should keep in mind that mode dynamics yields an incomplete description of the total motion and the cross-correlation coefficients are not representing the full motion.</p>
@@ -731,7 +813,7 @@ o6:IREDBOND:rk1:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Tpl_CCana_24_0.png" src="_images/Tpl_CCana_24_0.png" />
+<img alt="_images/Tpl_CCana_25_0.png" src="_images/Tpl_CCana_25_0.png" />
 </div>
 </div>
 </section>
@@ -742,12 +824,36 @@ o6:IREDBOND:rk1:backboneB
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># proj.chimera.close()</span>
 <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;iREDbond&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">CCchimera</span><span class="p">()</span>
-<span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">,</span><span class="s1">&#39;~show ~@N,C,CA,H,N&#39;</span><span class="p">])</span>
+<span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">,</span><span class="s1">&#39;~show ~@N,C,CA,H,N&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">&lt;ipython-input-12-0f0ae89d4082&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># proj.chimera.close()</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;iREDbond&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">CCchimera</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">,</span><span class="s1">&#39;~show ~@N,C,CA,H,N&#39;</span><span class="p">])</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/iRED/iRED.py</span> in <span class="ni">CCchimera</span><span class="nt">(self, index, rho_index, indexCC, scaling, norm)</span>
+<span class="g g-Whitespace">    </span><span class="mi">823</span>         <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">824</span>             <span class="c1"># mn=CMXRemote.how_many_models(ID)+1</span>
+<span class="ne">--&gt; </span><span class="mi">825</span>             <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">826</span>             <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot;  maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
+<span class="g g-Whitespace">    </span><span class="mi">827</span>             <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
+
+<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
+<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
+<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="k">return</span> <span class="mi">0</span>
+
+<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
@@ -787,7 +893,7 @@ o6:IREDBOND:rk1:backboneB
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Template: Basic NMR</font></p>
+            <p class="prev-next-title"><font color="maroon">Template: Solution-State NMR</font></p>
         </div>
     </a>
 </div>
@@ -799,7 +905,7 @@ o6:IREDBOND:rk1:backboneB
   
     By Albert Smith<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>

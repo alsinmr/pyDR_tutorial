@@ -23,6 +23,9 @@ step=10
 # How many detectors
 n=6
 
+# iRED rank (1 or 2)
+rank=1
+
 #What Nucleus did you measure?
 bond='N'  #This refers to the backbone nitrogen, specifically
 segids=None # Usually, segment does not need to be specified
@@ -70,18 +73,22 @@ sel.select_bond(bond)
 # 
 # Note that we'll do a rank 1 calculation here for iRED, since it simplifies the orientational dependence of iRED.
 
+# ### Create raw data 
+
 # In[5]:
 
 
 sel.traj.step=step  #Take every tenth point for MD calculation (set to 1 for more accurate calculation)
 pyDR.Defaults['ProgressBar']=False #Turns off the Progress bar (screws up webpage compilation)
 
-pyDR.md2data(sel,rank=1) #Direct calculation
-ired=pyDR.md2iRED(sel,rank=1)  #iRED object
+pyDR.md2data(sel,rank=rank) #Direct calculation
+ired=pyDR.md2iRED(sel,rank=rank)  #iRED object
 ired.iRED2data() #Send iRED results to proj
 
 
 # Next, we set up the detectors for the raw data. We'll do a pre-processing with 10 unoptimized detectors.
+
+# ### Fit to unoptimized detectors
 
 # In[6]:
 
@@ -90,7 +97,7 @@ proj['raw'].detect.r_no_opt(15)
 proj['raw'].fit()
 
 
-# Next, we use 7 optimized detectors, and finally conclude with an optimization of the results, including cleanup of the detector sensitivities.
+# ### Fit to optimized detectors + optimized fit
 
 # In[7]:
 
@@ -99,16 +106,16 @@ proj['no_opt'].detect.r_auto(n)
 proj['no_opt'].fit().opt2dist(rhoz_cleanup=True)
 
 
-# We now plot the results of the direct and iRED analysis.
-
-# ## Plot the results
+# ### Convert modes to bonds
 
 # In[8]:
 
 
-proj.close_fig('all')
-proj['opt_fit']['MD'].plot().fig.set_size_inches([8,10])
+proj['opt_fit'].modes2bonds()
 
+
+# ## Plots
+# ### Plot mode analysis
 
 # In[9]:
 
@@ -117,24 +124,14 @@ proj.close_fig('all')
 proj['opt_fit']['iREDmode'].plot().fig.set_size_inches([8,10])
 
 
-# ### Converting modes to bonds
-# The second plot is completely different than the first. So what's happening? In fact, this is the detector analysis of the iRED modes, where those modes still need to be projected onto the bonds. The modes are sorted by size, from smallest to largest, where the tendency is that larger modes are also slower, although this is certainly not an absolute rule.
-# 
-# Modes are converted to bonds using .modes2bonds. We will run this and then overlay the results with the direct calculation.
+# ### Compare iRED to direct analysis
 
 # In[10]:
-
-
-proj['opt_fit'].modes2bonds(includeOverall=True)
-
-
-# In[11]:
 
 
 proj.close_fig('all')
 proj['opt_fit']['MD'].plot(style='bar').fig.set_size_inches([8,12])
 proj['opt_fit']['iREDbond'].plot()
-# for a in proj.plot_obj.ax:a.set_ylim([0,.05])
 
 
 # In particularly flexible regions, there is some disagreement between the two analyses, but otherwise we have done fairly well with the iRED mode decomposition. In these flexible regions, we should keep in mind that mode dynamics yields an incomplete description of the total motion and the cross-correlation coefficients are not representing the full motion.
@@ -142,7 +139,7 @@ proj['opt_fit']['iREDbond'].plot()
 # ### Plotting cross-correlation matrix
 # We first plot the cross-correlation matrices (using the absolute normalized cross-correlation, ranging from 0 to 1).
 
-# In[12]:
+# In[11]:
 
 
 import numpy as np
@@ -154,10 +151,16 @@ fig.tight_layout()
 # ### 3D Representations in ChimeraX
 # Finally, if running locally, we can plot in ChimeraX. In ChimeraX, we can select a given bond (or atom in the bond/representative selection), and then mouse over one of the detectors in the upper right corner to view the cross-correlation to the selected bond.
 
-# In[13]:
+# In[12]:
 
 
 # proj.chimera.close()
 proj['iREDbond'].CCchimera()
-proj.chimera.command_line(['set bgColor white','lighting soft','~show ~@N,C,CA,H,N'])
+_=proj.chimera.command_line(['set bgColor white','lighting soft','~show ~@N,C,CA,H,N'])
+
+
+# In[ ]:
+
+
+
 

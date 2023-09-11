@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="References" href="References.html" />
-    <link rel="prev" title="Welcome to the pyDIFRATE tutorial" href="intro.html" />
+    <link rel="prev" title="Getting Started" href="GettingStarted.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -116,6 +116,13 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="GettingStarted.html">
+   <font color="maroon">
+    Getting Started
+   </font>
+  </a>
+ </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    <font color="maroon">
@@ -159,16 +166,44 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_MDvsNMR.html">
+  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
    <font color="maroon">
-    Chapter 4: Comparing MD and NMR Results
+    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_pyDRstruct.html">
+  <a class="reference internal" href="Ch5_MDvsNMR.html">
    <font color="maroon">
-    Chapter 5: Anatomy of pyDIFRATE
+    Chapter 5: Comparing MD and NMR Results
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch6_pyDRstruct.html">
+   <font color="maroon">
+    Chapter 6: Anatomy of pyDIFRATE
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch7_CCana.html">
+   <font color="maroon">
+    Chapter 7: Cross-Correlated Dynamics via iRED
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
+   <font color="maroon">
+    Chapter 8: ROMANCE Analysis of Methyl Groups
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
+   <font color="maroon">
+    Chapter 9: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -190,6 +225,13 @@ const thebe_selector_output = ".output, .cell_output"
   <a class="reference internal" href="Tpl_SolnNMR.html">
    <font color="maroon">
     Template: Solution-State NMR
+   </font>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Tpl_CCana.html">
+   <font color="maroon">
+    Template: Cross-Correlated Dynamics via iRED
    </font>
   </a>
  </li>
@@ -387,7 +429,7 @@ title="Print to PDF"
 <p>This analysis, then, can be used to treat systems with an arbitrary number of correlation times, assuming only that the [rank-2 tensor]correlation function is a sum of decaying exponentials.</p>
 <p>The challenge since then has been to explain what exactly these parameters mean. Without some idea of the model of motion, the parameters yield their definition reliably, but a really physical interpretation is difficult. Therefore, pyDIFRATE smoothly integrates multiple methods, especially NMR and MD simulation, to try to interpret these parameters, and understand the underlying nature of the dynamics at a higher level of detail than previously possible based on experiment or simulation alone. Multiple computational methods have been integrated with a fast, easy to use software that also includes data management and 2D and 3D visualization approaches.</p>
 <p><strong>So, is it ‘detectors’ or DIFRATE?</strong></p>
-<p>Detectors is the name of the method. DIFRATE is the name of the original MATLAB software <a class="reference external" href="http://difrate.sourceforge.io/">package</a>, and pyDIFRATE is the Python implementation (although the pyDIFRATE package on GitHub is superceded by <a class="reference external" href="http://github.com/alsinmr/pyDR">pyDR</a>). DIFRATE stands for DIstortion Free Relaxation Analysis TEchnique, and one essentially end up taking sums and differences of relaxation rate constants, so it was complete with a double meaning. However, being distortion <em>free</em> was too big a claim to be made in a peer-reviewed paper, so only the software and not the method ended up being named DIFRATE (I would maintain that it is distortion free as long as the correlation function is monoexponential, although I would not make this claim about solution-state NMR data).</p>
+<p>Detectors is the name of the method. DIFRATE is the name of the original MATLAB software <a class="reference external" href="http://difrate.sourceforge.io/">package</a>, and pyDIFRATE is the Python implementation (although the pyDIFRATE package on GitHub is superceded by <a class="reference external" href="http://github.com/alsinmr/pyDR">pyDR</a>). DIFRATE stands for DIstortion Free Relaxation Analysis TEchnique, and one ends up taking sums and differences of relaxation rate constants, giving a double meaning. However, being distortion <em>free</em> ss too bold a claim for peer-reviewed articles, so only the software and not the method ended up being named DIFRATE.</p>
 <p><strong>Major contributors</strong>
 Aside from myself, Beat Meier and Matthias Ernst helped clarify a lot of the important ideas for detector analysis and explain its necessity, and Fabien Ferrage was critical in repurposing for solution-state NMR. Daniel Huster has been a champion for pushing for its application beyond model proteins and looking at more biologically relevant systems. Kai Zumpfe has contributed significantly to the software itself.</p>
 </section>
@@ -419,11 +461,11 @@ Aside from myself, Beat Meier and Matthias Ernst helped clarify a lot of the imp
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="GettingStarted.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Welcome to the pyDIFRATE tutorial</p>
+            <p class="prev-next-title"><font color="maroon">Getting Started</font></p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="References.html" title="next page">
@@ -442,7 +484,7 @@ Aside from myself, Beat Meier and Matthias Ernst helped clarify a lot of the imp
   
     By Albert Smith<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>

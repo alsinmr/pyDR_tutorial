@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# # <font color="maroon">Template: Basic NMR</font>
+# # <font color="maroon">Template: Solution-State NMR</font>
 
 # <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Tpl_SolnNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
-
-# <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Tpl_basicNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # Solution-state NMR is not much different from solid-state NMR, except that we need to include the correlation time of isotropic tumbling (anisotropic tumbling not fully implemented- contact us if interested in this feature). Compare the files [HETs_15N.txt](https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt) to [ubi_soln.txt](https://github.com/alsinmr/pyDR_tutorial/raw/main/data/ubi_soln.txt), where ubiquitin data is from solution-state.
 # 

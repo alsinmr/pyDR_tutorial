@@ -5,6 +5,7 @@ format: jb-book
 root: intro
 parts:
 - chapters:
+  - file: GettingStarted
   - file: BriefHistory
   - file: References
 - caption: Tutorial
@@ -13,9 +14,12 @@ parts:
   - file: Ch1_detectors_intro
   - file: Ch2_detector_opt
   - file: Ch3_basic_NMR
-  - file: Ch4_MDvsNMR
-  - file: Ch5_pyDRstruct
-  - file: Ch6_CCana
+  - file: Ch4_ComparingAnalyses
+  - file: Ch5_MDvsNMR
+  - file: Ch6_pyDRstruct
+  - file: Ch7_CCana
+  - file: Ch8_ROMANCE_CH3
+  - file: Ch9_ROMANCE_backbone
 
 - caption: Templates
   numbered: false

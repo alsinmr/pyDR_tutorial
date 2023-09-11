@@ -135,14 +135,20 @@ nmr.new_exper(Type='R1p',v0=800,vr=60,v1=10,Nuc='15N') #Add an R1p (MAS=60 kHz, 
 nmr.new_exper(Type='S2')
 labels=[r'$R_1$(400 MHz)',r'$R_1$(600 MHz)',r'$R_1$(800 MHz)',
         r'$R_{1\rho}$',r'$1-S^2$']
+ax=plt.subplots()[1]
+nmr.plot_Rz(norm=True,ax=ax) #Plot the 9 relaxation rate constants (normalized to max of 1) vs tc
+_=ax.legend(labels)
 
-ax=nmr.plot_Rz(norm=True)[0].axes #Plot the 9 relaxation rate constants (normalized to max of 1) vs tc
-ax.legend(labels)
+
+# In[3]:
+
+
+ax.figure
 
 
 # Now we can construct the relaxation rate constants for the seven experiments above, by simply summing over the three correlation times and amplitudes
 
-# In[3]:
+# In[4]:
 
 
 R=np.zeros(nmr.rhoz.shape[0])  #Pre-allocate an array with 7 relaxation rates
@@ -160,7 +166,7 @@ ax.figure.tight_layout()
 
 # Now, the question is, can we fit this data based on a model of the correlation function, and does that model have to match the original model. For demonstration purposes, we try a model that only has two correlation times.
 
-# In[4]:
+# In[5]:
 
 
 #Function to calculate relaxation rate constants
@@ -192,7 +198,7 @@ def fun(x):
 # $$
 # 
 
-# In[5]:
+# In[6]:
 
 
 fit=minimize(fun,[-10,-9,-7,.2,.1,.05],bounds=([-14,-6],[-14,-6],[-14,-6],[0,1],[0,1],[0,1]))   
@@ -202,7 +208,7 @@ Rc=calcR(zf,Af,nmr)
 print(f'Error is {fit["fun"]} (should be small– otherwise adjust initial guess)')
 
 
-# In[6]:
+# In[7]:
 
 
 #Plot the results
@@ -230,7 +236,7 @@ ax.figure.tight_layout()
 
 # The data is well-fit, but the parameters themselves are not well determined, so we try again with a reduced number of variables, to see what happens.
 
-# In[7]:
+# In[8]:
 
 
 fit=minimize(fun,[-10,-8.5,.2,.01],bounds=([-14,-6],[-14,-6],[0,1],[0,1]))   
@@ -240,7 +246,7 @@ Rc=calcR(zf,Af,nmr)
 print(f'Error is {fit["fun"]} (should be small– otherwise adjust initial guess)')
 
 
-# In[8]:
+# In[9]:
 
 
 #Plot the results
@@ -328,7 +334,7 @@ ax.figure.tight_layout()
 # 
 # While the math may seem a bit overwhelming at first, all we've really done is a little shuffling of terms. We point out that a given relaxation rate constant is sensitive to certain correlation times more than others, and its measurement basically provides us a 'window', given by $R_\zeta(z)$, into the total dynamics. We have termed this window a *detector sensitivity*, which looks at only a certain range of correlation times, as defined by the integral above. pyDR automatically calculates these windows, as shown below, for a $^{15}$N $T_1$ (protein backbone) acquired at 600 MHz.
 
-# In[9]:
+# In[10]:
 
 
 _=pyDR.Sens.NMR(Type='R1',Nuc='15N',v0=600).plot_Rz()
@@ -357,7 +363,7 @@ _=pyDR.Sens.NMR(Type='R1',Nuc='15N',v0=600).plot_Rz()
 # 
 # The superscript $n$ just indicates that there are multiple possible linear combinations of relaxation rate constants. Each linear combination creates a new window, but most possible windows may not be particularly useful. For example, we take two relaxation rate constants below, and show a random set of linear combinations:
 
-# In[10]:
+# In[11]:
 
 
 nmr=pyDR.Sens.NMR(Type='R1',v0=[40,800],Nuc='15N')
@@ -372,7 +378,7 @@ _=ax.set_ylabel(r'\rho_n(z)')
 
 # However, pyDR is designed to yield the optimal $n$ windows for a given data set, for example, for the two experiments, we get two optimized windows (The number of optimized windows is always less than or equal to the number of experiments)
 
-# In[11]:
+# In[12]:
 
 
 _=nmr.Detector().r_auto(2).plot_rhoz()

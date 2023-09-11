@@ -3,6 +3,7 @@
 
 title: pyDIFRATE Tutorial
 author: Albert Smith
+copyright: "2023"
 logo: logo.png
 
 # Force re-execution of notebooks on each build.
