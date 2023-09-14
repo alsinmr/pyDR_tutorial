@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -729,7 +731,7 @@ Standard Deviation
 <img alt="_images/Ch6_pyDRstruct_10_0.png" src="_images/Ch6_pyDRstruct_10_0.png" />
 </div>
 </div>
-<p>We see that there are seven detectors space from below (~100 ps) to above (~3 <span class="math notranslate nohighlight">\(\mu\)</span>s). From <a class="reference external" href="http://sens.info">sens.info</a>, we can find out the mean position of the detectors (here, we convert from the log scale to ns). Note that the first and last detector do not really have a mean position (although one is nonetheless calculated), since they remain positive for arbitrarily short/long correlation times, respectively</p>
+<p>We see that there are seven detectors space from below (~100 ps) to above (~3 <span class="math notranslate nohighlight">\(\mu\)</span>s). From sens.info, we can find out the mean position of the detectors (here, we convert from the log scale to ns). Note that the first and last detector do not really have a mean position (although one is nonetheless calculated), since they remain positive for arbitrarily short/long correlation times, respectively</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">z0</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;z0&#39;</span><span class="p">]):</span>
@@ -749,7 +751,7 @@ rho6: ~ 1.4e+05 ns
 </div>
 </div>
 </div>
-<p>The <a class="reference external" href="http://sens.info">sens.info</a> object is particularly useful in summarizing relevant parameters for the sensitivity of a given data object. It is also accessible via <a class="reference external" href="http://data.info">data.info</a>. Note that <a class="reference external" href="http://sens.info">sens.info</a> for an NMR or MD sensitivity yields parameters from which the sensitivities may be calculated, whereas for detectors, <a class="reference external" href="http://sens.info">sens.info</a> only characterizes the sensitivities, but cannot calculation them. We show below the sensitivity of this data (detectors), but also create an NMR sensitivity object, and show info, to highlight the differences.</p>
+<p>The sens.info object is particularly useful in summarizing relevant parameters for the sensitivity of a given data object. It is also accessible via data.info. Note that sens.info for an NMR or MD sensitivity yields parameters from which the sensitivities may be calculated, whereas for detectors, sens.info only characterizes the sensitivities, but cannot calculation them. We show below the sensitivity of this data (detectors), but also create an NMR sensitivity object, and show info, to highlight the differences.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Info for detector:&#39;</span><span class="p">)</span>
@@ -884,9 +886,6 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Detector reoptimization failed
-</pre></div>
-</div>
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 7.05541598e-02,  1.31131795e-02,  1.56836598e-02, ...,
          2.72427192e-12,  9.10197174e-13,  9.64890409e-14],
        [ 7.06657670e-02, -6.53508201e-03,  2.49433414e-02, ...,
@@ -928,7 +927,8 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Relative error
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data already in project (index=12)
+Relative error
 Detector w/ bounds w/o bounds
   rho0: 0.0024    1.5e-08
   rho1: 0.0018    2.1e-08
@@ -976,32 +976,6 @@ Detector w/ bounds w/o bounds
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pyDR.chimeraX.chimeraX_funs.set_chimera_path(&#39;path_to_executable&#39;) #Needs to be run once</span>
 <span class="n">data</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
 <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;~show ~@N,C,CA&#39;</span><span class="p">,</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">])</span>  <span class="c1">#Send a command to ChimeraX to adjust the view</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-17-c0912388f5d8&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># pyDR.chimeraX.chimeraX_funs.set_chimera_path(&#39;path_to_executable&#39;) #Needs to be run once</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">data</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;~show ~@N,C,CA&#39;</span><span class="p">,</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">])</span>  <span class="c1">#Send a command to ChimeraX to adjust the view</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/Data/Data.py</span> in <span class="ni">chimera</span><span class="nt">(self, index, rho_index, scaling)</span>
-<span class="g g-Whitespace">    </span><span class="mi">452</span> 
-<span class="g g-Whitespace">    </span><span class="mi">453</span>         <span class="c1"># CMXRemote.send_command(ID,&#39;close&#39;)</span>
-<span class="ne">--&gt; </span><span class="mi">454</span>         <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">455</span>         <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot; maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">456</span>         <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
-<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
-<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="k">return</span> <span class="mi">0</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

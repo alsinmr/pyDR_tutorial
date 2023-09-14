@@ -4,9 +4,9 @@ Tpl_CCana.ipynb	1693820719
 Tpl_SolnNMR.ipynb	1693820723
 Ch2_detector_opt.ipynb	1693820677
 Ch8_ROMANCE_CH3.ipynb	1693902737
-Ch7_CCana.ipynb	1693907937
+Ch7_CCana.ipynb	1694527774
 Tpl_basicNMR.ipynb	1693820715
 Ch9_ROMANCE_backbone.ipynb	1693902728
-Ch3_basic_NMR.ipynb	1693820681
+Ch3_basic_NMR.ipynb	1694525650
 Ch4_ComparingAnalyses.ipynb	1693915202
-Ch5_MDvsNMR.ipynb	1693906251
+Ch5_MDvsNMR.ipynb	1694681572

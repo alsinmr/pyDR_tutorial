@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -585,7 +587,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f8e59dbf128&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7ff211c0e3d0&gt;
 </pre></div>
 </div>
 </div>
@@ -608,10 +610,8 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Individual components of the correlation functions or tensors will not be returned in auto or sym mode
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:IREDMODE:rk1:backboneB with 70 data points
-&lt;pyDR.iRED.iRED.Data_iRED object at 0x7f8e78955780&gt;
+r:IREDMODE:rk1:backboneB with 70 data points
+&lt;pyDR.iRED.iRED.Data_iRED object at 0x7ff21240f040&gt;
 </pre></div>
 </div>
 </div>
@@ -627,7 +627,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f8e59d9fe48&gt;
+&lt;pyDR.Project.Project.Project object at 0x7ff21240f1f0&gt;
 
 Titles:
 n10:MD:rk1:backboneB
@@ -646,11 +646,9 @@ n10:IREDMODE:rk1:backboneB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 2 data objects
+Optimized 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f8e5a106630&gt;
+&lt;pyDR.Project.Project.Project object at 0x7ff212c044f0&gt;
 
 Titles:
 o6:MD:rk1:backboneB
@@ -698,7 +696,7 @@ o6:IREDMODE:rk1:backboneB
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted 1 iRED data objects from modes to bonds
 pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f8e790c2ac8&gt;
+&lt;pyDR.Project.Project.Project object at 0x7ff1e393e2e0&gt;
 
 Titles:
 o6:IREDBOND:rk1:backboneB
@@ -753,30 +751,6 @@ o6:IREDBOND:rk1:backboneB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-12-f65eb0c12bdb&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># proj.chimera.close()</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;iREDbond&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">CCchimera</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">,</span><span class="s1">&#39;~show ~@N,C,CA,H,N&#39;</span><span class="p">])</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/iRED/iRED.py</span> in <span class="ni">CCchimera</span><span class="nt">(self, index, rho_index, indexCC, scaling, norm)</span>
-<span class="g g-Whitespace">    </span><span class="mi">823</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">824</span>             <span class="c1"># mn=CMXRemote.how_many_models(ID)+1</span>
-<span class="ne">--&gt; </span><span class="mi">825</span>             <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">826</span>             <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot;  maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">827</span>             <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
-<span class="g g-Whitespace">    </span><span class="mi">369</span>         <span class="n">tr</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
-<span class="ne">--&gt; </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>

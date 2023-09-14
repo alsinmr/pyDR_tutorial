@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Template: Solution-State NMR" href="Tpl_SolnNMR.html" />
@@ -665,7 +667,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f9d11897320&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f8839a7b400&gt;
 </pre></div>
 </div>
 </div>
@@ -690,10 +692,8 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Individual components of the correlation functions or tensors will not be returned in auto or sym mode
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:IREDMODE:rk1:backboneB with 70 data points
-&lt;pyDR.iRED.iRED.Data_iRED object at 0x7f9d61a578d0&gt;
+r:IREDMODE:rk1:backboneB with 70 data points
+&lt;pyDR.iRED.iRED.Data_iRED object at 0x7f87f8e428b0&gt;
 </pre></div>
 </div>
 </div>
@@ -712,7 +712,7 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f9d118a49b0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f88382d5910&gt;
 
 Titles:
 n15:MD:rk1:backboneB
@@ -733,11 +733,9 @@ n15:IREDMODE:rk1:backboneB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 2 data objects
+Optimized 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f9d11b96630&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f881d4366a0&gt;
 
 Titles:
 o6:MD:rk1:backboneB
@@ -758,7 +756,7 @@ o6:IREDMODE:rk1:backboneB
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted 1 iRED data objects from modes to bonds
 pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f9d118a4a90&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f883825d6d0&gt;
 
 Titles:
 o6:IREDBOND:rk1:backboneB
@@ -825,35 +823,6 @@ o6:IREDBOND:rk1:backboneB
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># proj.chimera.close()</span>
 <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;iREDbond&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">CCchimera</span><span class="p">()</span>
 <span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">,</span><span class="s1">&#39;~show ~@N,C,CA,H,N&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="nn">&lt;ipython-input-12-0f0ae89d4082&gt;</span> in <span class="ni">&lt;module&gt;</span><span class="nt">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># proj.chimera.close()</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;iREDbond&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">CCchimera</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">([</span><span class="s1">&#39;set bgColor white&#39;</span><span class="p">,</span><span class="s1">&#39;lighting soft&#39;</span><span class="p">,</span><span class="s1">&#39;~show ~@N,C,CA,H,N&#39;</span><span class="p">])</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/iRED/iRED.py</span> in <span class="ni">CCchimera</span><span class="nt">(self, index, rho_index, indexCC, scaling, norm)</span>
-<span class="g g-Whitespace">    </span><span class="mi">823</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">824</span>             <span class="c1"># mn=CMXRemote.how_many_models(ID)+1</span>
-<span class="ne">--&gt; </span><span class="mi">825</span>             <span class="n">om</span><span class="o">=</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">826</span>             <span class="n">CMXRemote</span><span class="o">.</span><span class="n">send_command</span><span class="p">(</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;open &quot;</span><span class="si">{0}</span><span class="s1">&quot;  maxModels 1&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">molsys</span><span class="o">.</span><span class="n">topo</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">827</span>             <span class="k">while</span> <span class="n">om</span><span class="o">==</span><span class="n">CMXRemote</span><span class="o">.</span><span class="n">how_many_models</span><span class="p">(</span><span class="n">ID</span><span class="p">):</span>
-
-<span class="nn">~/Documents/GitHub/pyDR/chimeraX/CMXRemote.py</span> in <span class="ni">how_many_models</span><span class="nt">(cls, ID, w_atoms)</span>
-<span class="g g-Whitespace">    </span><span class="mi">370</span>         <span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">371</span>         <span class="k">while</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">372</span>             <span class="k">if</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">373</span>                 <span class="k">return</span> <span class="n">tr</span><span class="o">.</span><span class="n">response</span>
-<span class="g g-Whitespace">    </span><span class="mi">374</span>         <span class="k">return</span> <span class="mi">0</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
 </div>
