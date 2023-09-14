@@ -163,10 +163,7 @@ def write_colab_setup(f):
      "outputs": [],
      "source": [
       "# SETUP pyDR\\n",
-      "!git clone https://github.com/alsinmr/pyDR_tutorial.git\\n",
-      "from pyDR_tutorial import colab_setup\\n",
-      "import os\\n",
-      "os.chdir('pyDR_tutorial')"
+      "!git clone https://github.com/alsinmr/pyDR.git"
      ]
     }""")
     
@@ -195,9 +192,7 @@ def write_book_setup(f):
      "source": [
       "# SETUP pyDR\\n",
       "import os\\n",
-      "os.chdir('..')\\n",
-      "import sys\\n",
-      "sys.path.append('../') # Path to pyDR location"
+      "os.chdir('../..')",
      ]
     }""")
     
