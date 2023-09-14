@@ -44,9 +44,7 @@ segids=None # Usually, segment does not need to be specified
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location
+os.chdir('../..')
 
 
 # In[3]:

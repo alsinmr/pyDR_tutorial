@@ -6,6 +6,9 @@
 # <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch5_MDvsNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # One of the biggest advantages of the *Detectors* approach is our ability to compare data from different sources. In this tutorial, we will look at comparing dynamics from NMR and MD data. However, we will also use detectors to compare, for example, the total motion in MD data to motion separated via reference frames ([ROMANCE](https://doi.org/10.1016/j.jmro.2022.100045)) and the total motion vs. detector analysis of the cross correlation of motion.
+# 
+# Note that if you're running this locally, you may need to manually [download](https://drive.google.com/file/d/1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW/view?usp=share_link) the .xtc file and place it in
+# pyDR/examples/HETs15N.
 
 # ## Setup and data downloads
 
@@ -14,9 +17,7 @@
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location
+os.chdir('../..')
 
 
 # In[2]:
@@ -29,24 +30,10 @@ import pyDR
 # ### Downloading from Google Drive to Google Colab
 # In the tutorial, we will use files that are already stored as part of pyDR/examples. If you are working locally, you can just download outside of the Jupyter notebook and then tell pyDR later where the files are. However, in Google Colab, you need to get the files to the Colab server somehow. Here, we show how to download them from file IDs from Google Drive (these need to be viewable to anyone with the share link in your the share settings).
 
-# In[3]:
-
-
-#Download MD files if running in Colab
-import sys
-if 'google.colab' in sys.modules:
-    from gdown import download
-    ID='1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW'   #HETs xtc file
-    #Just grab this string out of the google drive share link 'https://drive.google.com/file/d/1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW/view?usp=share_link'
-    gdown.download(f'https://drive.google.com/uc?id={ID}','HETs_md.xtc')
-    ID='1qkgKhQ7QMS8PAWS1AxyoaZUYej2qm_xT'   #HETs pdb (topology)
-    gdown.download(f'https://drive.google.com/uc?id={ID}','HETs_md.pdb')
-
-
 # ## Load and Process NMR
 # We'll do this in just a few lines. See the previous examples for processing NMR
 
-# In[4]:
+# In[5]:
 
 
 #Empty pyDR project (specify directory if you want to save later)
@@ -58,7 +45,7 @@ proj.append_data(pyDR.IO.readNMR(nmr_link))
 
 # Specify the bond selection for the NMR data
 # Note, we access select via the project. len(proj['NMR'])>1, this won't work, and we need to be more specific
-proj['NMR'].select=pyDR.MolSelect(topo='HETs_md.pdb')
+proj['NMR'].select=pyDR.MolSelect(topo='pyDR/examples/HETs15N/backboneB.pdb') #Paths may need adjusted if running locally ()
 proj['NMR'].select.select_bond('N',segids='B',resids=proj['NMR'].label)
 
 #Setup detectors for NMR data (4 detectors, use S2 data)
@@ -73,16 +60,13 @@ print(proj)
 
 # ###  Open MD trajectory, specify bonds
 
-# In[5]:
+# In[6]:
 
 
-if 'google.colab' in sys.modules:
-    #Create a selection object with trajectory data
-    sel=pyDR.MolSelect(topo='HETs_md.pdb',traj_files='HETs_md.xtc',project=proj)
-else:
-    sel=pyDR.MolSelect(topo='../pyDR/examples/HETs15N/backboneB.pdb',
-                       traj_files='../pyDR/examples/HETs15N/backboneB.xtc',
-                       project=proj)
+#Paths may need adjusted if running locally ()
+sel=pyDR.MolSelect(topo='pyDR/examples/HETs15N/backboneB.pdb',  
+                   traj_files='pyDR/examples/HETs15N/backboneB.xtc',
+                   project=proj)
 
 # Specify the bond select to analyze for MD
 sel.select_bond('N',segids='B')
@@ -96,7 +80,7 @@ sel.select_bond('N',segids='B')
 # pyDR.md2data(sel)
 # ```
 
-# In[6]:
+# In[7]:
 
 
 sel.traj.step=10  #Take every tenth point for MD calculation (set to 1 for more accurate calculation)
@@ -160,7 +144,7 @@ _=proj['NMR']['proc'].sens.plot_rhoz(ax=ax,color='black',linestyle=':')
 #Optimize 7 detectors
 proj['MD']['no_opt'].detect.r_auto(7)
 #Fit the data with those 7 detectors
-proj['MD']['no_opt'].fit()
+_=proj['MD']['no_opt'].fit()
 
 
 # In[13]:
@@ -172,11 +156,11 @@ proj['MD']['proc'].plot()
 proj.plot_obj.fig.set_size_inches([8,12])
 
 
-# In[23]:
+# In[14]:
 
 
 #Show the results for selected detectors in NGLviewer (may fail in Google Colab)
-# proj['MD']['proc'][0].nglview(rho_index=1,scaling=30)
+proj['MD']['proc'][0].nglview(rho_index=1,scaling=30)
 
 
 # In[15]:
@@ -186,7 +170,6 @@ proj.plot_obj.fig.set_size_inches([8,12])
 if 'google.colab' not in sys.modules:
 #    #The path to chimeraX needs to be defined the first time this is run!!
 #     pyDR.chimeraX.chimeraX_funs.set_chimera_path('path_to_executable')
-
     proj['MD']['proc'].chimera(scaling=30) #Adjust scaling to improve visibility for some detectors
 
 

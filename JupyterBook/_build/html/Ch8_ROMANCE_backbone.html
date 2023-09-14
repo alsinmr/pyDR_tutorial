@@ -50,10 +50,14 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Template: Basic NMR" href="Tpl_basicNMR.html" />
-    <link rel="prev" title="Chapter 7: ROMANCE Analysis of Methyl Groups" href="Ch7_ROMANCE_CH3.html" />
+    <link rel="prev" title="Chapter 7: Cross-Correlated Dynamics via iRED" href="Ch7_CCana.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -164,30 +168,30 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_MDvsNMR.html">
+  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
    <font color="maroon">
-    Chapter 4: Comparing MD and NMR Results
+    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_pyDRstruct.html">
+  <a class="reference internal" href="Ch5_MDvsNMR.html">
    <font color="maroon">
-    Chapter 5: Anatomy of pyDIFRATE
+    Chapter 5: Comparing MD and NMR Results
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_CCana.html">
+  <a class="reference internal" href="Ch6_pyDRstruct.html">
    <font color="maroon">
-    Chapter 6: Cross-Correlated Dynamics via iRED
+    Chapter 6: Anatomy of pyDIFRATE
    </font>
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch7_ROMANCE_CH3.html">
+  <a class="reference internal" href="Ch7_CCana.html">
    <font color="maroon">
-    Chapter 7: ROMANCE Analysis of Methyl Groups
+    Chapter 7: Cross-Correlated Dynamics via iRED
    </font>
   </a>
  </li>
@@ -437,6 +441,28 @@ title="Print to PDF"
    Setup and data downloads
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-the-frame-analysis">
+   Run the frame analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup-the-frame-analysis">
+     Setup the frame analysis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-the-frames-process">
+     Import the frames, process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results">
+     Plot the results
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
     </nav>
@@ -461,6 +487,28 @@ title="Print to PDF"
    Setup and data downloads
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#run-the-frame-analysis">
+   Run the frame analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#setup-the-frame-analysis">
+     Setup the frame analysis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-the-frames-process">
+     Import the frames, process
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-results">
+     Plot the results
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
                         </nav>
@@ -482,9 +530,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># Path to pyDR location</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -492,11 +538,143 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Imports</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pyDR</span>
 </pre></div>
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Project Creation and File loading</span>
+<span class="n">proj</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">Project</span><span class="p">()</span>
+
+<span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;pyDR/examples/HETs15N/backboneB.pdb&#39;</span><span class="p">,</span>
+                   <span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;pyDR/examples/HETs15N/backboneB.xtc&#39;</span><span class="p">,</span>
+                   <span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>  <span class="c1">#Selection object</span>
+
+<span class="c1"># Specify the bond select to analyze for MD</span>
+<span class="n">sel</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">)</span>
+
+<span class="n">sel</span><span class="o">.</span><span class="n">traj</span><span class="o">.</span><span class="n">step</span><span class="o">=</span><span class="mi">50</span>  <span class="c1">#Take every tenth point for MD calculation (set to 1 for more accurate calculation)</span>
+<span class="n">pyDR</span><span class="o">.</span><span class="n">Defaults</span><span class="p">[</span><span class="s1">&#39;ProgressBar&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">False</span> <span class="c1">#Turns of the Progress bar (screws up webpage compilation)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-the-frame-analysis">
+<h2>Run the frame analysis<a class="headerlink" href="#run-the-frame-analysis" title="Permalink to this headline">#</a></h2>
+<section id="setup-the-frame-analysis">
+<h3>Setup the frame analysis<a class="headerlink" href="#setup-the-frame-analysis" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span>
+<span class="n">bsheets</span><span class="o">=</span><span class="p">[(</span><span class="mi">226</span><span class="p">,</span><span class="mi">228</span><span class="p">),(</span><span class="mi">230</span><span class="p">,</span><span class="mi">234</span><span class="p">),(</span><span class="mi">236</span><span class="p">,</span><span class="mi">240</span><span class="p">),(</span><span class="mi">242</span><span class="p">,</span><span class="mi">245</span><span class="p">),</span>
+         <span class="p">(</span><span class="mi">262</span><span class="p">,</span><span class="mi">264</span><span class="p">),(</span><span class="mi">266</span><span class="p">,</span><span class="mi">270</span><span class="p">),(</span><span class="mi">272</span><span class="p">,</span><span class="mi">276</span><span class="p">),(</span><span class="mi">278</span><span class="p">,</span><span class="mi">281</span><span class="p">)]</span>
+
+<span class="c1"># Define second reference frame (beta sheets)</span>
+<span class="n">sel0</span><span class="o">=</span><span class="p">[</span><span class="n">sel</span><span class="o">.</span><span class="n">uni</span><span class="o">.</span><span class="n">select_atoms</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;resid </span><span class="si">{</span><span class="n">bsheet</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">-</span><span class="si">{</span><span class="n">bsheet</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">bsheet</span> <span class="ow">in</span> <span class="n">bsheets</span><span class="p">]</span>
+
+<span class="n">fo</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">Frames</span><span class="o">.</span><span class="n">FrameObj</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
+<span class="n">fo</span><span class="o">.</span><span class="n">tensor_frame</span><span class="p">(</span><span class="n">sel1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">sel2</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>  <span class="c1">#Define the frame of the interaction (dipole tensor)</span>
+<span class="n">fo</span><span class="o">.</span><span class="n">new_frame</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;peptide_plane&#39;</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">sel</span><span class="o">.</span><span class="n">label</span><span class="p">)</span> <span class="c1">#Define first reference frame</span>
+<span class="n">fo</span><span class="o">.</span><span class="n">new_frame</span><span class="p">(</span><span class="n">Type</span><span class="o">=</span><span class="s1">&#39;superimpose&#39;</span><span class="p">,</span><span class="n">sel</span><span class="o">=</span><span class="n">sel0</span><span class="p">)</span> <span class="c1">#Define second reference frame</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="import-the-frames-process">
+<h3>Import the frames, process<a class="headerlink" href="#import-the-frames-process" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fo</span><span class="o">.</span><span class="n">frames2data</span><span class="p">()</span>  <span class="c1">#Process frames, send to data</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;Frames&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>  <span class="c1">#Prepare detectors</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;Frames&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">opt2dist</span><span class="p">(</span><span class="n">rhoz_cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1">#Fit and optimize fit</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Individual components of the correlation functions or tensors will not be returned in auto or sym mode
+Using symmetric calculation for 70 correlation functions
+Using symmetric calculation for 70 correlation functions
+Fitted 5 data objects
+Optimized 5 data objects
+pyDIFRATE project with 5 data sets
+&lt;pyDR.Project.Project.Project object at 0x7fbe48e1eb00&gt;
+
+Titles:
+o6:FRAMES:Direct:backboneB
+o6:FRAMES:Product:backboneB
+o6:FRAMES:PAS&gt;peptide_plane:backboneB
+o6:FRAMES:peptide_plane&gt;superimpose:backboneB
+o6:FRAMES:superimpose&gt;LF:backboneB
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="plot-the-results">
+<h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">#</a></h3>
+<p>First, we validate the frame analysis quality by comparing the product of the individual correlation functions to the total correlation function</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;Frames&#39;</span><span class="p">][</span><span class="s1">&#39;Direct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;Frames&#39;</span><span class="p">][</span><span class="s1">&#39;Product&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch8_ROMANCE_backbone_14_0.png" src="_images/Ch8_ROMANCE_backbone_14_0.png" />
+</div>
+</div>
+<p>Plot the results for the Principal Axis System to the peptide plane (H–N librational motion)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;PAS&gt;peptide_plane&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">proj</span><span class="o">.</span><span class="n">plot_obj</span><span class="o">.</span><span class="n">ax</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span><span class="n">a</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">.05</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch8_ROMANCE_backbone_16_0.png" src="_images/Ch8_ROMANCE_backbone_16_0.png" />
+</div>
+</div>
+<p>Plot the results for peptide plane to <span class="math notranslate nohighlight">\(\beta\)</span>-sheet superimposition (peptide plane dynamics)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;peptide_plane&gt;superimpose&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">proj</span><span class="o">.</span><span class="n">plot_obj</span><span class="o">.</span><span class="n">ax</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span><span class="n">a</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">.2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch8_ROMANCE_backbone_18_0.png" src="_images/Ch8_ROMANCE_backbone_18_0.png" />
+</div>
+</div>
+<p>Plot the results for <span class="math notranslate nohighlight">\(\beta\)</span>-sheet superimposition to lab frame (<span class="math notranslate nohighlight">\(\beta\)</span>-sheet dynamics</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="c1"># Just show the beta sheets via index</span>
+<span class="n">resids</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;Direct&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">label</span>
+<span class="n">index</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resids</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">bsheet</span> <span class="ow">in</span> <span class="n">bsheets</span><span class="p">:</span>
+    <span class="n">index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">bsheet</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="n">resids</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]:</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">bsheet</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">==</span><span class="n">resids</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="mi">1</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;opt_fit&#39;</span><span class="p">][</span><span class="s1">&#39;superimpose&gt;LF&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">set_size_inches</span><span class="p">([</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">proj</span><span class="o">.</span><span class="n">plot_obj</span><span class="o">.</span><span class="n">ax</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span><span class="n">a</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">.05</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch8_ROMANCE_backbone_20_0.png" src="_images/Ch8_ROMANCE_backbone_20_0.png" />
+</div>
+</div>
+</section>
 </section>
 </section>
 
@@ -527,11 +705,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch7_ROMANCE_CH3.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Ch7_CCana.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Chapter 7: ROMANCE Analysis of Methyl Groups</font></p>
+            <p class="prev-next-title"><font color="maroon">Chapter 7: Cross-Correlated Dynamics via iRED</font></p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Tpl_basicNMR.html" title="next page">
@@ -550,7 +728,7 @@ title="Print to PDF"
   
     By Albert Smith<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>

@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -196,16 +194,9 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
+  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
    <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Methyl Groups
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
-   <font color="maroon">
-    Chapter 9: ROMANCE Analysis of Backbone Motion
+    Chapter 8: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -688,9 +679,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># Path to pyDR location</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -718,7 +707,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Load the data</span>
-<span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="s1">&#39;data/ubi_soln.txt&#39;</span><span class="p">)</span>
+<span class="n">data</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">IO</span><span class="o">.</span><span class="n">readNMR</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/alsinmr/pyDR_tutorial/main/data/ubi_soln.txt&#39;</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;med_val&#39;</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span>
 
 <span class="c1">#Split into one-field data for SDM, LeMaster&#39;s approach</span>
@@ -1037,16 +1026,12 @@ C(t)&amp;=&amp;\frac25\sum\limits_{i=1}^4{A_ie^{-t/\tau_i}} \\
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
+Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
+Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
-</pre></div>
-</div>
-<img alt="_images/Ch4_ComparingAnalyses_23_3.png" src="_images/Ch4_ComparingAnalyses_23_3.png" />
-<img alt="_images/Ch4_ComparingAnalyses_23_4.png" src="_images/Ch4_ComparingAnalyses_23_4.png" />
+<img alt="_images/Ch4_ComparingAnalyses_23_1.png" src="_images/Ch4_ComparingAnalyses_23_1.png" />
+<img alt="_images/Ch4_ComparingAnalyses_23_2.png" src="_images/Ch4_ComparingAnalyses_23_2.png" />
 </div>
 </div>
 </section>
@@ -1075,16 +1060,12 @@ C(t)&amp;=&amp;\frac25\sum\limits_{i=1}^4{A_ie^{-t/\tau_i}} \\
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
+Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
+Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
-</pre></div>
-</div>
-<img alt="_images/Ch4_ComparingAnalyses_25_3.png" src="_images/Ch4_ComparingAnalyses_25_3.png" />
-<img alt="_images/Ch4_ComparingAnalyses_25_4.png" src="_images/Ch4_ComparingAnalyses_25_4.png" />
+<img alt="_images/Ch4_ComparingAnalyses_25_1.png" src="_images/Ch4_ComparingAnalyses_25_1.png" />
+<img alt="_images/Ch4_ComparingAnalyses_25_2.png" src="_images/Ch4_ComparingAnalyses_25_2.png" />
 </div>
 </div>
 </section>
@@ -1105,10 +1086,7 @@ C(t)&amp;=&amp;\frac25\sum\limits_{i=1}^4{A_ie^{-t/\tau_i}} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Assigned sensitivity object did not equal detector sensitivities. Re-defining detector object
-</pre></div>
-</div>
-<img alt="_images/Ch4_ComparingAnalyses_27_1.png" src="_images/Ch4_ComparingAnalyses_27_1.png" />
+<img alt="_images/Ch4_ComparingAnalyses_27_0.png" src="_images/Ch4_ComparingAnalyses_27_0.png" />
 </div>
 </div>
 </section>
@@ -1194,18 +1172,12 @@ C(t)&amp;=&amp;\frac25\sum\limits_{i=1}^4{A_ie^{-t/\tau_i}} \\
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1 of 4 iterations
+2 of 4 iterations
+3 of 4 iterations
+4 of 4 iterations
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2 of 4 iterations
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3 of 4 iterations
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4 of 4 iterations
-</pre></div>
-</div>
-<img alt="_images/Ch4_ComparingAnalyses_34_4.png" src="_images/Ch4_ComparingAnalyses_34_4.png" />
+<img alt="_images/Ch4_ComparingAnalyses_34_1.png" src="_images/Ch4_ComparingAnalyses_34_1.png" />
 </div>
 </div>
 </section>

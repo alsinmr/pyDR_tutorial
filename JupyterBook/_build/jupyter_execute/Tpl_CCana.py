@@ -42,9 +42,7 @@ directory=None  #Path to project directory
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location
+os.chdir('../..')
 
 
 # In[5]:

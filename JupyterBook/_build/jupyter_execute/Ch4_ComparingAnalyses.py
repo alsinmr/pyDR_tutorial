@@ -45,17 +45,15 @@
 
 # ## Setup
 
-# In[1]:
+# In[ ]:
 
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location
+os.chdir('../..')
 
 
-# In[2]:
+# In[6]:
 
 
 # Imports, misc. setup
@@ -78,7 +76,7 @@ matplotlib.rcParams.update({'font.size':16})
 
 
 #Load the data
-data=pyDR.IO.readNMR('data/ubi_soln.txt')
+data=pyDR.IO.readNMR('https://raw.githubusercontent.com/alsinmr/pyDR_tutorial/main/data/ubi_soln.txt')
 data.info['med_val']=None
 
 #Split into one-field data for SDM, LeMaster's approach
@@ -151,7 +149,7 @@ ax[0].legend(titles)
 fig.tight_layout()
 
 
-# In[5]:
+# In[23]:
 
 
 print(f'From the rotational correlation time, 4.84e-9 s, we estimate J(0) should be slightly less than {2/5*4.84e-9} s')
@@ -159,7 +157,7 @@ print(f'From the rotational correlation time, 4.84e-9 s, we estimate J(0) should
 
 # ### Plot the SDM results
 
-# In[6]:
+# In[24]:
 
 
 fig,ax=plt.subplots(3,3)
@@ -224,7 +222,7 @@ fig.tight_layout()
 
 # ### Plot results from LeMaster's Approach
 
-# In[7]:
+# In[25]:
 
 
 fig,ax=plt.subplots(3,3)
@@ -274,7 +272,7 @@ fig.tight_layout()
 
 # ### Plot IMPACT amplitudes
 
-# In[8]:
+# In[33]:
 
 
 #I cheated a little bit here...
@@ -315,7 +313,7 @@ ax[0].set_title('IMPACT analysis')
 
 # ### Plot data fit resulting from IMPACT analysis
 
-# In[9]:
+# In[34]:
 
 
 fig,ax=plt.subplots(3,3)
@@ -331,7 +329,7 @@ ax[0,1].set_title('Data Fit')
 # ## One-field detector analysis, first without removing tumbling
 # Detector analysis can be performed on the total motion, which means for solution-state data, the overall tumbling is included in the detector responses. We do this analysis first.
 
-# In[10]:
+# In[27]:
 
 
 ax_sens=plt.subplots()[1]
@@ -357,7 +355,7 @@ fig.tight_layout()
 # ## One-field detector analysis, including removing tumbling
 # We may also factor out isotropic tumbling, which is the case for sufficiently spherical molecules, so that detector responses represent only the internal motion. Note that this has a profound effect on the positioning of the detector windows, as discussed [here](https://aip.scitation.org/doi/full/10.1063/1.5111081).
 
-# In[11]:
+# In[28]:
 
 
 ax_sens=plt.subplots()[1]
@@ -379,7 +377,7 @@ fig.tight_layout()
 
 # ## Detector Analysis of full data set without removing tumbling
 
-# In[12]:
+# In[36]:
 
 
 data.sens=pyDR.Sens.NMR(tc=np.logspace(-12,-7.9,200),info=data.sens.info)
@@ -395,7 +393,7 @@ plt_obj.show_tc()
 
 # ## Detector Analysis of full data set including removing tumbling
 
-# In[13]:
+# In[37]:
 
 
 zmax=[-14,*fit.info['zmax'][:-1]]
@@ -410,7 +408,7 @@ plt_obj.show_tc()
 # ## Model Free Analysis
 # In this analysis, we fit the internal motion of ubiquitin to a single correlation time, i.e. via the simple model free approach. Note that this is actually easier done to the results of the detector analysis rather than to the raw NMR data.
 
-# In[14]:
+# In[31]:
 
 
 from pyDR.Fitting.fit import model_free
@@ -436,7 +434,7 @@ fig.tight_layout()
 
 # ### Plot the Model Free parameters
 
-# In[15]:
+# In[38]:
 
 
 from pyDR.Fitting.fit import model_free
@@ -458,7 +456,7 @@ fig.tight_layout()
 
 # ### Plot the fit of the detector responses
 
-# In[16]:
+# In[39]:
 
 
 plt_obj=fit.plot(style='scatter')

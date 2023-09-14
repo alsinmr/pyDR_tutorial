@@ -196,16 +196,9 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
+  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
    <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Methyl Groups
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
-   <font color="maroon">
-    Chapter 9: ROMANCE Analysis of Backbone Motion
+    Chapter 8: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -608,15 +601,15 @@ title="Print to PDF"
 <h1><font color="maroon">Chapter 5: Comparing MD and NMR Results</font><a class="headerlink" href="#font-color-maroon-chapter-5-comparing-md-and-nmr-results-font" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch5_MDvsNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>One of the biggest advantages of the <em>Detectors</em> approach is our ability to compare data from different sources. In this tutorial, we will look at comparing dynamics from NMR and MD data. However, we will also use detectors to compare, for example, the total motion in MD data to motion separated via reference frames (<a class="reference external" href="https://doi.org/10.1016/j.jmro.2022.100045">ROMANCE</a>) and the total motion vs. detector analysis of the cross correlation of motion.</p>
+<p>Note that if you’re running this locally, you may need to manually <a class="reference external" href="https://drive.google.com/file/d/1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW/view?usp=share_link">download</a> the .xtc file and place it in
+pyDR/examples/HETs15N.</p>
 <section id="setup-and-data-downloads">
 <h2>Setup and data downloads<a class="headerlink" href="#setup-and-data-downloads" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># Path to pyDR location</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -632,21 +625,6 @@ title="Print to PDF"
 <section id="downloading-from-google-drive-to-google-colab">
 <h3>Downloading from Google Drive to Google Colab<a class="headerlink" href="#downloading-from-google-drive-to-google-colab" title="Permalink to this headline">#</a></h3>
 <p>In the tutorial, we will use files that are already stored as part of pyDR/examples. If you are working locally, you can just download outside of the Jupyter notebook and then tell pyDR later where the files are. However, in Google Colab, you need to get the files to the Colab server somehow. Here, we show how to download them from file IDs from Google Drive (these need to be viewable to anyone with the share link in your the share settings).</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Download MD files if running in Colab</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">gdown</span> <span class="kn">import</span> <span class="n">download</span>
-    <span class="n">ID</span><span class="o">=</span><span class="s1">&#39;1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW&#39;</span>   <span class="c1">#HETs xtc file</span>
-    <span class="c1">#Just grab this string out of the google drive share link &#39;https://drive.google.com/file/d/1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW/view?usp=share_link&#39;</span>
-    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;https://drive.google.com/uc?id=</span><span class="si">{</span><span class="n">ID</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;HETs_md.xtc&#39;</span><span class="p">)</span>
-    <span class="n">ID</span><span class="o">=</span><span class="s1">&#39;1qkgKhQ7QMS8PAWS1AxyoaZUYej2qm_xT&#39;</span>   <span class="c1">#HETs pdb (topology)</span>
-    <span class="n">gdown</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;https://drive.google.com/uc?id=</span><span class="si">{</span><span class="n">ID</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;HETs_md.pdb&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 </section>
 <section id="load-and-process-nmr">
@@ -663,7 +641,7 @@ title="Print to PDF"
 
 <span class="c1"># Specify the bond selection for the NMR data</span>
 <span class="c1"># Note, we access select via the project. len(proj[&#39;NMR&#39;])&gt;1, this won&#39;t work, and we need to be more specific</span>
-<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">select</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;HETs_md.pdb&#39;</span><span class="p">)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">select</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;pyDR/examples/HETs15N/backboneB.pdb&#39;</span><span class="p">)</span> <span class="c1">#Paths may need adjusted if running locally ()</span>
 <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">,</span><span class="n">resids</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
 
 <span class="c1">#Setup detectors for NMR data (4 detectors, use S2 data)</span>
@@ -693,13 +671,10 @@ p5:NMR:1w_0cR6ykj
 <h3>Open MD trajectory, specify bonds<a class="headerlink" href="#open-md-trajectory-specify-bonds" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-    <span class="c1">#Create a selection object with trajectory data</span>
-    <span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;HETs_md.pdb&#39;</span><span class="p">,</span><span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;HETs_md.xtc&#39;</span><span class="p">,</span><span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
-<span class="k">else</span><span class="p">:</span>
-    <span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.pdb&#39;</span><span class="p">,</span>
-                       <span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.xtc&#39;</span><span class="p">,</span>
-                       <span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Paths may need adjusted if running locally ()</span>
+<span class="n">sel</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">MolSelect</span><span class="p">(</span><span class="n">topo</span><span class="o">=</span><span class="s1">&#39;pyDR/examples/HETs15N/backboneB.pdb&#39;</span><span class="p">,</span>  
+                   <span class="n">traj_files</span><span class="o">=</span><span class="s1">&#39;pyDR/examples/HETs15N/backboneB.xtc&#39;</span><span class="p">,</span>
+                   <span class="n">project</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
 
 <span class="c1"># Specify the bond select to analyze for MD</span>
 <span class="n">sel</span><span class="o">.</span><span class="n">select_bond</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="n">segids</span><span class="o">=</span><span class="s1">&#39;B&#39;</span><span class="p">)</span>
@@ -707,7 +682,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fca13a32a58&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f9452b91d68&gt;
 </pre></div>
 </div>
 </div>
@@ -730,7 +705,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:MD:backboneB with 70 data points
-&lt;pyDR.Data.Data.Data object at 0x7fca3063eb38&gt;
+&lt;pyDR.Data.Data.Data object at 0x7f94807cec50&gt;
 </pre></div>
 </div>
 </div>
@@ -743,7 +718,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_16_0.png" src="_images/Ch5_MDvsNMR_16_0.png" />
+<img alt="_images/Ch5_MDvsNMR_15_0.png" src="_images/Ch5_MDvsNMR_15_0.png" />
 </div>
 </div>
 </section>
@@ -784,7 +759,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_20_0.png" src="_images/Ch5_MDvsNMR_20_0.png" />
+<img alt="_images/Ch5_MDvsNMR_19_0.png" src="_images/Ch5_MDvsNMR_19_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -802,7 +777,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_21_0.png" src="_images/Ch5_MDvsNMR_21_0.png" />
+<img alt="_images/Ch5_MDvsNMR_20_0.png" src="_images/Ch5_MDvsNMR_20_0.png" />
 </div>
 </div>
 <p>Above, we obtain reasonably good reproduction with <span class="math notranslate nohighlight">\(n=9\)</span> for detectors 0-2 (ns/ps range). The latter 2 detectors (<span class="math notranslate nohighlight">\(\mu\)</span>s range) are poorly reproduced because the 2 <span class="math notranslate nohighlight">\(\mu\)</span>s trajectory is insufficient for reproducing microsecond dynamics.</p>
@@ -815,17 +790,13 @@ n12:MD:backboneB
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Optimize 7 detectors</span>
 <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
 <span class="c1">#Fit the data with those 7 detectors</span>
-<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">_</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
-pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f8d71bd83c8&gt;
-
-Titles:
-n12:MD:backboneB
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data already in project (index=4)
+Fitted 1 data objects
 </pre></div>
 </div>
 </div>
@@ -840,16 +811,22 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_25_0.png" src="_images/Ch5_MDvsNMR_25_0.png" />
+<img alt="_images/Ch5_MDvsNMR_24_0.png" src="_images/Ch5_MDvsNMR_24_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Show the results for selected detectors in NGLviewer (may fail in Google Colab)</span>
-<span class="c1"># proj[&#39;MD&#39;][&#39;proc&#39;][0].nglview(rho_index=1,scaling=30)</span>
+<span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">nglview</span><span class="p">(</span><span class="n">rho_index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">scaling</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "2cfb244adbcd45acbcfd4e38a07b69dd", "version_major": 2, "version_minor": 0}
+</script><script type="application/vnd.jupyter.widget-view+json">
+{"model_id": "616b5607ae4e42589b692aadcbd31eb6", "version_major": 2, "version_minor": 0}
+</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -857,8 +834,28 @@ n12:MD:backboneB
 <span class="k">if</span> <span class="s1">&#39;google.colab&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
 <span class="c1">#    #The path to chimeraX needs to be defined the first time this is run!!</span>
 <span class="c1">#     pyDR.chimeraX.chimeraX_funs.set_chimera_path(&#39;path_to_executable&#39;)</span>
-
     <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">chimera</span><span class="p">(</span><span class="n">scaling</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span> <span class="c1">#Adjust scaling to improve visibility for some detectors</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failed to establish connection with ChimeraX
+No sessions were connected
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception in thread Thread-8:
+Traceback (most recent call last):
+  File &quot;/Users/albertsmith/anaconda3/lib/python3.7/threading.py&quot;, line 917, in _bootstrap_inner
+    self.run()
+  File &quot;../pyDR/chimeraX/CMXRemote.py&quot;, line 422, in run
+    self.conn=self.listener.accept()
+  File &quot;/Users/albertsmith/anaconda3/lib/python3.7/multiprocessing/connection.py&quot;, line 453, in accept
+    c = self._listener.accept()
+  File &quot;/Users/albertsmith/anaconda3/lib/python3.7/multiprocessing/connection.py&quot;, line 598, in accept
+    s, self._last_accepted = self._socket.accept()
+  File &quot;/Users/albertsmith/anaconda3/lib/python3.7/socket.py&quot;, line 212, in accept
+    fd, addr = self._accept()
+ConnectionAbortedError: [Errno 53] Software caused connection abort
 </pre></div>
 </div>
 </div>
@@ -879,7 +876,7 @@ n12:MD:backboneB
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 1 data objects
 </pre></div>
 </div>
-<img alt="_images/Ch5_MDvsNMR_29_1.png" src="_images/Ch5_MDvsNMR_29_1.png" />
+<img alt="_images/Ch5_MDvsNMR_28_1.png" src="_images/Ch5_MDvsNMR_28_1.png" />
 </div>
 </div>
 </section>
@@ -929,7 +926,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_34_0.png" src="_images/Ch5_MDvsNMR_34_0.png" />
+<img alt="_images/Ch5_MDvsNMR_33_0.png" src="_images/Ch5_MDvsNMR_33_0.png" />
 </div>
 </div>
 <p>No MD data is plotted for the last detector, since the detector sensitivies were very different. Note that typically MD-derived microsecond motion is difficult to reproduce. Also, note that this data set is better reproduced with longer, optimized MD trajectories.</p>

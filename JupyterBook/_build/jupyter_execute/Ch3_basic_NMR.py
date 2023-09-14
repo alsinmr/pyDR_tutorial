@@ -7,14 +7,12 @@
 
 # In this example, we load an NMR data set and demonstrate how to go about fitting it. For this, we need a text file with the measured relaxation rates and experimental data in it. This is provided for this example, but one can also upload one's own data. Make sure to follow the prescribed file format. Entries are separated by tabs within a given line and by carriage returns over multiple lines. An example data file is printed out as an example.
 
-# In[ ]:
+# In[1]:
 
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location 
+os.chdir('../..')
 
 
 # In[2]:
@@ -32,7 +30,7 @@ import pyDR
 
 
 # Load the data
-data=pyDR.IO.readNMR('data/HETs_15N.txt')
+data=pyDR.IO.readNMR('pyDR/examples/HETs15N/HETs_15N.txt')
 
 
 # First, we discuss the data object briefly to understand the contents of the data object. There are a few key components:
@@ -53,7 +51,7 @@ data=pyDR.IO.readNMR('data/HETs_15N.txt')
 # 
 # Below, you can investigate these different components. We show data.info, which provides the various relevant experimental parameters for determining the sensitivities of the 8 experiments. Note that this data set also includes $S^2$, which is treated separately and does not show up in data.info.
 
-# In[5]:
+# In[4]:
 
 
 data.info
@@ -79,7 +77,7 @@ data.info
 
 # A graphical summary of the data object is obtained via data.plot (can use various plotting options, such as plot type, etc.). The plt_obj provides a variety of functions for manipulating the plot.
 
-# In[4]:
+# In[5]:
 
 
 plt_obj=data.plot(style='bar')
@@ -94,7 +92,7 @@ plt_obj.fig.set_size_inches([8,10])
 # 
 # although a few improvements have been made since the initial analysis.
 
-# In[5]:
+# In[6]:
 
 
 data.detect.r_auto(4).inclS2()  #Optimize the detectors
@@ -108,7 +106,7 @@ _=plt_obj.ax[-1].set_xlabel('Residue')
 
 # Finally, we can check the fit quality by comparing the back-calculated relaxation rate constants to the original experimental relaxation rate constants.
 
-# In[6]:
+# In[7]:
 
 
 fig=fit.plot_fit()[0].axes.figure
@@ -153,7 +151,7 @@ proj.chimera.command_line('~show ~/B@N,C,CA') #Send command to chimera
 
 # You can mouse over the different detector names in ChimeraX ($\rho_0$,$\rho_1$,etc.), to view the different detector responses. However, the size of the responses are on different scales, so only $\rho_0$ is visible on the default scale (often a problem with rigid proteins). Run the cells below to view the different responses.
 
-# In[23]:
+# In[10]:
 
 
 proj.chimera.close()
@@ -161,7 +159,7 @@ fit.chimera(rho_index=[1,2])
 proj.chimera.command_line('~show ~/B@N,C,CA')
 
 
-# In[26]:
+# In[11]:
 
 
 proj.chimera.close()
@@ -171,13 +169,13 @@ proj.chimera.command_line('~show ~/B@N,C,CA')
 
 # ### Visualization with [NGL Viewer](https://nglviewer.org/)
 
-# In[10]:
+# In[12]:
 
 
 fit.nglview(0)  #Just provide the index of the detector to view
 
 
-# In[11]:
+# In[13]:
 
 
 fit.nglview(1)

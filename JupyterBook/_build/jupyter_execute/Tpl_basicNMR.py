@@ -33,14 +33,12 @@ segids='B' # The example data (HETs) has 3 copies of the molecule, so we need to
 # You will probably want to set segids=None
 
 
-# In[2]:
+# In[ ]:
 
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location
+os.chdir('../..')
 
 
 # In[3]:

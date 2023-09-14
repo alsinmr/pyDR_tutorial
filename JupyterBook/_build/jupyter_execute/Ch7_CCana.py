@@ -15,26 +15,24 @@
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location
+os.chdir('../..')
 
 
 # In[2]:
 
 
-#Imports
+#Imports / download
 import pyDR
 
 
-# In[29]:
+# In[4]:
 
 
 # Project Creation and File loading
 proj=pyDR.Project()
 
-sel=pyDR.MolSelect(topo='../pyDR/examples/HETs15N/backboneB.pdb',
-                   traj_files='../pyDR/examples/HETs15N/backboneB.xtc',
+sel=pyDR.MolSelect(topo='pyDR/examples/HETs15N/backboneB.pdb',
+                   traj_files='pyDR/examples/HETs15N/backboneB.xtc',
                    project=proj)  #Selection object
 
 # Specify the bond select to analyze for MD

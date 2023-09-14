@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -196,16 +194,9 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_CH3.html">
+  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
    <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Methyl Groups
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch9_ROMANCE_backbone.html">
-   <font color="maroon">
-    Chapter 9: ROMANCE Analysis of Backbone Motion
+    Chapter 8: ROMANCE Analysis of Backbone Motion
    </font>
   </a>
  </li>
@@ -604,9 +595,7 @@ S^2=\lim_{t\rightarrow\infty}C(t)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;..&#39;</span><span class="p">)</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;../&#39;</span><span class="p">)</span> <span class="c1"># Path to pyDR location</span>
+<span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s1">&#39;../..&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -638,6 +627,9 @@ S^2=\lim_{t\rightarrow\infty}C(t)
 <span class="n">_</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/Ch1_detectors_intro_6_0.png" src="_images/Ch1_detectors_intro_6_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -714,7 +706,7 @@ C(t)=1-(A_0+A_1+A_2)+A_0\exp(-t/\tau_0)+A_1\exp(-t/\tau_1)+A_2\exp(-t/\tau_2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error is 6.5735314936268175e-06 (should be small– otherwise adjust initial guess)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error is 1.5334372109582631e-07 (should be small– otherwise adjust initial guess)
 </pre></div>
 </div>
 </div>
@@ -762,7 +754,7 @@ C(t)=1-(A_0+A_1+A_2)+A_0\exp(-t/\tau_0)+A_1\exp(-t/\tau_1)+A_2\exp(-t/\tau_2)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error is 4.299449423051208e-07 (should be small– otherwise adjust initial guess)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Error is 4.299710895100029e-07 (should be small– otherwise adjust initial guess)
 </pre></div>
 </div>
 </div>

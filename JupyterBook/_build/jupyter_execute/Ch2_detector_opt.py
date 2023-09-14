@@ -30,17 +30,15 @@
 #     
 # Let's suppose, then, that we have some $m$ experimental sensitivies. To start, let's suppose we renormalize them to all have a maximum of 1.
 
-# In[1]:
+# In[ ]:
 
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location
+os.chdir('../..')
 
 
-# In[2]:
+# In[3]:
 
 
 import pyDR
@@ -57,7 +55,7 @@ _=nmr.plot_Rz(norm=True)
 # ## Singular Value decomposition
 # We have eight windows in this example ($R_\zeta^{(\theta,S)}$), but those windows are heavily overlapping in two regions. Then, we may generate good approximations of the eight windows from fewer functions, and we may also should be able to separate regions of sensitivity from the eight windows. We will first decompose the eight windows based on singular value decomposition (this is built-in into the "detector" sensitivity object, called 'r' in the next lines, see r.SVD). We test how well the eight windows can be decomposed based on 1-8 functions, and also plot the new windows based on SVD.
 
-# In[3]:
+# In[75]:
 
 
 ax0=plt.subplots(2,4)[1].flatten()
@@ -79,7 +77,7 @@ ax1[0].figure.tight_layout()
 # 
 # Note that we may prioritize fitting different pieces of experimental data by scaling the original functions. In this case, all functions are scaled to have a maximum of one, given all functions equal priority. If a sensitivity object ('nmr') is produced via loading NMR data from a file, then the median value of each rate constant and its median standard deviation is used for scaling in order to prioritize data with a higher signal-to-noise ratio (nmr.norm is multiplied by each sensitivity, nmr.rhoz to get the scaled sensitivities).
 
-# In[4]:
+# In[76]:
 
 
 r.rhoz @ r.rhoz.T  #Verify orthonormality of the window functions
@@ -95,7 +93,7 @@ r.rhoz @ r.rhoz.T  #Verify orthonormality of the window functions
 # 
 # Below, we plot from 1 to 8 windows for the 8 experiments, including the fits.
 
-# In[5]:
+# In[77]:
 
 
 ax0=plt.subplots(2,4)[1].flatten()
@@ -123,7 +121,7 @@ ax1[0].figure.tight_layout()
 # 
 # First, we optimize the nmr data for five detectors and plot the result:
 
-# In[6]:
+# In[78]:
 
 
 rNMR=nmr.Detector()
@@ -132,7 +130,7 @@ _=rNMR.r_auto(5).plot_rhoz()
 
 # Next, we suppose we have MD data, sampled every 10 ps out to 1 $\mu$s. We plot the sensitivities of some of the time points.
 
-# In[7]:
+# In[81]:
 
 
 md=pyDR.Sens.MD(t=np.arange(100001)*.01)
@@ -151,7 +149,7 @@ _=md.plot_rhoz()
 # 
 # Next, we create an md detector object, and use the sensitivity of the nmr detector as a target function for the md detector. Note, to reproduce the 5 NMR detector sensitivities, we need at least 5 singular values for the MD, but we can use more, which will result in some "dummy" sensitivities in the MD that are eventually used to fit the MD data, but may not be particularly interesting to us. We sweep from 5 up to 12 singular values for the example.
 
-# In[8]:
+# In[82]:
 
 
 rMD=md.Detector()
@@ -174,7 +172,7 @@ ax[0].figure.tight_layout()
 
 # Above, we see that as the number of singular values increases, the reproduction of the first two detectors (blue, orange, ~1 ns) continually improves. This is due to better timescale resolution for more singular values, but recall that it will be accompanied by decreasing signal-to-noise when analyzing real data. The reproduction of the latter three detectors never becomes acceptable. However, this makes sense: these windows fall at times longer than 1 $\mu$s, so a 1 $\mu$s trajectory cannot easily reproduce these motions  (we print the center of sensitivity for each detector below).
 
-# In[9]:
+# In[83]:
 
 
 for k,pars in enumerate(rNMR.info):
@@ -184,7 +182,7 @@ for k,pars in enumerate(rNMR.info):
 
 # So, how could we improve the window reproduction for longer correlation times? We would need a longer MD trajectory. So, let us suppose we have 50 $\mu$s instead of 1 $\mu$s. We'll use a longer time step to reduce the amount of data (500 ps timestep).
 
-# In[10]:
+# In[84]:
 
 
 md=pyDR.Sens.MD(t=np.arange(100001)*.5)
@@ -202,7 +200,7 @@ _=rNMR.plot_rhoz(ax=ax,color='grey',linestyle=':')
 # 
 # (for example, see A. A. Smith, E.M. Pacull, S. Stecher, P. W. Hildebrand, A. Vogel, D. Huster. [Analysis of the Dynamics of the Human Growth Hormone Secretagogue Receptor Reveals Insights into the Energy Landscape of the Molecule.](https://doi.org/10.1002/anie.202302003) Angew. Chem. Int. Ed. 2023 )
 
-# In[11]:
+# In[86]:
 
 
 _=rMD.r_auto(8).plot_rhoz()

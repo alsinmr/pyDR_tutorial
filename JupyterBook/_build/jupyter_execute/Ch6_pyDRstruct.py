@@ -19,9 +19,7 @@
 
 # SETUP pyDR
 import os
-os.chdir('..')
-import sys
-sys.path.append('../') # Path to pyDR location
+os.chdir('../..')
 
 
 # In[2]:
@@ -32,18 +30,18 @@ import pyDR
 import numpy as np
 
 
-# In[3]:
+# In[4]:
 
 
 #Load a project
-proj=pyDR.Project('../GHSR_archive/Projects/backboneHN/')
+proj=pyDR.Project('GHSR_archive/Projects/backboneHN/')
 data=proj[-2]  #Select a particular data object
 
 
 # ### Data in the data object
 # Data can be found in data.R, with its standard deviation in data.Rstd. For NMR data, we may have $S^2$ data as well (data.S2,data.S2std). These fields are MxN, where M is the number of different locations in the simulation, and N is the number of data points (detectors, experiments, or correlation function time points) for each location.
 
-# In[4]:
+# In[5]:
 
 
 print('Experimental data')
@@ -65,7 +63,7 @@ print(data.Rstd)
 # ```
 # Here, we plot the sensitivity of the data for example
 
-# In[5]:
+# In[6]:
 
 
 _=data.sens.plot_rhoz()
@@ -73,7 +71,7 @@ _=data.sens.plot_rhoz()
 
 # We see that there are seven detectors space from below (\~100 ps) to above (\~3 $\mu$s). From sens.info, we can find out the mean position of the detectors (here, we convert from the log scale to ns). Note that the first and last detector do not really have a mean position (although one is nonetheless calculated), since they remain positive for arbitrarily short/long correlation times, respectively
 
-# In[6]:
+# In[7]:
 
 
 for k,z0 in enumerate(data.sens.info['z0']):
@@ -82,7 +80,7 @@ for k,z0 in enumerate(data.sens.info['z0']):
 
 # The sens.info object is particularly useful in summarizing relevant parameters for the sensitivity of a given data object. It is also accessible via data.info. Note that sens.info for an NMR or MD sensitivity yields parameters from which the sensitivities may be calculated, whereas for detectors, sens.info only characterizes the sensitivities, but cannot calculation them. We show below the sensitivity of this data (detectors), but also create an NMR sensitivity object, and show info, to highlight the differences.
 
-# In[7]:
+# In[8]:
 
 
 print('Info for detector:')
@@ -95,7 +93,7 @@ print(nmr.info)
 # ### Detectors for the data object
 # The next critical component of the data object is the Detector object (data.detect). The detector object provides the instructions on how to fit the data (when calling data.fit()). The detector object is derived from the sensitivity object (data.detect=data.sens.Detector()), and the detector object always contains the original data object (data.detect.sens). We can demonstrate this below.
 
-# In[8]:
+# In[9]:
 
 
 # Demonstrate that the detector object contains the sensitivity object
@@ -107,7 +105,7 @@ r=data.sens.Detector() #Produce a detector object from a sensitivity object
 
 # Then, the detector object can be optimized in a variety of ways for data analysis. However, it is not recommended to re-analyze data that has already been analyzed with detectors *unless* un-optimized detectors have been used. Then, we will demonstrate based on the original sensitivity object for this data set. It has gone through two layers of processing, so we have to go two sensitivities back.
 
-# In[9]:
+# In[10]:
 
 
 sens=data.sens.sens.sens
@@ -116,7 +114,7 @@ _=sens.plot_rhoz()  #This plots only a selection of MD sensitivities by default
 
 # We first create a detector object from the sensitivity object. pyDR does this automatically when a data object is created (data.detect=data.sens.Detector()). However, here, we have to do this step ourselves.
 
-# In[10]:
+# In[11]:
 
 
 r0=sens.Detector()
@@ -124,7 +122,7 @@ r0=sens.Detector()
 
 # For NMR data, we usually just optimize the detectors with 'detect.r_auto', but for MD, we often take an intermediate step, using detect.r_no_opt()
 
-# In[11]:
+# In[12]:
 
 
 r0.r_no_opt(12)     #Create detectors with r_no_opt, using 12 detectors

@@ -18,8 +18,7 @@ parts:
   - file: Ch5_MDvsNMR
   - file: Ch6_pyDRstruct
   - file: Ch7_CCana
-  - file: Ch8_ROMANCE_CH3
-  - file: Ch9_ROMANCE_backbone
+  - file: Ch8_ROMANCE_backbone
 
 - caption: Templates
   numbered: false

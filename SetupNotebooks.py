@@ -192,7 +192,7 @@ def write_book_setup(f):
      "source": [
       "# SETUP pyDR\\n",
       "import os\\n",
-      "os.chdir('../..')",
+      "os.chdir('../..')"
      ]
     }""")
     
