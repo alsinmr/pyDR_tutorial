@@ -164,7 +164,9 @@ def write_colab_setup(f):
      "source": [
       "# SETUP pyDR\\n",
       "!git clone https://github.com/alsinmr/pyDR_tutorial.git\\n",
-      "from pyDR_tutorial import colab_setup"
+      "from pyDR_tutorial import colab_setup\\n",
+      "import os\\n",
+      "os.chdir('pyDR_tutorial')"
      ]
     }""")
     
