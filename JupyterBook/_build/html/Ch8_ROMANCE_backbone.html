@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -457,8 +455,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-results">
-     Plot the results
+    <a class="reference internal nav-link" href="#validate-the-frame-analysis">
+     Validate the frame analysis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-individual-frames">
+     Plot the individual frames
     </a>
    </li>
   </ul>
@@ -503,8 +506,13 @@ title="Print to PDF"
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-results">
-     Plot the results
+    <a class="reference internal nav-link" href="#validate-the-frame-analysis">
+     Validate the frame analysis
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#plot-the-individual-frames">
+     Plot the individual frames
     </a>
    </li>
   </ul>
@@ -522,7 +530,8 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-chapter-8-romance-analysis-of-backbone-motion-font">
 <h1><font color="maroon">Chapter 8: ROMANCE Analysis of Backbone Motion</font><a class="headerlink" href="#font-color-maroon-chapter-8-romance-analysis-of-backbone-motion-font" title="Permalink to this headline">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch8_ROMANCE_backbone.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
-<p>Some text about <a class="reference external" href="https://doi.org/10.1016/j.jmro.2022.100045">ROMANCE</a> analysis.</p>
+<p><a class="reference external" href="https://doi.org/10.1016/j.jmro.2022.100045">ROMANCE</a> (<strong>R</strong>e<strong>o</strong>rientational Dynamics in <strong>M</strong>D <strong>A</strong>nalyzed for <strong>N</strong>MR <strong>C</strong>orrelation Function Dis-<strong>e</strong>ntanglement) is a method of separating the total correlation function in MD simulations into several components, via the definition of internal reference frames. The idea is, we define some reference frame, and then determine correlation functions describing motion in the frame and motion of the frame. For motion in the frame, we simply align the frame the same way for all time points in the MD trajectory, and calculate the resulting correlation function for the NMR interaction tensor in the frame. Note that we account for reshaping of the interaction tensor due motions within any inner frames, so this may be a relatively complex correlation function (although this does not affect setup for the user, aside from increasing computational time). Then, we additionally calculate a correlation function for the motion of the frame, which also accounts for reshaping of the NMR interaction tensor due to any motion within the frame.</p>
+<p>Practically, what the user needs to do is generate a <em>frame object</em> which allows definition of the tensor frame (usually just a bond, which may already be defined by the selection object), and allows definition of the additional internal reference frames. Then, the .frames2data() function will create data objects between each pair of frames, plus the total correlation function (no frames) and the product of the individual correlation functions. Note that for <span class="math notranslate nohighlight">\(N\)</span> internal reference frames, we have <span class="math notranslate nohighlight">\(N+2\)</span> frames in total (including the tensor frame, i.e. PAS, and lab frames), and thus have <span class="math notranslate nohighlight">\(N+1\)</span> separated motions.</p>
 <section id="setup-and-data-downloads">
 <h2>Setup and data downloads<a class="headerlink" href="#setup-and-data-downloads" title="Permalink to this headline">#</a></h2>
 <p>Since we’ve learned now how pyDR is organized and allows us to manage larger data sets, we’ll now use the full project functionality.</p>
@@ -567,6 +576,7 @@ title="Print to PDF"
 <h2>Run the frame analysis<a class="headerlink" href="#run-the-frame-analysis" title="Permalink to this headline">#</a></h2>
 <section id="setup-the-frame-analysis">
 <h3>Setup the frame analysis<a class="headerlink" href="#setup-the-frame-analysis" title="Permalink to this headline">#</a></h3>
+<p>Frame analysis always uses the first frame to be the principal axis frame (i.e. tensor_frame), and the last frame to be the lab frame. In this example, we insert two additional frames: a peptide_plane frame, which separates H–N librational motion in and out of the peptide plane from motion of the peptide plane, and a superimpose frame, which in this case we align to 8 <span class="math notranslate nohighlight">\(\beta\)</span>-sheets, allowing us to separate out peptide plane motion in the <span class="math notranslate nohighlight">\(\beta\)</span>-sheet to motion of the <span class="math notranslate nohighlight">\(\beta\)</span>-sheets themselves.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">nan</span>
@@ -602,7 +612,7 @@ Using symmetric calculation for 70 correlation functions
 Fitted 5 data objects
 Optimized 5 data objects
 pyDIFRATE project with 5 data sets
-&lt;pyDR.Project.Project.Project object at 0x7fbe48e1eb00&gt;
+&lt;pyDR.Project.Project.Project object at 0x7ff118715390&gt;
 
 Titles:
 o6:FRAMES:Direct:backboneB
@@ -615,9 +625,10 @@ o6:FRAMES:superimpose&gt;LF:backboneB
 </div>
 </div>
 </section>
-<section id="plot-the-results">
-<h3>Plot the results<a class="headerlink" href="#plot-the-results" title="Permalink to this headline">#</a></h3>
-<p>First, we validate the frame analysis quality by comparing the product of the individual correlation functions to the total correlation function</p>
+<section id="validate-the-frame-analysis">
+<h3>Validate the frame analysis<a class="headerlink" href="#validate-the-frame-analysis" title="Permalink to this headline">#</a></h3>
+<p>First, we validate the frame analysis quality by comparing the product of the individual correlation functions to the total correlation function. It can be the case that motion in one frame and of one frame are not statistically independent, or not sufficiently separated in timescale. In this case, the product of correlation functions and the total correlation function will be significantly different, resulting in disagreement in the detector analysis below. In this case, caution must be taken in interpreting the results of the frame analysis.</p>
+<p>In the analysis here, we find the total and product correlation functions to be in good agreement.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
@@ -630,6 +641,9 @@ o6:FRAMES:superimpose&gt;LF:backboneB
 <img alt="_images/Ch8_ROMANCE_backbone_14_0.png" src="_images/Ch8_ROMANCE_backbone_14_0.png" />
 </div>
 </div>
+</section>
+<section id="plot-the-individual-frames">
+<h3>Plot the individual frames<a class="headerlink" href="#plot-the-individual-frames" title="Permalink to this headline">#</a></h3>
 <p>Plot the results for the Principal Axis System to the peptide plane (H–N librational motion)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -640,7 +654,7 @@ o6:FRAMES:superimpose&gt;LF:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch8_ROMANCE_backbone_16_0.png" src="_images/Ch8_ROMANCE_backbone_16_0.png" />
+<img alt="_images/Ch8_ROMANCE_backbone_17_0.png" src="_images/Ch8_ROMANCE_backbone_17_0.png" />
 </div>
 </div>
 <p>Plot the results for peptide plane to <span class="math notranslate nohighlight">\(\beta\)</span>-sheet superimposition (peptide plane dynamics)</p>
@@ -653,10 +667,10 @@ o6:FRAMES:superimpose&gt;LF:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch8_ROMANCE_backbone_18_0.png" src="_images/Ch8_ROMANCE_backbone_18_0.png" />
+<img alt="_images/Ch8_ROMANCE_backbone_19_0.png" src="_images/Ch8_ROMANCE_backbone_19_0.png" />
 </div>
 </div>
-<p>Plot the results for <span class="math notranslate nohighlight">\(\beta\)</span>-sheet superimposition to lab frame (<span class="math notranslate nohighlight">\(\beta\)</span>-sheet dynamics</p>
+<p>Plot the results for <span class="math notranslate nohighlight">\(\beta\)</span>-sheet superimposition to lab frame (<span class="math notranslate nohighlight">\(\beta\)</span>-sheet dynamics). Note we only show residues contained in <span class="math notranslate nohighlight">\(\beta\)</span>-sheets. For residues not in <span class="math notranslate nohighlight">\(\beta\)</span>-sheets, there is no second reference frame defined. However, these are by default still analyzed. In the previous plot, they simply exhibit no motion, since the frame is missing. In the next plot, they are actively excluded, since the missing frame makes the results significantly different. Leave ‘index’ out of the plot command to view these residues.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
@@ -671,7 +685,7 @@ o6:FRAMES:superimpose&gt;LF:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch8_ROMANCE_backbone_20_0.png" src="_images/Ch8_ROMANCE_backbone_20_0.png" />
+<img alt="_images/Ch8_ROMANCE_backbone_21_0.png" src="_images/Ch8_ROMANCE_backbone_21_0.png" />
 </div>
 </div>
 </section>

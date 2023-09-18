@@ -33,7 +33,7 @@ import pyDR
 # ## Load and Process NMR
 # We'll do this in just a few lines. See the previous examples for processing NMR
 
-# In[5]:
+# In[4]:
 
 
 #Empty pyDR project (specify directory if you want to save later)
@@ -60,7 +60,7 @@ print(proj)
 
 # ###  Open MD trajectory, specify bonds
 
-# In[6]:
+# In[5]:
 
 
 #Paths may need adjusted if running locally ()
@@ -80,7 +80,7 @@ sel.select_bond('N',segids='B')
 # pyDR.md2data(sel)
 # ```
 
-# In[7]:
+# In[6]:
 
 
 sel.traj.step=10  #Take every tenth point for MD calculation (set to 1 for more accurate calculation)
@@ -97,9 +97,9 @@ _=proj['MD']['raw'][0].sens.plot_rhoz()
 
 
 # ### MD Preprocessing (fit with no_opt detectors)
-# When working with MD simulations, we produce a very large data set (here, the data object has 70x40000 data points, and if we hadn't skipped points in the trajectory, it would be 70x400000, and we have trajectories with 70x2000000 data points). We would rather not save that data, but would also like to avoid re-processing every time we need a change to the analysis.
+# When working with MD simulations, we produce a very large data set (here, the data object has 70x40000 data points, and if we hadn't skipped points in the trajectory, it would be 70x400000. We also have trajectories with 70x2000000 data points). We would rather not save that data, but would also like to avoid re-processing every time we need a change to the analysis.
 # 
-# The solution is to use a large (12-15) number of *unoptimized* detectors. Data from unoptimized detectors is difficult to interpret directly, but can be subsequently reprocessed to ideal detectors, and allows us to try different processing approaches without dealing with the large correlation functions with every attempt.
+# The solution is to use a large (12-15) number of *unoptimized* detectors. Data from unoptimized detectors is difficult to interpret directly, but can be subsequently reprocessed to optimized detectors, and allows us to try different processing approaches without dealing with the large correlation functions with every attempt.
 
 # In[8]:
 
@@ -138,7 +138,7 @@ _=proj['NMR']['proc'].sens.plot_rhoz(ax=ax,color='black',linestyle=':')
 # ### Process and plot MD data
 # We'll start by processing the MD data for evaluation without comparison to NMR.
 
-# In[12]:
+# In[11]:
 
 
 #Optimize 7 detectors
@@ -147,7 +147,7 @@ proj['MD']['no_opt'].detect.r_auto(7)
 _=proj['MD']['no_opt'].fit()
 
 
-# In[13]:
+# In[12]:
 
 
 #Plot the results (be careful that we don't have open windows)
@@ -156,14 +156,14 @@ proj['MD']['proc'].plot()
 proj.plot_obj.fig.set_size_inches([8,12])
 
 
-# In[14]:
+# In[13]:
 
 
 #Show the results for selected detectors in NGLviewer (may fail in Google Colab)
 proj['MD']['proc'][0].nglview(rho_index=1,scaling=30)
 
 
-# In[15]:
+# In[14]:
 
 
 #Show the results in ChimeraX (only works locally)
@@ -173,9 +173,9 @@ if 'google.colab' not in sys.modules:
     proj['MD']['proc'].chimera(scaling=30) #Adjust scaling to improve visibility for some detectors
 
 
-# The low amplitude "waves" in the detector sensitivies can be removed if desired. The waves may capture some motion significantly faster or slower than the detector's mean position, and so are less than ideal. However, their removal can in principle distort the data, although our experiences is that this effect is usually unlikely.
+# The low amplitude "waves" in the detector sensitivies can be removed if desired. The waves may capture some motion significantly faster or slower than the detector's mean position, and so can be inconvenient for data analysis. However, their removal can in principle distort the data, although we have never observed any significant distortion from their removal.
 
-# In[16]:
+# In[15]:
 
 
 # Optimize the MD fit and cleanup the sensitivity "waves"
@@ -190,7 +190,7 @@ proj.plot_obj.fig.set_size_inches([8,12])
 
 # ### Optimize MD detectors to match NMR detectors
 
-# In[17]:
+# In[16]:
 
 
 target=proj['NMR']['proc'].sens.rhoz
@@ -202,16 +202,16 @@ _=proj['MD']['no_opt'].fit()
 
 
 # ### Plot the comparison between NMR and MD
-# pyDR compares detector sensitivies between data sets to decide which detector windows are most comparable. Furthermore, it determines bases on select/label what positions should be plotted on top of each other. Therefore, we do not need to do anything but specify what should be plotted.
+# pyDR compares detector sensitivies between data sets to decide which detector windows are most comparable. Furthermore, it determines based on the selection object or the data labels what positions should be plotted on top of each other. Therefore, we do not need to do anything but specify what should be plotted.
 # 
 # Note that the project manages the plotting. It will always try to plot into the previous plot, unless we set the current plot.
 # ```
-# proj.current_plot=2 #counting starts at 1, which is the default
-# proj.close_fig('all') #Close figure by number, or specify 'all'
+# proj.current_plot=2 #Generate a new plot. Counting starts at 1, which is the default
+# proj.close_fig('all') #Close figure by number, or specify 'all', to delete all plots (then uses plot 1)
 # ```
 # This behavior is usually convenient. However, in Jupyter notebooks, if one already has an open plot in a previous cell, it will not show up in a new cell by default (thus why we start plotting by closing all plots). Furthermore, if data with very different sensitivies are plotted into the same plot object, the second data set may not plot at all.
 
-# In[18]:
+# In[17]:
 
 
 proj.close_fig('all')

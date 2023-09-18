@@ -50,8 +50,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -682,7 +680,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f9452b91d68&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fe410326820&gt;
 </pre></div>
 </div>
 </div>
@@ -705,7 +703,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:MD:backboneB with 70 data points
-&lt;pyDR.Data.Data.Data object at 0x7f94807cec50&gt;
+&lt;pyDR.Data.Data.Data object at 0x7fe400152e50&gt;
 </pre></div>
 </div>
 </div>
@@ -724,8 +722,8 @@ p5:NMR:1w_0cR6ykj
 </section>
 <section id="md-preprocessing-fit-with-no-opt-detectors">
 <h3>MD Preprocessing (fit with no_opt detectors)<a class="headerlink" href="#md-preprocessing-fit-with-no-opt-detectors" title="Permalink to this headline">#</a></h3>
-<p>When working with MD simulations, we produce a very large data set (here, the data object has 70x40000 data points, and if we hadn’t skipped points in the trajectory, it would be 70x400000, and we have trajectories with 70x2000000 data points). We would rather not save that data, but would also like to avoid re-processing every time we need a change to the analysis.</p>
-<p>The solution is to use a large (12-15) number of <em>unoptimized</em> detectors. Data from unoptimized detectors is difficult to interpret directly, but can be subsequently reprocessed to ideal detectors, and allows us to try different processing approaches without dealing with the large correlation functions with every attempt.</p>
+<p>When working with MD simulations, we produce a very large data set (here, the data object has 70x40000 data points, and if we hadn’t skipped points in the trajectory, it would be 70x400000. We also have trajectories with 70x2000000 data points). We would rather not save that data, but would also like to avoid re-processing every time we need a change to the analysis.</p>
+<p>The solution is to use a large (12-15) number of <em>unoptimized</em> detectors. Data from unoptimized detectors is difficult to interpret directly, but can be subsequently reprocessed to optimized detectors, and allows us to try different processing approaches without dealing with the large correlation functions with every attempt.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;MD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_no_opt</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>  <span class="c1">#Calculate 12 unoptimized detectors</span>
@@ -795,8 +793,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Data already in project (index=4)
-Fitted 1 data objects
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 1 data objects
 </pre></div>
 </div>
 </div>
@@ -823,9 +820,9 @@ Fitted 1 data objects
 </div>
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "2cfb244adbcd45acbcfd4e38a07b69dd", "version_major": 2, "version_minor": 0}
+{"model_id": "a36928045f0e4183ae574f72c168463c", "version_major": 2, "version_minor": 0}
 </script><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "616b5607ae4e42589b692aadcbd31eb6", "version_major": 2, "version_minor": 0}
+{"model_id": "bf40ded136de4ec0b171d84656d7e189", "version_major": 2, "version_minor": 0}
 </script></div>
 </div>
 <div class="cell docutils container">
@@ -838,29 +835,8 @@ Fitted 1 data objects
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Failed to establish connection with ChimeraX
-No sessions were connected
-</pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Exception in thread Thread-8:
-Traceback (most recent call last):
-  File &quot;/Users/albertsmith/anaconda3/lib/python3.7/threading.py&quot;, line 917, in _bootstrap_inner
-    self.run()
-  File &quot;../pyDR/chimeraX/CMXRemote.py&quot;, line 422, in run
-    self.conn=self.listener.accept()
-  File &quot;/Users/albertsmith/anaconda3/lib/python3.7/multiprocessing/connection.py&quot;, line 453, in accept
-    c = self._listener.accept()
-  File &quot;/Users/albertsmith/anaconda3/lib/python3.7/multiprocessing/connection.py&quot;, line 598, in accept
-    s, self._last_accepted = self._socket.accept()
-  File &quot;/Users/albertsmith/anaconda3/lib/python3.7/socket.py&quot;, line 212, in accept
-    fd, addr = self._accept()
-ConnectionAbortedError: [Errno 53] Software caused connection abort
-</pre></div>
-</div>
-</div>
-</div>
-<p>The low amplitude “waves” in the detector sensitivies can be removed if desired. The waves may capture some motion significantly faster or slower than the detector’s mean position, and so are less than ideal. However, their removal can in principle distort the data, although our experiences is that this effect is usually unlikely.</p>
+<p>The low amplitude “waves” in the detector sensitivies can be removed if desired. The waves may capture some motion significantly faster or slower than the detector’s mean position, and so can be inconvenient for data analysis. However, their removal can in principle distort the data, although we have never observed any significant distortion from their removal.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optimize the MD fit and cleanup the sensitivity &quot;waves&quot;</span>
@@ -905,10 +881,10 @@ ConnectionAbortedError: [Errno 53] Software caused connection abort
 </section>
 <section id="plot-the-comparison-between-nmr-and-md">
 <h3>Plot the comparison between NMR and MD<a class="headerlink" href="#plot-the-comparison-between-nmr-and-md" title="Permalink to this headline">#</a></h3>
-<p>pyDR compares detector sensitivies between data sets to decide which detector windows are most comparable. Furthermore, it determines bases on select/label what positions should be plotted on top of each other. Therefore, we do not need to do anything but specify what should be plotted.</p>
+<p>pyDR compares detector sensitivies between data sets to decide which detector windows are most comparable. Furthermore, it determines based on the selection object or the data labels what positions should be plotted on top of each other. Therefore, we do not need to do anything but specify what should be plotted.</p>
 <p>Note that the project manages the plotting. It will always try to plot into the previous plot, unless we set the current plot.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">current_plot</span><span class="o">=</span><span class="mi">2</span> <span class="c1">#counting starts at 1, which is the default</span>
-<span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span> <span class="c1">#Close figure by number, or specify &#39;all&#39;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">current_plot</span><span class="o">=</span><span class="mi">2</span> <span class="c1">#Generate a new plot. Counting starts at 1, which is the default</span>
+<span class="n">proj</span><span class="o">.</span><span class="n">close_fig</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span> <span class="c1">#Close figure by number, or specify &#39;all&#39;, to delete all plots (then uses plot 1)</span>
 </pre></div>
 </div>
 <p>This behavior is usually convenient. However, in Jupyter notebooks, if one already has an open plot in a previous cell, it will not show up in a new cell by default (thus why we start plotting by closing all plots). Furthermore, if data with very different sensitivies are plotted into the same plot object, the second data set may not plot at all.</p>

@@ -6,7 +6,7 @@
 # <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch1_detectors_intro.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
 # ## Models for decaying correlation functions
-# Experimental and simulated dynamics information is often assumed to be described based on a time-correlation function, which relates the state of some parameter at an initial time to its value at a later time. The time-correlation is the *average* of that relationship. For example, for some parameter which varies with time, $A(\tau)$, the simplest time-correlation function would be
+# Experimental and simulated dynamics information is often assumed to be described based on a time-correlation function, which relates the state of some parameter at an initial time to its value at a later time. The time-correlation is the *average* of that relationship. For example, for some parameter which varies with time, $X(\tau)$, the simplest time-correlation function would be
 # 
 # $$
 # \begin{equation}
@@ -14,9 +14,9 @@
 # \end{equation}
 # $$
 # 
-# where the brackets ($\langle\rangle_\tau$) indication an average over the initial time $\tau$.
+# where the brackets ($\langle\rangle_\tau$) indicate an average over the initial time, $\tau$.
 # 
-# Then, the time-function often decays in time, indicating that the value of $X(t+\tau)$ eventually becomes uncorrelated with its value at some earlier time, $X(\tau)$. A simple model for this behavior is to assume the correlation function has the form
+# Then, the time-correlation function usually decays in time, indicating that the value of $X(t+\tau)$ eventually becomes uncorrelated with its value at some earlier time, $X(\tau)$. A simple model for this behavior is to assume the correlation function has the form
 # 
 # $$
 # \begin{equation}
@@ -24,7 +24,7 @@
 # \end{equation}
 # $$
 # 
-# In this simple case, the correlation time, $\tau_c$, indicates how quickly the correlation decays. For motion, a shorter $\tau_c$ indicates a faster motion, and a longer $\tau_c$ indicates a slower motion. $\langle X(\tau)\rangle_\tau$ is simply the average of the parameter $X(\tau)$, and ($\langle X(t)^2\rangle_\tau-\langle X(t)\rangle_\tau^2$) is its variance (standard deviation squared)
+# In this simple case, the correlation time, $\tau_c$, indicates how quickly the correlation decays. A shorter $\tau_c$ indicates a faster motion, and a longer $\tau_c$ indicates a slower motion. $\langle X(\tau)\rangle_\tau$ is simply the average of the parameter $X(\tau)$, and ($\langle X(t)^2\rangle_\tau-\langle X(t)\rangle_\tau^2$) is its variance (standard deviation squared)
 # 
 # It can be, however, that multiple motions affect the decorrelation, in which case the correlation function can be modeled more generally as
 # 
@@ -34,7 +34,7 @@
 # \end{equation}
 # $$
 # 
-# In this case, the $A_i$ add up to the total variance ($\langle X(t)^2\rangle_\tau-\langle X(t)\rangle_\tau^2$), but each corresponds to a different correlation time, representing contributions from different motions with varying speeds. This expression suggests a number of discrete motions, but it is also possible to obtain a continuum of correlation times, in which case we would better represent the situation with an infinite number of amplitudes, given as an integral:
+# In this case, the $A_i$ add up to the total variance ($\langle X(t)^2\rangle_\tau-\langle X(t)\rangle_\tau^2$), but each corresponds to a different correlation time, representing contributions from different motions with varying speeds. This expression suggests a number of discrete motions, but it is also possible to obtain a continuum of correlation times, in which case we would better represent the situation with a continuum of correlation times, yielding an integral:
 # 
 # $$
 # \begin{equation}
@@ -45,7 +45,7 @@
 # In this representation, $z$ is the log-correlation time ($z=\log_{10}(\tau_c/\mathrm{s})$), and $\theta(z)$ is the distribution of correlation times as a function of the log-correlation time. $\theta(z)$ must then integrate to the total variance.
 
 # ## The angular correlation function for NMR
-# In NMR, a major source of relaxation is due to the stochastic reoriention of anisotropy interaction tensors, such as dipole couplings, chemical shift anisotropies (CSA), and quadrupole couplings. Then, we cannot use a strictly linear correlation function, but rather must use the rank-2 tensor correlation function (which can be constructed from a sum of linear correlation functions).
+# In NMR, a major source of relaxation is due to the stochastic reoriention of anisotropic interaction tensors, such as dipole couplings, chemical shift anisotropies (CSA), and quadrupole couplings. Then, we cannot use a strictly linear correlation function, but rather must use the rank-2 tensor correlation function (which can be constructed from a sum of linear correlation functions).
 # 
 # $$
 # \begin{equation}
@@ -71,9 +71,9 @@
 # \end{equation}
 # $$
 # 
-# In this equation, $R_1$ is the longitudinal relaxation rate constant for $^{13}$C ($1/T_1=R_1$), with $\delta_\mathrm{HC}$ being the anisotropy of the dipole coupling and $\Delta\sigma_\mathrm{C}$ the width of the CSA in ppm. The $J(\omega)$ are sampled at the $^1$H and $^13$C Larmor frequencies in addition to their sums and differences (given in radians/s).
+# In this equation, $R_1$ is the longitudinal relaxation rate constant for $^{13}$C ($1/T_1=R_1$), with $\delta_\mathrm{HC}$ being the anisotropy of the dipole coupling and $\Delta\sigma_\mathrm{C}$ the width of the CSA in ppm. The $J(\omega)$ are sampled at the $^1$H and $^{13}$C Larmor frequencies in addition to their sums and differences (given in radians/s).
 # 
-# Usually, relaxation due to reorientational motion can be expressed as a sum over the spectral density sampled at various frequencies:
+# In general, relaxation due to reorientational motion can be expressed as a sum over the spectral density sampled at various frequencies:
 # 
 # $$
 # \begin{equation}
@@ -81,7 +81,7 @@
 # \end{equation}.
 # $$
 # 
-# The models of the correlation function given above are still valid, but we typically write them as:
+# For the rank-2 tensor correlation function, we typically give the correlation function in terms of the order parameter squared ($S^2$), where the $A_i$ must then sum to one (or $\theta(z)$ integrates to 1):
 # 
 # $$
 # \begin{eqnarray}
@@ -100,9 +100,9 @@
 # 
 
 # ## Fitting dynamics data
-# Whether we have NMR data, or other dynamics data depending on some form of time-correlation function, we can, in principle, fit the experimental data based on some model of the correlation function. However, the challenge is, if we don't know the model, how valuable are these fits? We'll start by taking some example motion, characterized by 3 motions and calculate a few relaxation rate constants for those motions.
+# Whether we have NMR data, or other dynamics data depending on some form of time-correlation function, we can, in principle, fit the experimental data based on some model of the correlation function. However, the challenge is, if we don't know the model, how valuable are these fits? We'll start by taking some example motion, characterized by 3 motions and calculate a few relaxation rate constants for those motions. We will then attempt to fit to a model, to show why fitting the correlation function to an explicit model can be problematic.
 
-# In[ ]:
+# In[1]:
 
 
 # SETUP pyDR
@@ -110,7 +110,7 @@ import os
 os.chdir('../..')
 
 
-# In[11]:
+# In[2]:
 
 
 # Import various modules, including the pyDR module
@@ -126,8 +126,8 @@ import matplotlib.pyplot as plt #Plotting tools
 z=[-11,-9.5,-7.5]  #These are log-correlation times, corresponding to 10 ps, 1 ns, and 1 μs, respectively
 A=[.2,.05,.01]  #These are the corresponding amplitudes. The total amplitude of motion is 0.38 (S^2=0.62)
 
-nmr=pyDR.Sens.NMR()  #This is a container for NMR experiments, which give the relaxation rates as a function of z
-nmr.new_exper(Type='R1',v0=[400,600,800],Nuc='15N') #Add 3 experiments: 15N T1 at 400, 600, and 800
+nmr=pyDR.Sens.NMR()  #This is a container for NMR experiments, which gives the relaxation rates as a function of z
+nmr.new_exper(Type='R1',v0=[400,600,800],Nuc='15N') #Add 3 experiments: 15N T1 at 400, 600, and 800 MHz
 #We assume by default N15 coupled to a single proton (22.954 kHz = 2*11.477) and CSA of 113 ppm (z-component)
 nmr.new_exper(Type='R1p',v0=800,vr=60,v1=10,Nuc='15N') #Add an R1p (MAS=60 kHz, spin-lock at 10 kHz)
 nmr.new_exper(Type='S2')
@@ -138,7 +138,7 @@ nmr.plot_Rz(norm=True,ax=ax) #Plot the 9 relaxation rate constants (normalized t
 _=ax.legend(labels)
 
 
-# In[12]:
+# In[3]:
 
 
 ax.figure
@@ -146,7 +146,7 @@ ax.figure
 
 # Now we can construct the relaxation rate constants for the seven experiments above, by simply summing over the three correlation times and amplitudes
 
-# In[3]:
+# In[4]:
 
 
 R=np.zeros(nmr.rhoz.shape[0])  #Pre-allocate an array with 7 relaxation rates
@@ -162,9 +162,9 @@ ax.set_ylabel(r'$R$ / s$^{-1}$')
 ax.figure.tight_layout()
 
 
-# Now, the question is, can we fit this data based on a model of the correlation function, and does that model have to match the original model. For demonstration purposes, we try a model that only has two correlation times.
+# Now, the question is, can we fit this data based on a model of the correlation function, and does that model have to match the original model. For demonstration purposes, we try both a model with two and with three correlation times.
 
-# In[4]:
+# In[5]:
 
 
 #Function to calculate relaxation rate constants
@@ -196,7 +196,7 @@ def fun(x):
 # $$
 # 
 
-# In[5]:
+# In[6]:
 
 
 fit=minimize(fun,[-10,-9,-7,.2,.1,.05],bounds=([-14,-6],[-14,-6],[-14,-6],[0,1],[0,1],[0,1]))   
@@ -206,15 +206,15 @@ Rc=calcR(zf,Af,nmr)
 print(f'Error is {fit["fun"]} (should be small– otherwise adjust initial guess)')
 
 
-# In[6]:
+# In[7]:
 
 
 #Plot the results
 ax=plt.subplots()[1]
 for z0,A0 in zip(z,A):
-    hdl0=ax.plot([z0,z0],[0,A0],color='red',label='Input' if z0==z[-1] else None)
+    hdl0=ax.plot([z0,z0],[0,A0],color='blue',label='Input' if z0==z[-1] else None)
 for z0,A0 in zip(zf,Af):
-    hdl1=ax.plot([z0,z0],[0,A0],color='blue',label='Fit' if z0==zf[-1] else None)
+    hdl1=ax.plot([z0,z0],[0,A0],color='black',label='Fit' if z0==zf[-1] else None)
 ax.set_ylim([0,ax.get_ylim()[1]])
 ax.set_xlabel(r'$z=\log_{10}(\tau_i/\mathrm{s})$')
 ax.set_ylabel(r'$A_i$')
@@ -223,7 +223,7 @@ ax.set_title('Input vs. fitted correlation times and amplitudes')
 ax.figure.tight_layout()
 
 ax=plt.subplots()[1]
-ax.bar(range(len(R)),R,label='Input')
+ax.bar(range(len(R)),R,label='Input',color='blue')
 ax.scatter(range(len(Rc)),Rc,color='black',marker='o',label='Fit')
 ax.legend()
 ax.set_xticks(range(len(Rc)))
@@ -232,9 +232,9 @@ ax.set_title('Input vs. fitted rate constants')
 ax.figure.tight_layout()
 
 
-# The data is well-fit, but the parameters themselves are not well determined, so we try again with a reduced number of variables, to see what happens.
+# The data is well-fit, but the parameters themselves are not well-determined, thus not yielding the original parameters. Therefore, we try again with a reduced number of variables, to see what happens.
 
-# In[7]:
+# In[8]:
 
 
 fit=minimize(fun,[-10,-8.5,.2,.01],bounds=([-14,-6],[-14,-6],[0,1],[0,1]))   
@@ -244,15 +244,15 @@ Rc=calcR(zf,Af,nmr)
 print(f'Error is {fit["fun"]} (should be small– otherwise adjust initial guess)')
 
 
-# In[8]:
+# In[9]:
 
 
 #Plot the results
 ax=plt.subplots()[1]
 for z0,A0 in zip(z,A):
-    hdl0=ax.plot([z0,z0],[0,A0],color='red',label='Input' if z0==z[-1] else None)
+    hdl0=ax.plot([z0,z0],[0,A0],color='blue',label='Input' if z0==z[-1] else None)
 for z0,A0 in zip(zf,Af):
-    hdl1=ax.plot([z0,z0],[0,A0],color='blue',label='Fit' if z0==zf[-1] else None)
+    hdl1=ax.plot([z0,z0],[0,A0],color='black',label='Fit' if z0==zf[-1] else None)
 ax.set_ylim([0,ax.get_ylim()[1]])
 ax.set_xlabel(r'$z=\log_{10}(\tau_i/\mathrm{s})$')
 ax.set_ylabel(r'$A_i$')
@@ -261,7 +261,7 @@ ax.set_title('Input vs. fitted correlation times and amplitudes')
 ax.figure.tight_layout()
 
 ax=plt.subplots()[1]
-ax.bar(range(len(R)),R,label='Input')
+ax.bar(range(len(R)),R,color='blue',label='Input')
 ax.scatter(range(len(Rc)),Rc,color='black',marker='o',label='Fit')
 ax.legend()
 ax.set_xticks(range(len(Rc)))
@@ -274,7 +274,7 @@ ax.figure.tight_layout()
 # 
 # A. A. Smith, M. Ernst, B. H. Meier. [Because the light is better here: correlation-time analysis by NMR.](https://doi.org/10.1002/ange.201707316) Angew. Chem. Int. Ed. 2017, 56, 13778-13783. 
 # 
-# If it was just a matter of fitting three correlation times instead of two, we might be able to solve this problem by simply obtaining additional experimental data. However, the real problem is that we often have continua of correlation times (hence why we suggest using a distribution of correlation times above, $(1-S^2)\theta(z)$. Without a model of the correlation function that both accurately describes the motion and has sufficiently few parameters, we fail to be able to get really meaningful dynamics parameters. Furthermore, for proteins, which have a complex structure, it is highly non-trivial to get a good model.
+# If it was just a matter of fitting three correlation times instead of two, we might be able to solve this problem by simply obtaining additional experimental data. However, the real problem is that we often have continua of correlation times (hence why we suggest using a distribution of correlation times above ($(1-S^2)\theta(z)$). Without a model of the correlation function that both accurately describes the motion and has sufficiently few parameters, we fail to be able to get really meaningful dynamics parameters. Furthermore, for proteins, which have a complex structure, it is highly non-trivial to get a good model.
 # 
 # To address this problem, we have developed the **detector** analysis, which we introduce here.
 
@@ -287,7 +287,7 @@ ax.figure.tight_layout()
 # \end{equation}
 # $$
 # 
-# The distribution, $(1-S^2)\theta(z)$, can be assumed to be a sum of $\delta$-functions, allowing it to also be re-written as a sum of correlation times:
+# Note that if there are a discrete number of correlation times, then the distribution, $(1-S^2)\theta(z)$, becomes a sum of $\delta$-functions, allowing it to also be re-written as a sum of correlation times:
 # 
 # $$
 # \begin{equation}
@@ -295,7 +295,7 @@ ax.figure.tight_layout()
 # \end{equation}
 # $$
 # 
-# Then, a given relaxation rate constant is given by
+# We can then re-express a given relaxation rate constant as a linear function of this distribution. We start by noting that a relaxation rate constant is given by a sum of terms from the spectral density.
 # 
 # $$
 # \begin{equation}
@@ -303,7 +303,7 @@ ax.figure.tight_layout()
 # \end{equation}
 # $$
 # 
-# The spectral density, $J^{(\theta,S)}(\omega)$ is, indeed, a function of the distribution of correlation times, given by
+# The spectral density, $J^{(\theta,S)}(\omega)$ is, in fact, a linear function of the distribution of correlation times, given by
 # 
 # $$
 # \begin{equation}
@@ -311,13 +311,15 @@ ax.figure.tight_layout()
 # \end{equation}
 # $$
 # 
-# Then, a given relaxation rate constant can be written as a function of the distribution of correlation times:
+# This is obtained simply by taking the Fourier transform of the individual exponential terms in the correlation function.
+# 
+# Then, we insert the spectra density into the expression for the relaxation rate constant:
 # 
 # $$
 # \begin{eqnarray}
 # R_\zeta^{(\theta,S)}&=&\sum\limits_i{a_\zeta^iJ^{(\theta,S)}(\omega_i)} \\
 # &=&\sum\limits_i{a_\zeta^i2(1-S^2)\int\limits_{-\infty}^\infty{\theta(z)\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot10^z\cdot\mathrm{1 s})^2}}dz}\\
-# &=&(1-S^2)\int\limits_{-\infty}^\infty{2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot10^z\cdot\mathrm{1 s})^2}}dz}\\
+# &=&(1-S^2)\int\limits_{-\infty}^\infty{\theta(z)\cdot2\sum\limits_i{a_\zeta^i\frac{10^z\cdot\mathrm{1 s}}{1+(\omega_i\cdot10^z\cdot\mathrm{1 s})^2}}dz}\\
 # &=&(1-S^2)\int\limits_{-\infty}^\infty{\theta(z)R_\zeta(z)dz}
 # \end{eqnarray}
 # $$
@@ -330,9 +332,9 @@ ax.figure.tight_layout()
 # \end{equation}
 # $$
 # 
-# While the math may seem a bit overwhelming at first, all we've really done is a little shuffling of terms. We point out that a given relaxation rate constant is sensitive to certain correlation times more than others, and its measurement basically provides us a 'window', given by $R_\zeta(z)$, into the total dynamics. We have termed this window a *detector sensitivity*, which looks at only a certain range of correlation times, as defined by the integral above. pyDR automatically calculates these windows, as shown below, for a $^{15}$N $T_1$ (protein backbone) acquired at 600 MHz.
+# While the math may seem a bit overwhelming at first, all we've really done is a little shuffling of terms. We point out that a given relaxation rate constant is sensitive to certain correlation times more than others, and its measurement basically provides us a 'window', given by $R_\zeta(z)$, into the total dynamics. We have named this window a *detector sensitivity*, which looks at only a certain range of correlation times, as defined by the integral above. pyDIFRATE automatically calculates these windows, as shown below, for a $^{15}$N $T_1$ (protein backbone) acquired at 600 MHz.
 
-# In[9]:
+# In[10]:
 
 
 _=pyDR.Sens.NMR(Type='R1',Nuc='15N',v0=600).plot_Rz()
@@ -340,7 +342,7 @@ _=pyDR.Sens.NMR(Type='R1',Nuc='15N',v0=600).plot_Rz()
 
 # As one sees, measurement of this $T_1$ lets us characterize dynamics *around* roughly 1 ns. 
 # 
-# Interestingly, if we have multiple relaxation rate constants, we may add them together to get new windows. For example, we define:
+# The *detector* concept comes from noting that, if we have multiple relaxation rate constants, we may add them together to get new windows. For example, we define:
 # 
 # $$
 # \begin{eqnarray}
@@ -361,7 +363,7 @@ _=pyDR.Sens.NMR(Type='R1',Nuc='15N',v0=600).plot_Rz()
 # 
 # The superscript $n$ just indicates that there are multiple possible linear combinations of relaxation rate constants. Each linear combination creates a new window, but most possible windows may not be particularly useful. For example, we take two relaxation rate constants below, and show a random set of linear combinations:
 
-# In[34]:
+# In[11]:
 
 
 nmr=pyDR.Sens.NMR(Type='R1',v0=[40,800],Nuc='15N')
@@ -376,13 +378,13 @@ _=ax.set_ylabel(r'\rho_n(z)')
 
 # However, pyDR is designed to yield the optimal $n$ windows for a given data set, for example, for the two experiments, we get two optimized windows (The number of optimized windows is always less than or equal to the number of experiments)
 
-# In[33]:
+# In[12]:
 
 
 _=nmr.Detector().r_auto(2).plot_rhoz()
 
 
-# Formally, the linear combination of rate constants (or any other parameter depending linearly on the correlation function) is referred to as a *detector response* ($\rho_n^{(\theta,S)}$), and the linear combination of sensitivities of the rate constants as *detector sensitivities* ($\rho_n(z)$). In the next chapter, we discuss how the windows are actually optimized.
+# Formally, the linear combination of experimental relaxation rate constants (or any other parameter depending linearly on the correlation function) is referred to as a *detector response* ($\rho_n^{(\theta,S)}$), and the linear combination of sensitivities of the rate constants as *detector sensitivities* ($\rho_n(z)$). In the next chapter, we discuss how the windows are actually optimized.
 
 # In[ ]:
 

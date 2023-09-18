@@ -576,7 +576,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7faac2f903c8&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f8660866f60&gt;
 </pre></div>
 </div>
 </div>
@@ -584,8 +584,8 @@ title="Print to PDF"
 </section>
 <section id="load-and-process-md-without-and-with-ired">
 <h2>Load and process MD without and with iRED<a class="headerlink" href="#load-and-process-md-without-and-with-ired" title="Permalink to this headline">#</a></h2>
-<p>When using iRED, it’s important to compare the dynamics obtained with iRED and with a direct calculation of the detector responses. iRED works by determining modes of reorientational motion that are independent from each other. Then, the cross-correlation between modes is, by definition, zero at the initial time. However, there is no guarantee that the modes remain independent at a later time. If the direct and iRED calculations are in good agreement for a given bond, then the majority of motion for that bond results from independent mode motions which remain mostly independent. However, if not, then the total motion of that bond may have significant contributions from <a class="reference external" href="https://pubs.aip.org/aip/jcp/article/139/1/015102/192538/Identification-of-slow-molecular-order-parameters">time-lagged cross-correlation</a> between modes, and the iRED analysis is not necessarily a good representation of its total motion.</p>
-<p>Note that we’ll do a rank 1 calculation here for iRED, since it simplifies the orientational dependence.</p>
+<p>When using iRED, it’s important to compare the dynamics obtained with iRED and with a direct calculation of the detector responses. iRED works by determining modes of reorientational motion that are independent from each other. Then, the cross-correlation between modes is, by definition, zero at the initial time. However, there is no guarantee that the modes remain independent at later times. If the direct and iRED calculations are in good agreement for a given bond, then the majority of motion for that bond results from mode motions which remain mostly independent. However, if not, then the total motion of that bond may have significant contributions from <a class="reference external" href="https://pubs.aip.org/aip/jcp/article/139/1/015102/192538/Identification-of-slow-molecular-order-parameters">time-lagged cross-correlation</a> between modes, and the iRED analysis is not necessarily a good representation of its total motion.</p>
+<p>Note that we’ll do a rank-1 calculation here for iRED, since it simplifies the orientational dependence.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sel</span><span class="o">.</span><span class="n">traj</span><span class="o">.</span><span class="n">step</span><span class="o">=</span><span class="mi">10</span>  <span class="c1">#Take every tenth point for MD calculation (set to 1 for more accurate calculation)</span>
@@ -599,13 +599,15 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Individual components of the correlation functions or tensors will not be returned in auto or sym mode
-r:IREDMODE:rk1:backboneB with 70 data points
-&lt;pyDR.iRED.iRED.Data_iRED object at 0x7ff21240f040&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:IREDMODE:rk1:backboneB with 70 data points
+&lt;pyDR.iRED.iRED.Data_iRED object at 0x7f866088fb00&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>Next, we set up the detectors for the raw data. We’ll do a pre-processing with 10 unoptimized detectors.</p>
+<p>Next, we set up the detectors for the raw data. We’ll do a pre-processing with 10 unoptimized detectors. Note that each command is applied to two data sets (batch processing).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;raw&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_no_opt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -616,7 +618,7 @@ r:IREDMODE:rk1:backboneB with 70 data points
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7ff21240f1f0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f86608d55c0&gt;
 
 Titles:
 n10:MD:rk1:backboneB
@@ -628,20 +630,22 @@ n10:IREDMODE:rk1:backboneB
 <p>Next, we use 7 optimized detectors, and finally conclude with an optimization of the results, including cleanup of the detector sensitivities.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">detect</span><span class="o">.</span><span class="n">r_auto</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
 <span class="n">proj</span><span class="p">[</span><span class="s1">&#39;no_opt&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">opt2dist</span><span class="p">(</span><span class="n">rhoz_cleanup</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
-Optimized 2 data objects
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7ff212c044f0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f866076a9e8&gt;
 
 Titles:
-o6:MD:rk1:backboneB
-o6:IREDMODE:rk1:backboneB
+o7:MD:rk1:backboneB
+o7:IREDMODE:rk1:backboneB
 </pre></div>
 </div>
 </div>
@@ -685,10 +689,10 @@ o6:IREDMODE:rk1:backboneB
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted 1 iRED data objects from modes to bonds
 pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7ff1e393e2e0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7f86a1f614a8&gt;
 
 Titles:
-o6:IREDBOND:rk1:backboneB
+o7:IREDBOND:rk1:backboneB
 </pre></div>
 </div>
 </div>
@@ -707,12 +711,12 @@ o6:IREDBOND:rk1:backboneB
 </div>
 </div>
 <p>In particularly flexible regions, there is some disagreement between the two analyses, but otherwise we have done fairly well with the iRED mode decomposition. In these flexible regions, we should keep in mind that mode dynamics yields an incomplete description of the total motion and the cross-correlation coefficients are not representing the full motion.</p>
-<p>Note that iRED adds an isotropic average over all motions (<em>isotropic</em> Reorientational Eigenmode Dynamics), which usually manifests as some overall motion in the 3 or 5 (rank-1,2) largest eigenvalues. We remove the overall isotropic motion by removing these 3-5 modes when running .modes2bonds (although we don’t have to, set inclOverall=True), which has the result that <span class="math notranslate nohighlight">\(\rho^{(\theta,S)}_5\)</span> does not capture the static component of each bond, whereas the direct calculation does. Then, <span class="math notranslate nohighlight">\(\rho^{(\theta,S)}_5\)</span> of the direct calculation is large, but it becomes almost zero in the iRED calculation. This should not be considered disagreement between the methods, but rather an artifact of the analysis.</p>
-<p>This artifact also means that one should not run .opt2dist on iREDbond data, since part of the motion is missing and therefore the distribution cannot be corrected (anyway, we have already run opt2dist on the mode data, so we don’t gain anything by running it again).</p>
+<p>Note that iRED adds an isotropic average over all motions (<em>isotropic</em> Reorientational Eigenmode Dynamics), which usually manifests as some overall motion in the 3 or 5 (rank-1 or 2, respectively) largest eigenvalues. We remove the overall isotropic motion by removing these 3-5 modes when running .modes2bonds (although we don’t have to, set inclOverall=True), which has the result that <span class="math notranslate nohighlight">\(\rho^{(\theta,S)}_5\)</span> does not capture the static component of each bond, whereas the direct calculation does. Then, <span class="math notranslate nohighlight">\(\rho^{(\theta,S)}_5\)</span> of the direct calculation is large, but it becomes almost zero in the iRED calculation. This should not be considered disagreement between the methods, but rather an artifact of the analysis.</p>
+<p>This artifact also means that one should not run .opt2dist on iREDbond data, since part of the motion is missing and therefore the distribution cannot be corrected (we may run opt2dist on the mode data, as has been done in a previous step here).</p>
 </section>
 <section id="plotting-cross-correlation-matrix">
 <h3>Plotting cross-correlation matrix<a class="headerlink" href="#plotting-cross-correlation-matrix" title="Permalink to this headline">#</a></h3>
-<p>We first plot the cross-correlation matrices (using the absolute normalized cross-correlation, ranging from 0 to 1).</p>
+<p>We first plot the cross-correlation matrices, using the absolute values of the normalized cross-correlation (i.e. correlation coefficients, which range from 0 to 1).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>

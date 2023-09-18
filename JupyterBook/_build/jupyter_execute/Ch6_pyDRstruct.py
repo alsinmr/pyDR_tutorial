@@ -5,7 +5,7 @@
 
 # <a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch6_pyDRstruct.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 
-# pyDR uses extensive application of object-oriented programming in order to streamline detector analysis and ensure that data is correctly treated. The central object in pyDR is the 'data' object, which naturally contains dynamics data, but also contains all the other information about that data, and functions/objects for processing and data display. Data can be stored within a project, and data is created via loading NMR data from text or from processing MD data. The program structure is summarized in the figure below (although this is far from a comprehensive description). This tutorial investigates some of the components of pyDR, and discusses how they work together to simplify and accelerate processing for the user.
+# pyDR uses object-oriented programming in order to streamline detector analysis and ensure that data is correctly analyzed. The central object in pyDR is the 'data' object, which naturally contains dynamics data, but also contains sensitivities for the data set as well as other information about the data, and functions/objects for processing and data display. Data can be stored within a project, and data is created via loading NMR data from text or from processing MD data. The program structure is summarized in the figure below (although this is far from a comprehensive description). This tutorial investigates some of the components of pyDR, and discusses how they work together to simplify and accelerate processing for the user.
 # 
 # The figure below summarizes the structure/workflow of pyDR. Note that each box corresponds to an [object](https://en.wikipedia.org/wiki/Object_(computer_science)), in some cases being contained inside other objects. As one sees, most components of pyDR take advantage of [object-oriented programming](https://en.wikipedia.org/wiki/Object-oriented_programming) in order to improve the detector analysis workflow.
 # 
@@ -30,7 +30,7 @@ import pyDR
 import numpy as np
 
 
-# In[4]:
+# In[14]:
 
 
 #Load a project
@@ -39,21 +39,21 @@ data=proj[-2]  #Select a particular data object
 
 
 # ### Data in the data object
-# Data can be found in data.R, with its standard deviation in data.Rstd. For NMR data, we may have $S^2$ data as well (data.S2,data.S2std). These fields are MxN, where M is the number of different locations in the simulation, and N is the number of data points (detectors, experiments, or correlation function time points) for each location.
+# Data can be found in data.R, with its standard deviation in data.Rstd. For NMR data, we may have $S^2$ data as well (data.S2,data.S2std). These fields are MxN, where M is the number of different locations in the molecule, and N is the number of data points (detectors, experiments, or correlation function time points) for each location.
 
-# In[5]:
+# In[8]:
 
 
-print('Experimental data')
+print(f'Experimental data ({data.R.shape[0]}x{data.R.shape[1]})')
 print(data.R)
-print('Standard Deviation')
+print(f'Standard Deviation ({data.Rstd.shape[0]}x{data.Rstd.shape[1]})')
 print(data.Rstd)
 
 
 # ### Sensitivity of the data object
-# Each data point in a simulation has its own sensitivity. To know the significance of a data point, we naturally need to know the sensitivity of each data point, so it makes sense to always store the sensitivity object along with the data object. It is found in data.sens. A few key components are found in the sensitivity object.
+# Each data point in a simulation has its own sensitivity. Each data point tells us something about the dynamics for a given range of correlation times, and that range is determined by the sensitivity. Then, it makes sense to always store the sensitivity object along with the data object. The sensitivity is found in data.sens. A few key components are found in the sensitivity object.
 # ```
-# .tc        correlation time vector (default 10 fs to 1 ms, 200 points)
+# .tc        correlation time vector (default 10 fs to 1 ms, log-spaced, 200 points)
 # .z         log-correlation time (default -14 to -3, 200 points)
 # .rhoz      Sensitivity of the data as a function of correlation time
 #            (NxM, where N is the number of data points, M is the number of times in the correlation time axis)
@@ -63,13 +63,13 @@ print(data.Rstd)
 # ```
 # Here, we plot the sensitivity of the data for example
 
-# In[6]:
+# In[9]:
 
 
 _=data.sens.plot_rhoz()
 
 
-# We see that there are seven detectors space from below (\~100 ps) to above (\~3 $\mu$s). From sens.info, we can find out the mean position of the detectors (here, we convert from the log scale to ns). Note that the first and last detector do not really have a mean position (although one is nonetheless calculated), since they remain positive for arbitrarily short/long correlation times, respectively
+# We see that there are seven detectors, with sensitivity ranges from below (\~100 ps) to above (\~3 $\mu$s). From sens.info, we can find out the mean position of the detectors (here, we convert from the log scale to ns). Note that the first and last detector do not really have a mean position (although one is nonetheless calculated), since they remain positive for arbitrarily short/long correlation times, respectively
 
 # In[7]:
 
@@ -78,14 +78,14 @@ for k,z0 in enumerate(data.sens.info['z0']):
     print(f'rho{k}: ~ {10**z0*1e9:.2} ns')
 
 
-# The sens.info object is particularly useful in summarizing relevant parameters for the sensitivity of a given data object. It is also accessible via data.info. Note that sens.info for an NMR or MD sensitivity yields parameters from which the sensitivities may be calculated, whereas for detectors, sens.info only characterizes the sensitivities, but cannot calculation them. We show below the sensitivity of this data (detectors), but also create an NMR sensitivity object, and show info, to highlight the differences.
+# The sens.info object is particularly useful in summarizing relevant parameters for the sensitivity of a given data object. It is also accessible via data.info. Note that sens.info for an NMR or MD sensitivity yields parameters from which the sensitivities may be calculated, whereas for detectors, sens.info only characterizes the sensitivities, but cannot calculate them. We show below the sensitivity of this data (detectors), but also create an NMR sensitivity object, and show data.info, to highlight the differences.
 
-# In[8]:
+# In[11]:
 
 
 print('Info for detector:')
 print(data.info)
-nmr=pyDR.Sens.NMR(Nuc='15N',Type='R1',v0=[400,600,800])
+nmr=pyDR.Sens.NMR(Nuc='15N',Type='R1',v0=[400,600,800]).new_exper(Nuc='15N',Type='R1p',v0=600,vr=60,v1=[10,30,50])
 print('\n\nInfo for NMR sensitivity:')
 print(nmr.info)
 
@@ -103,9 +103,9 @@ print(data.sens is data.detect.sens)
 r=data.sens.Detector() #Produce a detector object from a sensitivity object
 
 
-# Then, the detector object can be optimized in a variety of ways for data analysis. However, it is not recommended to re-analyze data that has already been analyzed with detectors *unless* un-optimized detectors have been used. Then, we will demonstrate based on the original sensitivity object for this data set. It has gone through two layers of processing, so we have to go two sensitivities back.
+# Then, the detector object can be optimized in a variety of ways for data analysis. However, it is not recommended to re-analyze data that has already been analyzed with detectors *unless* un-optimized detectors have been used. Then, we will demonstrate based on the original sensitivity object for this data set. This data has gone through two layers of processing, so we have to go two sensitivities back (note, furthermore, that the sensitivity of processed data is the detector object for the data having been processed)
 
-# In[10]:
+# In[16]:
 
 
 sens=data.sens.sens.sens
@@ -114,7 +114,7 @@ _=sens.plot_rhoz()  #This plots only a selection of MD sensitivities by default
 
 # We first create a detector object from the sensitivity object. pyDR does this automatically when a data object is created (data.detect=data.sens.Detector()). However, here, we have to do this step ourselves.
 
-# In[11]:
+# In[19]:
 
 
 r0=sens.Detector()
@@ -122,16 +122,16 @@ r0=sens.Detector()
 
 # For NMR data, we usually just optimize the detectors with 'detect.r_auto', but for MD, we often take an intermediate step, using detect.r_no_opt()
 
-# In[12]:
+# In[20]:
 
 
 r0.r_no_opt(12)     #Create detectors with r_no_opt, using 12 detectors
 _=r0.plot_rhoz()    #Plot the result
 
 
-# The raw correlation function data can be fitted with the *unoptimized* detectors and stored, which vastly reduces the data size, but loses very little correlation time information. In a subsequent step, one can use 'r_auto'. Once data has been processed with detectors using 'r_auto' or 'r_target', the data should ideally not be reprocessed (rather, go back to the unoptimized detectors, and apply differnet processing from there).
+# The raw correlation function data can be fitted with the *unoptimized* detectors and stored, which vastly reduces the data size, but loses very little correlation time information. In a subsequent step, one can use 'r_auto' or 'r_target'. Once data has been processed with detectors using 'r_auto' or 'r_target', the data should ideally not be reprocessed (rather, go back to the unoptimized detectors, and apply differnet processing from there).
 
-# In[12]:
+# In[21]:
 
 
 r1=r0.Detector()  #Create another detector
@@ -148,12 +148,12 @@ _=r1.plot_rhoz()  #Plot the results
 # ```
 
 # ### Fitting results in the data object
-# A data object, by default contains (or can back calculate), the results of fitting. These results are found in data.Rc. Note a data object usually also contains a reference to the original (source) data (data.src_data), although if the source data consisted of long correlation functions, then it is usually discarded if the data is saved and reloaded.
+# A data object, by default contains (or can back calculate), the results of fitting. These results are found in data.Rc. Note a data object can also contain a reference to the original (source) data (data.src_data), although if the source data consisted of long correlation functions, then it is usually discarded if the data is saved and reloaded.
 # ```
 # data.Rc   #Back-calculated parameters 
 # data.src_data #Reference to the original data object
 # ```
-# A comparison of the back-calculated data and the original data may be obtained with data.plot_fit(). In this example, the source data was the result of first fitting to 15 unoptimized detectors and subsequently fitting with seven optimized detectors. The result is that the first 7 unoptimized detectors are almost perfectly fit (with small error due to bounds placed on the result– eliminating the bounds will eliminate the error), but the latter 8 detectors are not fit at all. This comes about because the 7 optimized detectors use exactly the first 7 singular values to fit the data, and discard the latter 8. 
+# A comparison of the back-calculated data and the original data may be obtained with data.plot_fit(). In this example, the source data was the result of first fitting to 15 unoptimized detectors and subsequently fitting with seven optimized detectors. Then, the raw correlation functions are not available here (they are not saved because this data is orders-of-magnitude larger than the processed data). We can, however, check the fit of the unoptimized detectors when using optimized detectors. In this case, we find that the first 7 unoptimized detectors are almost perfectly fit (with small error due to bounds placed on the result– eliminating the bounds will eliminate the error), but the latter 8 detectors are not fit at all. This comes about because the 7 optimized detectors use exactly the first 7 singular values to fit the data, and discard the latter 8. 
 
 # In[10]:
 
@@ -169,7 +169,7 @@ data.plot_fit()[0].figure.set_size_inches([12,12])
 
 # Below, we print the median relative error for each detector. Note that there is some error for the first seven detectors. This comes because non-exponentiality in the correlation functions (from noise or other sources) may lead to an unphysical set of unoptimized detectors, where bounds on the optimized detectors eliminates some of this unphysicality, but results in mis-fit of the unoptimized detectors. This error can be eliminated by not enforcing the bounds (as done below in fit_nobounds).
 
-# In[9]:
+# In[24]:
 
 
 fit_nobounds=data.src_data.fit(bounds=False)
@@ -178,19 +178,19 @@ print('Detector w/ bounds w/o bounds')
 for k,(R,Rc,Rcnb) in enumerate(zip(data.src_data.R.T,data.Rc.T,fit_nobounds.Rc.T)):
     error=np.median(np.abs((R-Rc)/R))
     error_nb=np.median(np.abs((R-Rcnb)/R))
-    print(f'  rho{k}: {error:<9.2} {error_nb:.2}')
+    print(f'  rho{k:>2}: {error:<9.2} {error_nb:.2}')
 
 
 # ### Data displays in the data object
-# While all the theoretical efforts going into pyDR are important, it is equally critical to easily visualize our data. The pyDR data object implements then the .plot function, as well as extensive functionality for 3D visualization in [ChimeraX](https://www.cgl.ucsf.edu/chimerax/) and more limited visualization in [NGL viewer](https://nglviewer.org/).
+# While all the theoretical efforts going into pyDR are important, it is equally critical to easily visualize our data. The pyDR data object implements the .plot function, as well as extensive functionality for 3D visualization in [ChimeraX](https://www.cgl.ucsf.edu/chimerax/) and more limited visualization in [NGL viewer](https://nglviewer.org/).
 # ```
 # data.plot()
 # data.chimeraX()
 # data.nglview(rho_index)  
 # ```
-# We show data.plot below. ChimeraX will only work locally. It can be launched from Jupyter, but runs as a separate program, whereas Colab does not support its running separately from the Colab notebook. NGL viewer runs in both Jupyter and Colab cells, but rendering in Colab often fails partway through. This appears to be a Colab problem, rather than an NGLview or pyDR problem (since it works locally).
+# We show data.plot below. ChimeraX will only work locally. It can be launched from Jupyter or other Python console, but runs as a separate program, and Colab does not support its running separately from the Colab notebook. NGL viewer runs in both Jupyter and Colab cells, but rendering in Colab often fails to produce coloring. This appears to be a Colab problem, rather than an NGLview or pyDR problem (NGL viewer works locally).
 
-# In[10]:
+# In[25]:
 
 
 proj.close_fig('all')
@@ -199,16 +199,17 @@ data.plot().fig.set_size_inches([8,12])
 
 # Below, we execute chimera (won't work in Colab). Once the molecule is open in ChimeraX, you can mouse over the different detectors in the upper right corner to see the different detector responses.
 
-# In[7]:
+# In[26]:
 
 
 # pyDR.chimeraX.chimeraX_funs.set_chimera_path('path_to_executable') #Needs to be run once
-data.chimera()
-proj.chimera.command_line(['~show ~@N,C,CA','set bgColor white','lighting soft'])  #Send a command to ChimeraX to adjust the view
+if 'google.colab' not in sys.modules:
+    data.chimera()
+    proj.chimera.command_line(['~show ~@N,C,CA','set bgColor white','lighting soft'])  #Send a command to ChimeraX to adjust the view
 
 
 # ### Selections in data object
-# Our ability to plot data onto the molecule, and also to compare data from different sources to the same positions on the molecule comes from the association of the dynamics data with particular bonds on a molecule. This association is defined by the MolSelect (data.select) object. The key components of this object are the bond selections (defined by .sel1, .sel2), the "representative selection", which usually contains the atoms in sel1 and sel2, but may contain additional atoms to improve visibility of the dynamics (e.g. for H–N motion, we include the whole peptide plane in the representative selection). The selection object also suggests a unique set of labels for the set of bonds in the selection object (used for MD labeling), which are often assigned to the data object upon data generation from MD simulations.
+# Our ability to plot data onto the molecule, and also to compare data from different sources to the same positions on the molecule comes from the association of the dynamics data with particular bonds on a molecule. This association is defined by a MolSelect instance (data.select). The key components of this object are the bond selections (defined by .sel1, .sel2), the "representative selection", which usually contains the atoms in sel1 and sel2, but may contain additional atoms to improve visibility of the dynamics (e.g. for H–N motion, we include the whole peptide plane in the representative selection). The selection object also suggests a unique set of labels for the set of bonds in the selection object (used for MD labeling), which are often assigned to the data object upon data generation from MD simulations.
 # ```
 # data.select.sel1  #First atom in bond
 # data.select.sel2  #Second atom in bond
@@ -217,7 +218,7 @@ proj.chimera.command_line(['~show ~@N,C,CA','set bgColor white','lighting soft']
 # ```
 
 # ### Source information in data object
-# pyDR keeps careful track of where data came from, to avoid later confusion on what happened in a data processing procedure. It is also important to automatically organize data in projects. This is largely managed by the data.source object. We will not list all attributes of data.source here, but note that a few critical ones are
+# pyDR keeps careful track of where data came from, to avoid later confusion on what happened in the data processing procedure. It is also important to organize data in Projects. This is largely managed by the data.source object. We will not list all attributes of data.source here, but a few critical attributes are
 # ```
 # .source.filename:   File or list of files from which data is derived
 # .source.short_file: Shortened version of above (just one string)
@@ -227,12 +228,12 @@ proj.chimera.command_line(['~show ~@N,C,CA','set bgColor white','lighting soft']
 # .source.n_det       Number of detector (if not raw data)
 # .source.title       Title constructed from the above information
 # ```
-# For example, the title of our example data object is 
+# The title summarizes a lot of this information. While the user can overwrite the default title, we find the default title fairly powerful for describing what is in the data set. For example, the title of our example data object is 
 # **o7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein**
 # which means:
 # * o: Optimized fit (status)
 # * 7: Seven detectors (n_det)
-# * FRAMES: Data extracted from a frames analysis (Type)
+# * FRAMES: Data extracted from a frame analysis (Type)
 # * AvOb: Data was averaged over several data objects (additional_info)
 # * WT-apo_run1_0.1ns_just_protein (short_file)
 # 
@@ -244,7 +245,7 @@ proj.chimera.command_line(['~show ~@N,C,CA','set bgColor white','lighting soft']
 # proj.update_info()  
 # ```
 
-# In[38]:
+# In[27]:
 
 
 print(data.source.status)
@@ -253,7 +254,7 @@ print(data.source.Type)
 print(data.source.additional_info)
 print(data.source.short_file)
 print(data.source.title)
-print(data.title)  #This references data.source.title
+print(data.title)  #This links to data.source.title
 
 
 # data.source also keeps a detailed, plain text processing history (data.source.details). It can also be accessed from data.details. This particular data set was obtained using averages over 3 MD trajectories and each trajectory was chunked by residue into 5 parts, so there are 15 combined data objects, making the details much longer than usual. We print part of the details here.
@@ -270,9 +271,9 @@ for k in range(-10,0):print(data.details[k])
 
 # While Projects are not required for using pyDR, they are particularly helpful in organizing/processing/saving/displaying data. They provide a straightforward data sorting mechanism, and automatically manage the displaying of data, including data superposition. They also allow execution of processing commands on multiple data sets at once. 
 # 
-# We can see what's in a project, just by typing the variable name:
+# We can see what's in a Project, just by typing the name of the Project object:
 
-# In[48]:
+# In[28]:
 
 
 proj
@@ -289,7 +290,7 @@ proj
 # proj['opt_fit']['.+apo'] : String together multiple fills
 # 
 # proj['opt_fit']+proj['WT-apo'] : Combine subprojects (must be the same parent project)
-# proj['opt_fit']-proj['.ghrelin'] : Intersection of projects
+# proj['opt_fit']-proj['.ghrelin'] : Set difference/relative complement
 # ```
 # 
 # Note: a single index returns a data object. All other methods return a subproject, even if that subproject only contains a single data object. However, most attributes of the data object in a subproject with only one element are accessible directly from the subproject, e.g.
@@ -301,16 +302,34 @@ proj
 # In[60]:
 
 
-proj['.+AvOb.+apo']
+proj['.+AvOb.+apo']   #Regular expressions
 
 
-# In[61]:
+# In[36]:
 
 
-proj['opt_fit']['.+apo']
+proj['opt_fit']&proj['.+apo']   #Intersection
 
 
-# As mentioned above, subprojects with only one data object automatically obtain attributes of that data object (unless project already has the attribute– e.g., a subproject always uses the proj.chimera object, rather than the data.chimera function. Usually, the user will not notice the difference, but occasionally this can become important. Here we demonstrate how the full project has no attribute 'R', but a subproject with a single element does have 'R'.
+# In[37]:
+
+
+proj['opt_fit']['.+apo']    #Intersection (via multiple indexing)
+
+
+# In[30]:
+
+
+proj['no_opt']+proj['proc']  #Union
+
+
+# In[38]:
+
+
+proj['opt_fit']-proj['WT-apo_run1_0.1ns_just_protein'] #Set difference
+
+
+# As mentioned above, subprojects with only one data object automatically obtain attributes of that data object (unless project already has the attribute– e.g., a subproject always uses the proj.chimera object, rather than the data.chimera function). Usually, the user will not notice the difference, but occasionally this can become important. Here we demonstrate how the full project has no attribute 'R', but a subproject with a single element does have 'R'.
 
 # In[8]:
 
@@ -330,7 +349,7 @@ hasattr(proj['opt_fit']['.+apo'],'R')
 # In[4]:
 
 
-proj['no_opt']['AvOb'].detect.r_auto(8)  #OPtimize detectors
+proj['no_opt']['AvOb'].detect.r_auto(8)  #Optimize detectors
 _=proj['no_opt']['AvOb'].fit()
 
 
@@ -351,20 +370,32 @@ proj['no_opt']['AvOb'].detect.unique_detect()
 proj['no_opt']['AvOb'][0].detect is proj['no_opt']['AvOb'][1].detect
 
 
+# It is also useful to note: when running .fit, .opt2dist, and .modes2bonds in a Project, the result returns a subproject that only contains the newly created data. Then it is possible to *pipe* the results through multiple processing steps. For example, suppose we have some iRED data that we want to fit, optimize, convert to bonds, and plot, we could run in one line:
+# ```
+# proj['no_opt']['iREDmode'].fit().opt2dist(rhoz_cleanup=True).modes2bonds().plot()
+# ```
+# On the other hand, without the piping, we have to re-index the project at each step to make sure we operate on the correct data set.
+# ```
+# proj['no_opt]['iREDmode'].fit()
+# proj['proc']['iREDmode'].opt2dist(rhoz_cleanup=True)
+# proj['opt_fit']['iREDmode'].modes2bonds()
+# proj['opt_fit']['iREDbond'].plot()
+# ```
+
 # ### Project plotting
 # When we plot data contained in a project, it is automatically plotted into a *plot object* contained within the project (proj.plt_obj). A project has an active plot object (proj.current_plot, indexed from 1), but may also have inactive plots. When plotting, data always goes into the active plot. To create a blank plot object, just change the current_plot to an unused value (or close all plots, proj.close_fig('all')).
 # 
-# Note that you can capture the plt_obj after plotting, or obtain the current plot object from proj.plt_obj. 
+# Note that the plot_obj is returned when a plot is created, or one can obtain the current plot object from proj.plt_obj. 
 # 
 # plt_obj contains access to the various axes (.ax, .ax_sens) and figure (.fig). plt_obj.show_tc() will display the average correlation time for each detector on the corresponding plot.
 # 
-# Note that assignment of the plt_obj to a variable will suppress its display, and will need to be called later.
+# Note that assignment of the plt_obj to a variable will suppress its display, and will need to be called later. In some Python consoles, the plot only appears if you run plt_obj.fig.show(). 
 # 
 # Plot object plots can be saved to the project folder by calling:
 # ```
 # proj.savefig(filename)
 # ```
-# Plots may also be saved outside the project folder by providing the full path.
+# Plots may also be saved outside the project folder by providing the full path (not relative path!) to the desired destination.
 
 # In[7]:
 
@@ -385,7 +416,7 @@ proj['o7.+apo'].plot(style='plot')
 
 
 # ### ChimeraX in projects
-# proj.chimera also provides special functionality. For example, when calling chimera for data within a project, by default, the project will retain communcation with the chimeraX instance such that one may add additional molecules to it, send commands to chimeraX via the command line, and save the results. We can also use multiple chimera instances (tested on Mac/Linux), by changing current.
+# proj.chimera also provides special functionality. For example, when calling chimera for data within a project, the project will retain communcation with the chimeraX instance such that one may add additional molecules to it, send commands to chimeraX via the command line, and save the results. We can also use multiple chimera instances (tested on Mac/Linux), by changing current.
 # 
 # Note that occasionally, communication with ChimeraX is lost for one reason or another. pyDR should automatically create a new instance/connection, but the previous instance will need to be manually closed.
 # ```
@@ -404,7 +435,7 @@ proj.chimera.command_line('~show ~@N,C,CA')  #Just show the backbone
 
 
 # ### Project saving/loading
-# When a project is created, we may specify a directory to allow that project later to be saved (projects consist of folders). Note that we may also create an empty project without a directory but then it will not be possible to save the project later. Note that if we are making a new project, we must specify create=True.
+# When a project is created, we may specify a directory to allow that project later to be saved (projects consist of folders). Note that we may also create an empty project without a directory but then it will not be possible to save the project later. If we are making a new project, we must specify create=True.
 # 
 # A project is saved simply by specifying proj.save()
 # ```
@@ -421,28 +452,28 @@ proj.chimera.command_line('~show ~@N,C,CA')  #Just show the backbone
 # 
 # NMR data is already prepared and stored in a text file. Then, we may either load the data object and then append to a project, or just provide the path/link to the project directly. We'll make an empty project to test this.
 
-# In[10]:
+# In[42]:
 
 
 proj=pyDR.Project()  #Project (without directory)
 
-nmr_data=pyDR.IO.readNMR('data/ubi_soln.txt')  #File path
+nmr_data=pyDR.IO.readNMR('pyDR/examples/HETs15N/HETs_15N.txt')  #File path
 proj.append_data(nmr_data)
 
-proj.append_data('https://drive.google.com/file/d/1w_0cR6ykjL7xvdxU2W90fRXvZ8XfLFc3/view?usp=share_link') #Online link
+proj.append_data('https://drive.google.com/file/d/1U4mGNGyIEH9XNqDvI4qUWQZagPkwi7dx/view?usp=share_link') #Online link
 proj
 
 
 # The second way we get data into a project is by processing data already stored in a project
 
-# In[11]:
+# In[43]:
 
 
-proj[0].detect.r_auto(4)
+proj[0].detect.r_auto(4).inclS2()
 proj[0].fit()
 
 
-# In[9]:
+# In[44]:
 
 
 proj
@@ -452,11 +483,11 @@ proj
 # 
 # For MD data, we first create a selection object. The simplest way to get MD data to a project is to add the project to the original selection object, which will cause any data produced from that selection object to go automatically into the project. We may also use proj.append_data after the data creation if desired.
 
-# In[17]:
+# In[46]:
 
 
-sel=pyDR.MolSelect(topo='../pyDR/examples/HETs15N/backboneB.pdb',
-                   traj_files='../pyDR/examples/HETs15N/backboneB.xtc',
+sel=pyDR.MolSelect(topo='pyDR/examples/HETs15N/backboneB.pdb',
+                   traj_files='pyDR/examples/HETs15N/backboneB.xtc',
                    project=proj) #Create a selection object
 sel.traj.step=10 #Adjust time step for faster loading
 pyDR.Defaults['ProgressBar']=False  #Turn off progress bar for webpage
@@ -466,7 +497,7 @@ pyDR.md2data(sel)
 
 # If we check, we find indeed that the raw data has now appeared in the project
 
-# In[18]:
+# In[47]:
 
 
 proj
