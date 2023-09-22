@@ -23,6 +23,7 @@ parts:
 - caption: Templates
   numbered: false
   chapters:
+  - file: Tpl_blank
   - file: Tpl_basicNMR
   - file: Tpl_SolnNMR
   - file: Tpl_CCana

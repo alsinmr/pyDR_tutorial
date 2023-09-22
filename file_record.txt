@@ -2,6 +2,7 @@ Ch6_pyDRstruct.ipynb	1695050625
 Ch1_detectors_intro.ipynb	1695050625
 Tpl_CCana.ipynb	1694688073
 Tpl_SolnNMR.ipynb	1695050625
+Tpl_blank.ipynb	1695367887
 Ch9_ROMANCE_CH3.ipynb	1694687801
 Ch2_detector_opt.ipynb	1695050625
 Ch7_CCana.ipynb	1695050625
