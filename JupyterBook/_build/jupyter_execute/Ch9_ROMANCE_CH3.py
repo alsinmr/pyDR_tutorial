@@ -10,7 +10,7 @@
 # ## Setup and data downloads
 # Since we've learned now how pyDR is organized and allows us to manage larger data sets, we'll now use the full project functionality.
 
-# In[ ]:
+# In[1]:
 
 
 # SETUP pyDR
@@ -18,7 +18,7 @@ import os
 os.chdir('../..')
 
 
-# In[ ]:
+# In[2]:
 
 
 #Imports

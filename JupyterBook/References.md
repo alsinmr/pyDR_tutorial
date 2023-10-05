@@ -39,6 +39,6 @@ Our papers using the Detector analysis
 
 <a href="https://onlinelibrary.wiley.com/doi/10.1002/anie.202383561" target="_blank"><img src="https://onlinelibrary.wiley.com/cms/asset/ad32c81c-3cd2-4a29-aad3-15aec20e0e16/anie202383561-toc-0001-m.jpg" 
                                                                                           width="350"></a>
-                                                                                          <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/anie.201784461" target="_blank"><img src="https://onlinelibrary.wiley.com/cms/asset/cc24017a-e5ef-40c7-b9dc-4e237fd0e28b/anie201784461-toc-0001-m.jpg" 
+                                                                                          <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/anie.201784461" target="_blank"><img src="https://onlinelibrary.wiley.com/cms/asset/ef4b5c4c-e576-45ed-b21c-264ba5cbf9b2/anie201784461-toc-0001-m.png" 
                                                                                           width="350"
                                                                                           align="right"></a> 
