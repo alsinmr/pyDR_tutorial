@@ -10,12 +10,12 @@
 # ## Parameters
 # Below, you find the parameters you would typically change for your own analysis
 
-# In[3]:
+# In[1]:
 
 
 #Where's  your data??
-topo='../pyDR/examples/HETs15N/backboneB.pdb'
-traj_files=['../pyDR/examples/HETs15N/backboneB.xtc']  #Can be multiple files
+topo='pyDR/examples/HETs15N/backboneB.pdb'
+traj_files=['pyDR/examples/HETs15N/backboneB.xtc']  #Can be multiple files
 
 # Step (how many MD frames to skip. Set to 1 to use all frames)
 step=10
@@ -37,7 +37,7 @@ directory=None  #Path to project directory
 # ## Setup and data downloads
 # Since we've learned now how pyDR is organized and allows us to manage larger data sets, we'll now use the full project functionality.
 
-# In[ ]:
+# In[2]:
 
 
 # SETUP pyDR
@@ -45,14 +45,14 @@ import os
 os.chdir('../..')
 
 
-# In[5]:
+# In[3]:
 
 
 #Imports
 import pyDR
 
 
-# In[16]:
+# In[4]:
 
 
 # Project Creation and File loading
@@ -73,7 +73,7 @@ sel.select_bond(bond)
 
 # ### Create raw data 
 
-# In[17]:
+# In[5]:
 
 
 sel.traj.step=step  #Take every tenth point for MD calculation (set to 1 for more accurate calculation)
@@ -88,7 +88,7 @@ ired.iRED2data() #Send iRED results to proj
 
 # ### Fit to unoptimized detectors
 
-# In[18]:
+# In[6]:
 
 
 proj['raw'].detect.r_no_opt(15)
@@ -97,7 +97,7 @@ proj['raw'].fit()
 
 # ### Fit to optimized detectors + optimized fit
 
-# In[19]:
+# In[7]:
 
 
 proj['no_opt'].detect.r_auto(n)
@@ -106,7 +106,7 @@ proj['no_opt'].fit().opt2dist(rhoz_cleanup=True)
 
 # ### Convert modes to bonds
 
-# In[20]:
+# In[8]:
 
 
 proj['opt_fit'].modes2bonds()
@@ -115,7 +115,7 @@ proj['opt_fit'].modes2bonds()
 # ## Plots
 # ### Plot mode analysis
 
-# In[21]:
+# In[9]:
 
 
 proj.close_fig('all')
@@ -124,7 +124,7 @@ proj['opt_fit']['iREDmode'].plot().fig.set_size_inches([8,10])
 
 # ### Compare iRED to direct analysis
 
-# In[23]:
+# In[10]:
 
 
 proj.close_fig('all')
@@ -137,7 +137,7 @@ proj['opt_fit']['iREDbond'].plot()
 # ### Plotting cross-correlation matrix
 # We first plot the cross-correlation matrices (using the absolute normalized cross-correlation, ranging from 0 to 1).
 
-# In[24]:
+# In[11]:
 
 
 import numpy as np
@@ -149,7 +149,7 @@ fig.tight_layout()
 # ### 3D Representations in ChimeraX
 # Finally, if running locally, we can plot in ChimeraX. In ChimeraX, we can select a given bond (or atom in the bond/representative selection), and then mouse over one of the detectors in the upper right corner to view the cross-correlation to the selected bond.
 
-# In[26]:
+# In[12]:
 
 
 # proj.chimera.close()

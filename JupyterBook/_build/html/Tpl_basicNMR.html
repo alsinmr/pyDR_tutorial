@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Template: Solution-State NMR" href="Tpl_SolnNMR.html" />
@@ -579,8 +581,8 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Where&#39;s  your data??</span>
-<span class="n">path_to_nmr_data</span><span class="o">=</span><span class="s1">&#39;data/HETs_15N.txt&#39;</span>  <span class="c1">#Data stored locally</span>
-<span class="c1"># path_to_nmr_data=&#39;https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt&#39; #Github raw link</span>
+<span class="c1"># path_to_nmr_data=&#39;data/HETs_15N.txt&#39;  #Data stored locally</span>
+<span class="n">path_to_nmr_data</span><span class="o">=</span><span class="s1">&#39;https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt&#39;</span> <span class="c1">#Github raw link</span>
 <span class="c1"># path_to_nmr_data=&#39;https://drive.google.com/file/d/1w_0cR6ykjL7xvdxU2W90fRXvZ8XfLFc3/view?usp=share_link&#39; #Google drive share link</span>
 
 <span class="c1"># How many detectors</span>
@@ -802,7 +804,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Albert Smith<br/>
+    By Albert Smith, Kai Zumpfe<br/>
   
       &copy; Copyright 2023.<br/>
 </p>

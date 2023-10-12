@@ -20,8 +20,8 @@
 
 
 #Where's  your data??
-path_to_nmr_data='data/ubi_soln.txt'  #Data stored locally
-# path_to_nmr_data='https://github.com/alsinmr/pyDR_tutorial/raw/main/data/ubi_soln.txt' #Github raw link
+# path_to_nmr_data='data/ubi_soln.txt'  #Data stored locally
+path_to_nmr_data='https://github.com/alsinmr/pyDR_tutorial/raw/main/data/ubi_soln.txt' #Github raw link
 # path_to_nmr_data='https://drive.google.com/file/d/1U4mGNGyIEH9XNqDvI4qUWQZagPkwi7dx/view?usp=share_link' #Google drive share link
 
 # How many detectors
@@ -39,7 +39,7 @@ Nuc='N'  #This refers to the backbone nitrogen, specifically
 segids=None # Usually, segment does not need to be specified
 
 
-# In[ ]:
+# In[2]:
 
 
 # SETUP pyDR
@@ -65,11 +65,17 @@ import pyDR
 data=pyDR.IO.readNMR(path_to_nmr_data)
 
 
+# In[5]:
+
+
+ls
+
+
 # ## Put data into a project
 # 
 # Projects are convenient ways to manage a lot of data, and provide convenient tools for overlaying data in 2D plots, as well as visualizing data in 3D in ChimeraX. Not used extensively in this template.
 
-# In[5]:
+# In[6]:
 
 
 proj=pyDR.Project(directory=None)    #Include a directory to save the project
@@ -93,7 +99,7 @@ proj.append_data(data)
 # 
 # We can also filter based on residues, segments, and a filter string ([MDAnalysis](https://docs.mdanalysis.org/stable/documentation_pages/selections.html) format).
 
-# In[6]:
+# In[7]:
 
 
 if topo is not None and Nuc is not None:
@@ -103,7 +109,7 @@ if topo is not None and Nuc is not None:
 
 # ## Plot the data
 
-# In[7]:
+# In[8]:
 
 
 plt_obj=data.plot(style='bar')
@@ -112,7 +118,7 @@ plt_obj.fig.set_size_inches([8,10])
 
 # ## Process NMR data
 
-# In[8]:
+# In[9]:
 
 
 data.detect.r_auto(n)    #Set number of detectors here
@@ -122,7 +128,7 @@ fit=data.fit()  #Fit the data
 
 # ## Plot the results
 
-# In[9]:
+# In[10]:
 
 
 proj.close_fig('all')
@@ -134,7 +140,7 @@ _=plt_obj.ax[-1].set_xlabel('Residue')
 
 # ## Plot the fit quality
 
-# In[10]:
+# In[11]:
 
 
 fig=fit.plot_fit()[0].axes.figure
@@ -143,7 +149,7 @@ fig.set_size_inches([12,10])
 
 # ## Visualize with NGL viewer
 
-# In[11]:
+# In[12]:
 
 
 fit.nglview(1,scaling=None)

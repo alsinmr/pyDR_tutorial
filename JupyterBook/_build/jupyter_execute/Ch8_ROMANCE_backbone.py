@@ -12,7 +12,7 @@
 # ## Setup and data downloads
 # Since we've learned now how pyDR is organized and allows us to manage larger data sets, we'll now use the full project functionality.
 
-# In[ ]:
+# In[1]:
 
 
 # SETUP pyDR
@@ -28,7 +28,7 @@ import numpy as np
 import pyDR
 
 
-# In[4]:
+# In[3]:
 
 
 # Project Creation and File loading
@@ -50,7 +50,7 @@ pyDR.Defaults['ProgressBar']=False #Turns of the Progress bar (screws up webpage
 # ### Setup the frame analysis
 # Frame analysis always uses the first frame to be the principal axis frame (i.e. tensor_frame), and the last frame to be the lab frame. In this example, we insert two additional frames: a peptide_plane frame, which separates H–N librational motion in and out of the peptide plane from motion of the peptide plane, and a superimpose frame, which in this case we align to 8 $\beta$-sheets, allowing us to separate out peptide plane motion in the $\beta$-sheet to motion of the $\beta$-sheets themselves.
 
-# In[5]:
+# In[4]:
 
 
 from numpy import nan

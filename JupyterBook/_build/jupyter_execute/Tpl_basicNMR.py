@@ -16,8 +16,8 @@
 
 
 #Where's  your data??
-path_to_nmr_data='data/HETs_15N.txt'  #Data stored locally
-# path_to_nmr_data='https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt' #Github raw link
+# path_to_nmr_data='data/HETs_15N.txt'  #Data stored locally
+path_to_nmr_data='https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt' #Github raw link
 # path_to_nmr_data='https://drive.google.com/file/d/1w_0cR6ykjL7xvdxU2W90fRXvZ8XfLFc3/view?usp=share_link' #Google drive share link
 
 # How many detectors

@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="prev" title="Template: Solution-State NMR" href="Tpl_SolnNMR.html" />
@@ -605,8 +607,8 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Where&#39;s  your data??</span>
-<span class="n">topo</span><span class="o">=</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.pdb&#39;</span>
-<span class="n">traj_files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;../pyDR/examples/HETs15N/backboneB.xtc&#39;</span><span class="p">]</span>  <span class="c1">#Can be multiple files</span>
+<span class="n">topo</span><span class="o">=</span><span class="s1">&#39;pyDR/examples/HETs15N/backboneB.pdb&#39;</span>
+<span class="n">traj_files</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pyDR/examples/HETs15N/backboneB.xtc&#39;</span><span class="p">]</span>  <span class="c1">#Can be multiple files</span>
 
 <span class="c1"># Step (how many MD frames to skip. Set to 1 to use all frames)</span>
 <span class="n">step</span><span class="o">=</span><span class="mi">10</span>
@@ -663,7 +665,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7f8839a7b400&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;pyDR.Selection.MolSys.MolSelect at 0x7fd0f95304a8&gt;
 </pre></div>
 </div>
 </div>
@@ -688,8 +690,10 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Warning: Individual components of the correlation functions or tensors will not be returned in auto or sym mode
-r:IREDMODE:rk1:backboneB with 70 data points
-&lt;pyDR.iRED.iRED.Data_iRED object at 0x7f87f8e428b0&gt;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>r:IREDMODE:rk1:backboneB with 70 data points
+&lt;pyDR.iRED.iRED.Data_iRED object at 0x7fd0f957f2b0&gt;
 </pre></div>
 </div>
 </div>
@@ -708,7 +712,7 @@ r:IREDMODE:rk1:backboneB with 70 data points
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f88382d5910&gt;
+&lt;pyDR.Project.Project.Project object at 0x7fd0f957f470&gt;
 
 Titles:
 n15:MD:rk1:backboneB
@@ -729,9 +733,11 @@ n15:IREDMODE:rk1:backboneB
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Fitted 2 data objects
-Optimized 2 data objects
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 2 data objects
 pyDIFRATE project with 2 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f881d4366a0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7fd0b9162748&gt;
 
 Titles:
 o6:MD:rk1:backboneB
@@ -752,7 +758,7 @@ o6:IREDMODE:rk1:backboneB
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Converted 1 iRED data objects from modes to bonds
 pyDIFRATE project with 1 data sets
-&lt;pyDR.Project.Project.Project object at 0x7f883825d6d0&gt;
+&lt;pyDR.Project.Project.Project object at 0x7fd0f957f6a0&gt;
 
 Titles:
 o6:IREDBOND:rk1:backboneB
@@ -822,6 +828,11 @@ o6:IREDBOND:rk1:backboneB
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
@@ -868,7 +879,7 @@ o6:IREDBOND:rk1:backboneB
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Albert Smith<br/>
+    By Albert Smith, Kai Zumpfe<br/>
   
       &copy; Copyright 2023.<br/>
 </p>
