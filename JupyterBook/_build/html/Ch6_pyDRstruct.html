@@ -1,114 +1,167 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Chapter 6: Anatomy of pyDIFRATE &#8212; pyDIFRATE Tutorial</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Ch6_pyDRstruct';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Chapter 7: Cross-Correlated Dynamics via iRED" href="Ch7_CCana.html" />
     <link rel="prev" title="Chapter 5: Comparing MD and NMR Results" href="Ch5_MDvsNMR.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
     
-    <div class="container-fluid" id="banner"></div>
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-    
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">pyDIFRATE Tutorial</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="pyDIFRATE Tutorial - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="pyDIFRATE Tutorial - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -118,526 +171,257 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="GettingStarted.html">
-   <font color="maroon">
-    Getting Started
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="BriefHistory.html">
-   <font color="maroon">
-    Background
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="References.html">
-   <font color="maroon">
-    References
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html"><font color="maroon">Getting Started</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="BriefHistory.html"><font color="maroon"> Background </font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html"><font color="maroon"> References </font></a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tutorial
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch1_detectors_intro.html">
-   <font color="maroon">
-    Chapter 1: A brief introduction to detectors
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch2_detector_opt.html">
-   <font color="maroon">
-    Chapter 2: Detector Optimization
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch3_basic_NMR.html">
-   <font color="maroon">
-    Chapter 3: A Basic NMR Analysis
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
-   <font color="maroon">
-    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_MDvsNMR.html">
-   <font color="maroon">
-    Chapter 5: Comparing MD and NMR Results
-   </font>
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   <font color="maroon">
-    Chapter 6: Anatomy of pyDIFRATE
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch7_CCana.html">
-   <font color="maroon">
-    Chapter 7: Cross-Correlated Dynamics via iRED
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
-   <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Backbone Motion
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Ch1_detectors_intro.html"><font color="maroon"> Chapter 1: A brief introduction to detectors </font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch2_detector_opt.html"><font color="maroon">Chapter 2: Detector Optimization</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch3_basic_NMR.html"><font color="maroon">Chapter 3: A Basic NMR Analysis</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch4_ComparingAnalyses.html"><font color="maroon">Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch5_MDvsNMR.html"><font color="maroon">Chapter 5: Comparing MD and NMR Results</font></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch7_CCana.html"><font color="maroon">Chapter 7: Cross-Correlated Dynamics via iRED</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch8_ROMANCE_backbone.html"><font color="maroon">Chapter 8: ROMANCE Analysis of Backbone Motion</font></a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Templates
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Templates</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_blank.html">
-   <font color="maroon">
-    Template: pyDR Setup
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_basicNMR.html">
-   <font color="maroon">
-    Template: Basic NMR
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_SolnNMR.html">
-   <font color="maroon">
-    Template: Solution-State NMR
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_CCana.html">
-   <font color="maroon">
-    Template: Cross-Correlated Dynamics via iRED
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_blank.html"><font color="maroon">Template: pyDR Setup</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_basicNMR.html"><font color="maroon">Template: Basic NMR</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_SolnNMR.html"><font color="maroon">Template: Solution-State NMR</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_CCana.html"><font color="maroon">Template: Cross-Correlated Dynamics via iRED</font></a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/alsinmr/pyDR_tutorial/master?urlpath=tree/JupyterBook/Ch6_pyDRstruct.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/pyDR_tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/pyDR_tutorial/issues/new?title=Issue%20on%20page%20%2FCh6_pyDRstruct.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Ch6_pyDRstruct.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/alsinmr/pyDR_tutorial/"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/alsinmr/pyDR_tutorial//issues/new?title=Issue%20on%20page%20%2FCh6_pyDRstruct.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/Ch6_pyDRstruct.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button>
 
-      </li>
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-data-object">
-   The Data Object
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-in-the-data-object">
-     Data in the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sensitivity-of-the-data-object">
-     Sensitivity of the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#detectors-for-the-data-object">
-     Detectors for the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fitting-results-in-the-data-object">
-     Fitting results in the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-displays-in-the-data-object">
-     Data displays in the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#selections-in-data-object">
-     Selections in data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#source-information-in-data-object">
-     Source information in data object
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-project-object">
-   The Project Object
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#project-data-selection">
-     Project data selection
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#project-batch-processing">
-     Project batch processing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#project-plotting">
-     Project plotting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chimerax-in-projects">
-     ChimeraX in projects
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#project-saving-loading">
-     Project saving/loading
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-generation">
-   Data Generation
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font></h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-data-object">
-   The Data Object
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-in-the-data-object">
-     Data in the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sensitivity-of-the-data-object">
-     Sensitivity of the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#detectors-for-the-data-object">
-     Detectors for the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fitting-results-in-the-data-object">
-     Fitting results in the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#data-displays-in-the-data-object">
-     Data displays in the data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#selections-in-data-object">
-     Selections in data object
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#source-information-in-data-object">
-     Source information in data object
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-project-object">
-   The Project Object
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#project-data-selection">
-     Project data selection
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#project-batch-processing">
-     Project batch processing
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#project-plotting">
-     Project plotting
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#chimerax-in-projects">
-     ChimeraX in projects
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#project-saving-loading">
-     Project saving/loading
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-generation">
-   Data Generation
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-object">The Data Object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-in-the-data-object">Data in the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-of-the-data-object">Sensitivity of the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectors-for-the-data-object">Detectors for the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-results-in-the-data-object">Fitting results in the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-displays-in-the-data-object">Data displays in the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selections-in-data-object">Selections in data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-information-in-data-object">Source information in data object</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-project-object">The Project Object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-data-selection">Project data selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-batch-processing">Project batch processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-plotting">Project plotting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chimerax-in-projects">ChimeraX in projects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-saving-loading">Project saving/loading</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation">Data Generation</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-chapter-6-anatomy-of-pydifrate-font">
-<h1><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font><a class="headerlink" href="#font-color-maroon-chapter-6-anatomy-of-pydifrate-font" title="Permalink to this headline">#</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-6-anatomy-of-pydifrate">
+<h1><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font><a class="headerlink" href="#chapter-6-anatomy-of-pydifrate" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch6_pyDRstruct.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>pyDR uses object-oriented programming in order to streamline detector analysis and ensure that data is correctly analyzed. The central object in pyDR is the ‘data’ object, which naturally contains dynamics data, but also contains sensitivities for the data set as well as other information about the data, and functions/objects for processing and data display. Data can be stored within a project, and data is created via loading NMR data from text or from processing MD data. The program structure is summarized in the figure below (although this is far from a comprehensive description). This tutorial investigates some of the components of pyDR, and discusses how they work together to simplify and accelerate processing for the user.</p>
 <p>The figure below summarizes the structure/workflow of pyDR. Note that each box corresponds to an <a class="reference external" href="https://en.wikipedia.org/wiki/Object_(computer_science)">object</a>, in some cases being contained inside other objects. As one sees, most components of pyDR take advantage of <a class="reference external" href="https://en.wikipedia.org/wiki/Object-oriented_programming">object-oriented programming</a> in order to improve the detector analysis workflow.</p>
 <p><img alt="pyDR program structure" src="https://raw.githubusercontent.com/alsinmr/pyDR_tutorial/main/JupyterBook/pyDR_structure.png" /></p>
 <section id="the-data-object">
-<h2>The Data Object<a class="headerlink" href="#the-data-object" title="Permalink to this headline">#</a></h2>
+<h2>The Data Object<a class="headerlink" href="#the-data-object" title="Link to this heading">#</a></h2>
 <p>Central to pyDR functionality is the data object, which is responsible for storage of experimental and simulated data, as well as data produced by detector analysis. We will select a data object out of a recent project investigating Growth Hormone Secretagogue Receptor using MD simulation (<a class="reference external" href="https://doi.org/10.1002/anie.202302003">source</a>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -667,7 +451,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="data-in-the-data-object">
-<h3>Data in the data object<a class="headerlink" href="#data-in-the-data-object" title="Permalink to this headline">#</a></h3>
+<h3>Data in the data object<a class="headerlink" href="#data-in-the-data-object" title="Link to this heading">#</a></h3>
 <p>Data can be found in data.R, with its standard deviation in data.Rstd. For NMR data, we may have <span class="math notranslate nohighlight">\(S^2\)</span> data as well (data.S2,data.S2std). These fields are MxN, where M is the number of different locations in the molecule, and N is the number of data points (detectors, experiments, or correlation function time points) for each location.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -707,7 +491,7 @@ Standard Deviation (295x7)
 </div>
 </section>
 <section id="sensitivity-of-the-data-object">
-<h3>Sensitivity of the data object<a class="headerlink" href="#sensitivity-of-the-data-object" title="Permalink to this headline">#</a></h3>
+<h3>Sensitivity of the data object<a class="headerlink" href="#sensitivity-of-the-data-object" title="Link to this heading">#</a></h3>
 <p>Each data point in a simulation has its own sensitivity. Each data point tells us something about the dynamics for a given range of correlation times, and that range is determined by the sensitivity. Then, it makes sense to always store the sensitivity object along with the data object. The sensitivity is found in data.sens. A few key components are found in the sensitivity object.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">tc</span>        <span class="n">correlation</span> <span class="n">time</span> <span class="n">vector</span> <span class="p">(</span><span class="n">default</span> <span class="mi">10</span> <span class="n">fs</span> <span class="n">to</span> <span class="mi">1</span> <span class="n">ms</span><span class="p">,</span> <span class="n">log</span><span class="o">-</span><span class="n">spaced</span><span class="p">,</span> <span class="mi">200</span> <span class="n">points</span><span class="p">)</span>
 <span class="o">.</span><span class="n">z</span>         <span class="n">log</span><span class="o">-</span><span class="n">correlation</span> <span class="n">time</span> <span class="p">(</span><span class="n">default</span> <span class="o">-</span><span class="mi">14</span> <span class="n">to</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">200</span> <span class="n">points</span><span class="p">)</span>
@@ -726,10 +510,10 @@ Standard Deviation (295x7)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch6_pyDRstruct_10_0.png" src="_images/Ch6_pyDRstruct_10_0.png" />
+<img alt="_images/e431be2153fab64da76d49308505ebf13d24bdfd1ed1fbf1e3e0d0795d0df0bb.png" src="_images/e431be2153fab64da76d49308505ebf13d24bdfd1ed1fbf1e3e0d0795d0df0bb.png" />
 </div>
 </div>
-<p>We see that there are seven detectors, with sensitivity ranges from below (~100 ps) to above (~3 <span class="math notranslate nohighlight">\(\mu\)</span>s). From sens.info, we can find out the mean position of the detectors (here, we convert from the log scale to ns). Note that the first and last detector do not really have a mean position (although one is nonetheless calculated), since they remain positive for arbitrarily short/long correlation times, respectively</p>
+<p>We see that there are seven detectors, with sensitivity ranges from below (~100 ps) to above (~3 <span class="math notranslate nohighlight">\(\mu\)</span>s). From <a class="reference external" href="http://sens.info">sens.info</a>, we can find out the mean position of the detectors (here, we convert from the log scale to ns). Note that the first and last detector do not really have a mean position (although one is nonetheless calculated), since they remain positive for arbitrarily short/long correlation times, respectively</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">z0</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;z0&#39;</span><span class="p">]):</span>
@@ -749,7 +533,7 @@ rho6: ~ 1.4e+05 ns
 </div>
 </div>
 </div>
-<p>The sens.info object is particularly useful in summarizing relevant parameters for the sensitivity of a given data object. It is also accessible via data.info. Note that sens.info for an NMR or MD sensitivity yields parameters from which the sensitivities may be calculated, whereas for detectors, sens.info only characterizes the sensitivities, but cannot calculate them. We show below the sensitivity of this data (detectors), but also create an NMR sensitivity object, and show data.info, to highlight the differences.</p>
+<p>The <a class="reference external" href="http://sens.info">sens.info</a> object is particularly useful in summarizing relevant parameters for the sensitivity of a given data object. It is also accessible via <a class="reference external" href="http://data.info">data.info</a>. Note that <a class="reference external" href="http://sens.info">sens.info</a> for an NMR or MD sensitivity yields parameters from which the sensitivities may be calculated, whereas for detectors, <a class="reference external" href="http://sens.info">sens.info</a> only characterizes the sensitivities, but cannot calculate them. We show below the sensitivity of this data (detectors), but also create an NMR sensitivity object, and show <a class="reference external" href="http://data.info">data.info</a>, to highlight the differences.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Info for detector:&#39;</span><span class="p">)</span>
@@ -797,7 +581,7 @@ theta         23.0      23.0      23.0      23.0      23.0      23.0
 </div>
 </section>
 <section id="detectors-for-the-data-object">
-<h3>Detectors for the data object<a class="headerlink" href="#detectors-for-the-data-object" title="Permalink to this headline">#</a></h3>
+<h3>Detectors for the data object<a class="headerlink" href="#detectors-for-the-data-object" title="Link to this heading">#</a></h3>
 <p>The next critical component of the data object is the Detector object (data.detect). The detector object provides the instructions on how to fit the data (when calling data.fit()). The detector object is derived from the sensitivity object (data.detect=data.sens.Detector()), and the detector object always contains the original data object (data.detect.sens). We can demonstrate this below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -825,7 +609,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch6_pyDRstruct_18_0.png" src="_images/Ch6_pyDRstruct_18_0.png" />
+<img alt="_images/0309e3f038dcab73d794ddd09c84dc98e01a153c363f36b7e78fa7b385fda345.png" src="_images/0309e3f038dcab73d794ddd09c84dc98e01a153c363f36b7e78fa7b385fda345.png" />
 </div>
 </div>
 <p>We first create a detector object from the sensitivity object. pyDR does this automatically when a data object is created (data.detect=data.sens.Detector()). However, here, we have to do this step ourselves.</p>
@@ -845,7 +629,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch6_pyDRstruct_22_0.png" src="_images/Ch6_pyDRstruct_22_0.png" />
+<img alt="_images/89e479f5de40927ae3d43a770c05fba2b3d3f2d9cd102e8f74735fdeaf66d4b7.png" src="_images/89e479f5de40927ae3d43a770c05fba2b3d3f2d9cd102e8f74735fdeaf66d4b7.png" />
 </div>
 </div>
 <p>The raw correlation function data can be fitted with the <em>unoptimized</em> detectors and stored, which vastly reduces the data size, but loses very little correlation time information. In a subsequent step, one can use ‘r_auto’ or ‘r_target’. Once data has been processed with detectors using ‘r_auto’ or ‘r_target’, the data should ideally not be reprocessed (rather, go back to the unoptimized detectors, and apply differnet processing from there).</p>
@@ -858,7 +642,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch6_pyDRstruct_24_0.png" src="_images/Ch6_pyDRstruct_24_0.png" />
+<img alt="_images/981f0c6a52bbbb1cde6d707526c498941066b8764417b38478bfb31512fd84e5.png" src="_images/981f0c6a52bbbb1cde6d707526c498941066b8764417b38478bfb31512fd84e5.png" />
 </div>
 </div>
 <p>It is important to note: we get the same detectors going directly from MD data to optimized detector windows as if we go via two steps, using unoptimized detector windows in between. Copy the following code into a cell if you want to check.</p>
@@ -870,7 +654,7 @@ True
 </div>
 </section>
 <section id="fitting-results-in-the-data-object">
-<h3>Fitting results in the data object<a class="headerlink" href="#fitting-results-in-the-data-object" title="Permalink to this headline">#</a></h3>
+<h3>Fitting results in the data object<a class="headerlink" href="#fitting-results-in-the-data-object" title="Link to this heading">#</a></h3>
 <p>A data object, by default contains (or can back calculate), the results of fitting. These results are found in data.Rc. Note a data object can also contain a reference to the original (source) data (data.src_data), although if the source data consisted of long correlation functions, then it is usually discarded if the data is saved and reloaded.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">Rc</span>   <span class="c1">#Back-calculated parameters </span>
 <span class="n">data</span><span class="o">.</span><span class="n">src_data</span> <span class="c1">#Reference to the original data object</span>
@@ -908,7 +692,7 @@ True
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch6_pyDRstruct_28_0.png" src="_images/Ch6_pyDRstruct_28_0.png" />
+<img alt="_images/e1fbfc03542c018f0a9a6cb9bfb95e77f65941ba24e7554b1ef7338a6b941172.png" src="_images/e1fbfc03542c018f0a9a6cb9bfb95e77f65941ba24e7554b1ef7338a6b941172.png" />
 </div>
 </div>
 <p>Below, we print the median relative error for each detector. Note that there is some error for the first seven detectors. This comes because non-exponentiality in the correlation functions (from noise or other sources) may lead to an unphysical set of unoptimized detectors, where bounds on the optimized detectors eliminates some of this unphysicality, but results in mis-fit of the unoptimized detectors. This error can be eliminated by not enforcing the bounds (as done below in fit_nobounds).</p>
@@ -949,7 +733,7 @@ Detector w/ bounds w/o bounds
 </div>
 </section>
 <section id="data-displays-in-the-data-object">
-<h3>Data displays in the data object<a class="headerlink" href="#data-displays-in-the-data-object" title="Permalink to this headline">#</a></h3>
+<h3>Data displays in the data object<a class="headerlink" href="#data-displays-in-the-data-object" title="Link to this heading">#</a></h3>
 <p>While all the theoretical efforts going into pyDR are important, it is equally critical to easily visualize our data. The pyDR data object implements the .plot function, as well as extensive functionality for 3D visualization in <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a> and more limited visualization in <a class="reference external" href="https://nglviewer.org/">NGL viewer</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 <span class="n">data</span><span class="o">.</span><span class="n">chimeraX</span><span class="p">()</span>
@@ -965,7 +749,7 @@ Detector w/ bounds w/o bounds
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch6_pyDRstruct_32_0.png" src="_images/Ch6_pyDRstruct_32_0.png" />
+<img alt="_images/f21b14f936c2509c96a18dd6f5671507731e010af04937e5b10aada671cb1c2e.png" src="_images/f21b14f936c2509c96a18dd6f5671507731e010af04937e5b10aada671cb1c2e.png" />
 </div>
 </div>
 <p>Below, we execute chimera (won’t work in Colab). Once the molecule is open in ChimeraX, you can mouse over the different detectors in the upper right corner to see the different detector responses.</p>
@@ -981,7 +765,7 @@ Detector w/ bounds w/o bounds
 </div>
 </section>
 <section id="selections-in-data-object">
-<h3>Selections in data object<a class="headerlink" href="#selections-in-data-object" title="Permalink to this headline">#</a></h3>
+<h3>Selections in data object<a class="headerlink" href="#selections-in-data-object" title="Link to this heading">#</a></h3>
 <p>Our ability to plot data onto the molecule, and also to compare data from different sources to the same positions on the molecule comes from the association of the dynamics data with particular bonds on a molecule. This association is defined by a MolSelect instance (data.select). The key components of this object are the bond selections (defined by .sel1, .sel2), the “representative selection”, which usually contains the atoms in sel1 and sel2, but may contain additional atoms to improve visibility of the dynamics (e.g. for H–N motion, we include the whole peptide plane in the representative selection). The selection object also suggests a unique set of labels for the set of bonds in the selection object (used for MD labeling), which are often assigned to the data object upon data generation from MD simulations.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">sel1</span>  <span class="c1">#First atom in bond</span>
 <span class="n">data</span><span class="o">.</span><span class="n">select</span><span class="o">.</span><span class="n">sel2</span>  <span class="c1">#Second atom in bond</span>
@@ -991,7 +775,7 @@ Detector w/ bounds w/o bounds
 </div>
 </section>
 <section id="source-information-in-data-object">
-<h3>Source information in data object<a class="headerlink" href="#source-information-in-data-object" title="Permalink to this headline">#</a></h3>
+<h3>Source information in data object<a class="headerlink" href="#source-information-in-data-object" title="Link to this heading">#</a></h3>
 <p>pyDR keeps careful track of where data came from, to avoid later confusion on what happened in the data processing procedure. It is also important to organize data in Projects. This is largely managed by the data.source object. We will not list all attributes of data.source here, but a few critical attributes are</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">filename</span><span class="p">:</span>   <span class="n">File</span> <span class="ow">or</span> <span class="nb">list</span> <span class="n">of</span> <span class="n">files</span> <span class="kn">from</span> <span class="nn">which</span> <span class="n">data</span> <span class="ow">is</span> <span class="n">derived</span>
 <span class="o">.</span><span class="n">source</span><span class="o">.</span><span class="n">short_file</span><span class="p">:</span> <span class="n">Shortened</span> <span class="n">version</span> <span class="n">of</span> <span class="n">above</span> <span class="p">(</span><span class="n">just</span> <span class="n">one</span> <span class="n">string</span><span class="p">)</span>
@@ -1080,7 +864,7 @@ Data fit optimized with opt2dist (rhoz_cleanup:True)
 </section>
 </section>
 <section id="the-project-object">
-<h2>The Project Object<a class="headerlink" href="#the-project-object" title="Permalink to this headline">#</a></h2>
+<h2>The Project Object<a class="headerlink" href="#the-project-object" title="Link to this heading">#</a></h2>
 <p>While Projects are not required for using pyDR, they are particularly helpful in organizing/processing/saving/displaying data. They provide a straightforward data sorting mechanism, and automatically manage the displaying of data, including data superposition. They also allow execution of processing commands on multiple data sets at once.</p>
 <p>We can see what’s in a Project, just by typing the name of the Project object:</p>
 <div class="cell docutils container">
@@ -1112,7 +896,7 @@ p7:FRAMES:AvOb:WT-apo_run1_0.1ns_just_protein
 </div>
 </div>
 <section id="project-data-selection">
-<h3>Project data selection<a class="headerlink" href="#project-data-selection" title="Permalink to this headline">#</a></h3>
+<h3>Project data selection<a class="headerlink" href="#project-data-selection" title="Link to this heading">#</a></h3>
 <p>It’s possible to select one or more data objects out of a project using a variety of methods:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">:</span> <span class="n">Single</span> <span class="n">index</span> <span class="n">returns</span> <span class="n">one</span> <span class="n">data</span> <span class="nb">object</span>
 <span class="n">proj</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="p">:</span> <span class="n">Slicing</span> <span class="n">returns</span> <span class="n">several</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">the</span> <span class="n">project</span> 
@@ -1249,7 +1033,7 @@ o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
 </div>
 </section>
 <section id="project-batch-processing">
-<h3>Project batch processing<a class="headerlink" href="#project-batch-processing" title="Permalink to this headline">#</a></h3>
+<h3>Project batch processing<a class="headerlink" href="#project-batch-processing" title="Link to this heading">#</a></h3>
 <p>The functions .fit, .opt2dist, and .modes2bonds (iRED) can be applied to a (sub-)project and will be applied to all data within. Also, proj.detect allows batch optimization of detectors. In fact, the project will test to see if some of the detector objects are originating from identical sensitivities and will replace them with a unified object if so, avoiding redundant detector optimization. We’ll show the procedure for re-fitting some of the no-opt data.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1304,7 +1088,7 @@ o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
 </div>
 </section>
 <section id="project-plotting">
-<h3>Project plotting<a class="headerlink" href="#project-plotting" title="Permalink to this headline">#</a></h3>
+<h3>Project plotting<a class="headerlink" href="#project-plotting" title="Link to this heading">#</a></h3>
 <p>When we plot data contained in a project, it is automatically plotted into a <em>plot object</em> contained within the project (proj.plt_obj). A project has an active plot object (proj.current_plot, indexed from 1), but may also have inactive plots. When plotting, data always goes into the active plot. To create a blank plot object, just change the current_plot to an unused value (or close all plots, proj.close_fig(‘all’)).</p>
 <p>Note that the plot_obj is returned when a plot is created, or one can obtain the current plot object from proj.plt_obj.</p>
 <p>plt_obj contains access to the various axes (.ax, .ax_sens) and figure (.fig). plt_obj.show_tc() will display the average correlation time for each detector on the corresponding plot.</p>
@@ -1323,7 +1107,7 @@ o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch6_pyDRstruct_60_0.png" src="_images/Ch6_pyDRstruct_60_0.png" />
+<img alt="_images/807aa1aede872cd70f4d98a1f7971749df75dbef4ca622343f9578ebfd857d47.png" src="_images/807aa1aede872cd70f4d98a1f7971749df75dbef4ca622343f9578ebfd857d47.png" />
 </div>
 </div>
 <p>In the above plot, it is difficult to see the differences between the two data objects (data sets are differentiated by hashes on the bars), so we can instead plot them with two different plot types (plot types are line plots: ‘p’, bar plots: ‘b’, and scatter plots: ‘s’)</p>
@@ -1336,12 +1120,12 @@ o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch6_pyDRstruct_62_0.png" src="_images/Ch6_pyDRstruct_62_0.png" />
+<img alt="_images/edd8c3f26b04e341272ed52ab16a3cfeb1ccb3fa9b3350eb61154568dc69aade.png" src="_images/edd8c3f26b04e341272ed52ab16a3cfeb1ccb3fa9b3350eb61154568dc69aade.png" />
 </div>
 </div>
 </section>
 <section id="chimerax-in-projects">
-<h3>ChimeraX in projects<a class="headerlink" href="#chimerax-in-projects" title="Permalink to this headline">#</a></h3>
+<h3>ChimeraX in projects<a class="headerlink" href="#chimerax-in-projects" title="Link to this heading">#</a></h3>
 <p>proj.chimera also provides special functionality. For example, when calling chimera for data within a project, the project will retain communcation with the chimeraX instance such that one may add additional molecules to it, send commands to chimeraX via the command line, and save the results. We can also use multiple chimera instances (tested on Mac/Linux), by changing current.</p>
 <p>Note that occasionally, communication with ChimeraX is lost for one reason or another. pyDR should automatically create a new instance/connection, but the previous instance will need to be manually closed.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>proj.chimera()           :  Send all data sets in the project to chimera
@@ -1361,7 +1145,7 @@ o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
 </div>
 </section>
 <section id="project-saving-loading">
-<h3>Project saving/loading<a class="headerlink" href="#project-saving-loading" title="Permalink to this headline">#</a></h3>
+<h3>Project saving/loading<a class="headerlink" href="#project-saving-loading" title="Link to this heading">#</a></h3>
 <p>When a project is created, we may specify a directory to allow that project later to be saved (projects consist of folders). Note that we may also create an empty project without a directory but then it will not be possible to save the project later. If we are making a new project, we must specify create=True.</p>
 <p>A project is saved simply by specifying proj.save()</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">=</span><span class="n">pyDR</span><span class="o">.</span><span class="n">Project</span><span class="p">(</span><span class="s1">&#39;my_new_project&#39;</span><span class="p">,</span><span class="n">create</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1">#create a new project</span>
@@ -1374,7 +1158,7 @@ o7:FRAMES:AvOb:WT-ghrelin_run1_0.1ns_just_protein
 </section>
 </section>
 <section id="data-generation">
-<h2>Data Generation<a class="headerlink" href="#data-generation" title="Permalink to this headline">#</a></h2>
+<h2>Data Generation<a class="headerlink" href="#data-generation" title="Link to this heading">#</a></h2>
 <p>The final question in this chapter, is how do we get data in the first place, and how do we put it into projects?</p>
 <p>NMR data is already prepared and stored in a text file. Then, we may either load the data object and then append to a project, or just provide the path/link to the project directly. We’ll make an empty project to test this.</p>
 <div class="cell docutils container">
@@ -1490,7 +1274,7 @@ r:MD:backboneB
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -1498,50 +1282,122 @@ r:MD:backboneB
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch5_MDvsNMR.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Chapter 5: Comparing MD and NMR Results</font></p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Ch5_MDvsNMR.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><font color="maroon">Chapter 5: Comparing MD and NMR Results</font></p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="Ch7_CCana.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="Ch7_CCana.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><font color="maroon">Chapter 7: Cross-Correlated Dynamics via iRED</font></p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-data-object">The Data Object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-in-the-data-object">Data in the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sensitivity-of-the-data-object">Sensitivity of the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detectors-for-the-data-object">Detectors for the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fitting-results-in-the-data-object">Fitting results in the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#data-displays-in-the-data-object">Data displays in the data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#selections-in-data-object">Selections in data object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#source-information-in-data-object">Source information in data object</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-project-object">The Project Object</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-data-selection">Project data selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-batch-processing">Project batch processing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-plotting">Project plotting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#chimerax-in-projects">ChimeraX in projects</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#project-saving-loading">Project saving/loading</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-generation">Data Generation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Albert Smith, Kai Zumpfe<br/>
-  
-      &copy; Copyright 2023.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Albert Smith, Kai Zumpfe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

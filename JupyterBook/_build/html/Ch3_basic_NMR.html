@@ -1,114 +1,167 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Chapter 3: A Basic NMR Analysis &#8212; pyDIFRATE Tutorial</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Ch3_basic_NMR';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors" href="Ch4_ComparingAnalyses.html" />
     <link rel="prev" title="Chapter 2: Detector Optimization" href="Ch2_detector_opt.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
     
-    <div class="container-fluid" id="banner"></div>
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-    
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">pyDIFRATE Tutorial</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="pyDIFRATE Tutorial - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="pyDIFRATE Tutorial - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -118,416 +171,239 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="GettingStarted.html">
-   <font color="maroon">
-    Getting Started
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="BriefHistory.html">
-   <font color="maroon">
-    Background
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="References.html">
-   <font color="maroon">
-    References
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html"><font color="maroon">Getting Started</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="BriefHistory.html"><font color="maroon"> Background </font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html"><font color="maroon"> References </font></a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tutorial
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch1_detectors_intro.html">
-   <font color="maroon">
-    Chapter 1: A brief introduction to detectors
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch2_detector_opt.html">
-   <font color="maroon">
-    Chapter 2: Detector Optimization
-   </font>
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   <font color="maroon">
-    Chapter 3: A Basic NMR Analysis
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
-   <font color="maroon">
-    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch5_MDvsNMR.html">
-   <font color="maroon">
-    Chapter 5: Comparing MD and NMR Results
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_pyDRstruct.html">
-   <font color="maroon">
-    Chapter 6: Anatomy of pyDIFRATE
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch7_CCana.html">
-   <font color="maroon">
-    Chapter 7: Cross-Correlated Dynamics via iRED
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
-   <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Backbone Motion
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Ch1_detectors_intro.html"><font color="maroon"> Chapter 1: A brief introduction to detectors </font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch2_detector_opt.html"><font color="maroon">Chapter 2: Detector Optimization</font></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><font color="maroon">Chapter 3: A Basic NMR Analysis</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch4_ComparingAnalyses.html"><font color="maroon">Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch5_MDvsNMR.html"><font color="maroon">Chapter 5: Comparing MD and NMR Results</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch6_pyDRstruct.html"><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch7_CCana.html"><font color="maroon">Chapter 7: Cross-Correlated Dynamics via iRED</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch8_ROMANCE_backbone.html"><font color="maroon">Chapter 8: ROMANCE Analysis of Backbone Motion</font></a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Templates
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Templates</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_blank.html">
-   <font color="maroon">
-    Template: pyDR Setup
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_basicNMR.html">
-   <font color="maroon">
-    Template: Basic NMR
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_SolnNMR.html">
-   <font color="maroon">
-    Template: Solution-State NMR
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_CCana.html">
-   <font color="maroon">
-    Template: Cross-Correlated Dynamics via iRED
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_blank.html"><font color="maroon">Template: pyDR Setup</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_basicNMR.html"><font color="maroon">Template: Basic NMR</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_SolnNMR.html"><font color="maroon">Template: Solution-State NMR</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_CCana.html"><font color="maroon">Template: Cross-Correlated Dynamics via iRED</font></a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/alsinmr/pyDR_tutorial/master?urlpath=tree/JupyterBook/Ch3_basic_NMR.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/pyDR_tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/pyDR_tutorial/issues/new?title=Issue%20on%20page%20%2FCh3_basic_NMR.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Ch3_basic_NMR.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/alsinmr/pyDR_tutorial/"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/alsinmr/pyDR_tutorial//issues/new?title=Issue%20on%20page%20%2FCh3_basic_NMR.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/Ch3_basic_NMR.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button>
 
-      </li>
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#loading-nmr-data">
-   Loading NMR data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#processing-nmr-experimental-data">
-   Processing NMR experimental data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#connecting-data-to-locations-in-a-structure-3d-visualization">
-   Connecting data to locations in a structure, 3D visualization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualization-via-chimerax">
-     Visualization via ChimeraX
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualization-with-ngl-viewer">
-     Visualization with NGL Viewer
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1><font color="maroon">Chapter 3: A Basic NMR Analysis</font></h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#loading-nmr-data">
-   Loading NMR data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#processing-nmr-experimental-data">
-   Processing NMR experimental data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#connecting-data-to-locations-in-a-structure-3d-visualization">
-   Connecting data to locations in a structure, 3D visualization
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualization-via-chimerax">
-     Visualization via ChimeraX
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#visualization-with-ngl-viewer">
-     Visualization with NGL Viewer
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><font color="maroon">Chapter 3: A Basic NMR Analysis</font></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-nmr-data">Loading NMR data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-nmr-experimental-data">Processing NMR experimental data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-data-to-locations-in-a-structure-3d-visualization">Connecting data to locations in a structure, 3D visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-via-chimerax">Visualization via ChimeraX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-with-ngl-viewer">Visualization with NGL Viewer</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-chapter-3-a-basic-nmr-analysis-font">
-<h1><font color="maroon">Chapter 3: A Basic NMR Analysis</font><a class="headerlink" href="#font-color-maroon-chapter-3-a-basic-nmr-analysis-font" title="Permalink to this headline">#</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-3-a-basic-nmr-analysis">
+<h1><font color="maroon">Chapter 3: A Basic NMR Analysis</font><a class="headerlink" href="#chapter-3-a-basic-nmr-analysis" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch3_basic_NMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>In this example, we load an NMR data set and demonstrate how to go about fitting it. For this, we need a text file with the measured relaxation rates and experimental data in it (e.g. <a class="reference external" href="https://github.com/alsinmr/pyDR_tutorial/raw/main/data/HETs_15N.txt">HETs_15N.txt</a>). This is provided for this example, but one can also use one’s own data. Make sure to follow the prescribed file format. Entries are separated by tabs within a given line and by carriage returns over multiple lines. An example data file is printed out as an example.</p>
 <div class="cell docutils container">
@@ -548,7 +424,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="loading-nmr-data">
-<h2>Loading NMR data<a class="headerlink" href="#loading-nmr-data" title="Permalink to this headline">#</a></h2>
+<h2>Loading NMR data<a class="headerlink" href="#loading-nmr-data" title="Link to this heading">#</a></h2>
 <p>First, we load a data object and discuss some of its contents, including plotting the experimental data. The contents of the data text file are shown below (entries are truncated for convenient viewing).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -567,9 +443,9 @@ title="Print to PDF"
 <li><p>Labels for the data: <strong>data.label</strong></p></li>
 <li><p>Sensitivity of the data: <strong>data.sens</strong></p></li>
 <li><p>Detector object for processing the data: <strong>data.detect</strong></p></li>
-<li><p>Experimental parameters: <strong>data.info</strong></p>
+<li><p>Experimental parameters: <strong><a class="reference external" href="http://data.info">data.info</a></strong></p>
 <ul>
-<li><p>This is a reference to data.sens.info</p></li>
+<li><p>This is a reference to <a class="reference external" href="http://data.sens.info">data.sens.info</a></p></li>
 </ul>
 </li>
 <li><p>Details on the data / processing so far: <strong>data.details</strong></p></li>
@@ -580,7 +456,7 @@ title="Print to PDF"
 </li>
 </ul>
 <p>A number of other functions and data objects are also attached to data, but these are for data processing, or analysis of the processing after an initial fit.</p>
-<p>Below, you can investigate these different components. We show data.info, which provides the various relevant experimental parameters for determining the sensitivities of the 8 experiments. Note that this data set also includes <span class="math notranslate nohighlight">\(S^2\)</span>, which is treated separately and does not show up in data.info.</p>
+<p>Below, you can investigate these different components. We show <a class="reference external" href="http://data.info">data.info</a>, which provides the various relevant experimental parameters for determining the sensitivities of the 8 experiments. Note that this data set also includes <span class="math notranslate nohighlight">\(S^2\)</span>, which is treated separately and does not show up in <a class="reference external" href="http://data.info">data.info</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span>
@@ -611,7 +487,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 </div>
-<p>These are the parameters found by default in data.info. Not all parameters are required for all experiments. If unspecified, these go to some default value (usually 0 or None).</p>
+<p>These are the parameters found by default in <a class="reference external" href="http://data.info">data.info</a>. Not all parameters are required for all experiments. If unspecified, these go to some default value (usually 0 or None).</p>
 <ul class="simple">
 <li><p>v0: External magnetic field, given as the <span class="math notranslate nohighlight">\(^1\)</span>H frequency in MHz</p></li>
 <li><p>v1: Spin-locking strength for <span class="math notranslate nohighlight">\(R_{1\rho}\)</span> experiments (applied to the relaxing nucleus), given in kHz</p></li>
@@ -642,12 +518,12 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_11_0.png" src="_images/Ch3_basic_NMR_11_0.png" />
+<img alt="_images/b39efa88558f736eb3e75d1168bed8d5b9f8383cf5e36fa939c0bd2e64735e37.png" src="_images/b39efa88558f736eb3e75d1168bed8d5b9f8383cf5e36fa939c0bd2e64735e37.png" />
 </div>
 </div>
 </section>
 <section id="processing-nmr-experimental-data">
-<h2>Processing NMR experimental data<a class="headerlink" href="#processing-nmr-experimental-data" title="Permalink to this headline">#</a></h2>
+<h2>Processing NMR experimental data<a class="headerlink" href="#processing-nmr-experimental-data" title="Link to this heading">#</a></h2>
 <p>Now, we want to process this data set. To do so, we first must optimize a set of detectors to analyze it with. The detector object is already attached to the data object, found in data.detect. So, we just need to run the optimization algorithm. We also will include <span class="math notranslate nohighlight">\(S^2\)</span> in the data analysis, which we must also specify. We will use 4 detectors plus one more for <span class="math notranslate nohighlight">\(S^2\)</span> data, to yield 5 total. Once the detector analysis is run, we may simply run the “fit” function to obtain the detector analysis, and finally plot the results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -662,7 +538,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_13_0.png" src="_images/Ch3_basic_NMR_13_0.png" />
+<img alt="_images/557b45063193aa4005d7689b65e8bfb658c0645e0a2d9c5a5fde7da11b150e41.png" src="_images/557b45063193aa4005d7689b65e8bfb658c0645e0a2d9c5a5fde7da11b150e41.png" />
 </div>
 </div>
 <p>Finally, we can check the fit quality by comparing the back-calculated relaxation rate constants to the original experimental relaxation rate constants. The original data is shown as bar plots with error bars and the fitted rate constants are scatter points (filled circles).</p>
@@ -674,12 +550,12 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch3_basic_NMR_15_0.png" src="_images/Ch3_basic_NMR_15_0.png" />
+<img alt="_images/abf11fc5cab5dff68075050a1b0a12cd5db41b3f1fa748f0723e4d6ce162ed45.png" src="_images/abf11fc5cab5dff68075050a1b0a12cd5db41b3f1fa748f0723e4d6ce162ed45.png" />
 </div>
 </div>
 </section>
 <section id="connecting-data-to-locations-in-a-structure-3d-visualization">
-<h2>Connecting data to locations in a structure, 3D visualization<a class="headerlink" href="#connecting-data-to-locations-in-a-structure-3d-visualization" title="Permalink to this headline">#</a></h2>
+<h2>Connecting data to locations in a structure, 3D visualization<a class="headerlink" href="#connecting-data-to-locations-in-a-structure-3d-visualization" title="Link to this heading">#</a></h2>
 <p>It is often useful to see how relaxation parameters relate to the structure. Also, for sake of comparison of dynamics between methods, one may assign a common set of labels, but alternatively, one may associate dynamics via the structure. We attach a structure to the data via the selection objection. The selection is a list of atom groups (from the <a class="reference external" href="http://mdanalysis.org/">MDAnalysis</a> Python module), with the same number of entries as the number of data points in the data object (len(data)).</p>
 <p>We will also include a ‘Project’ here. Projects add a lot of convient functionality; here they provide us with convenient communcation with <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a>.</p>
 <div class="cell docutils container">
@@ -701,7 +577,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 <p>Detector analysis can be viewed directly on the molecule, with detector responses represented as color intensity and atom radius. This works externally from Jupyter notebooks via ChimeraX (must be separately installed, and the path provided to pyDR, see below), or within the Jupyter notebook, via NGLviewer (must be installed in Python with pip or conda).</p>
 <section id="visualization-via-chimerax">
-<h3>Visualization via <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a><a class="headerlink" href="#visualization-via-chimerax" title="Permalink to this headline">#</a></h3>
+<h3>Visualization via <a class="reference external" href="https://www.cgl.ucsf.edu/chimerax/">ChimeraX</a><a class="headerlink" href="#visualization-via-chimerax" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Set chimera path (only required once)</span>
@@ -709,6 +585,27 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 
 <span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
 <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">(</span><span class="s1">&#39;~show ~/B@N,C,CA&#39;</span><span class="p">)</span> <span class="c1">#Send command to chimera</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">AssertionError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mi">189842587</span><span class="n">d6b</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1">#Set chimera path (only required once)</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">pyDR</span><span class="o">.</span><span class="n">chimeraX</span><span class="o">.</span><span class="n">chimeraX_funs</span><span class="o">.</span><span class="n">set_chimera_path</span><span class="p">(</span><span class="s1">&#39;/Applications/ChimeraX-1.5.app/Contents/MacOS/ChimeraX&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> 
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">fit</span><span class="o">.</span><span class="n">chimera</span><span class="p">()</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">proj</span><span class="o">.</span><span class="n">chimera</span><span class="o">.</span><span class="n">command_line</span><span class="p">(</span><span class="s1">&#39;~show ~/B@N,C,CA&#39;</span><span class="p">)</span> <span class="c1">#Send command to chimera</span>
+
+<span class="nn">~/Documents/GitHub.nosync/pyDR/chimeraX/chimeraX_funs.py</span> in <span class="ni">set_chimera_path</span><span class="nt">(path)</span>
+<span class="g g-Whitespace">     </span><span class="mi">48</span>     <span class="n">once</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="s2">&quot;&quot;&quot;</span>
+<span class="ne">---&gt; </span><span class="mi">50</span><span class="s2">     assert os.path.exists(path),&quot;No file found at &#39;</span><span class="si">{0}</span><span class="s2">&#39;&quot;.format(path)</span>
+<span class="g g-Whitespace">     </span><span class="mi">51</span><span class="s2"> </span>
+<span class="g g-Whitespace">     </span><span class="mi">52</span><span class="s2">     with open(os.path.join(get_path(),&#39;ChimeraX_program_path.txt&#39;),&#39;w&#39;) as f:</span>
+
+<span class="ne">AssertionError</span>: No file found at &#39;/Applications/ChimeraX-1.5.app/Contents/MacOS/ChimeraX&#39;
 </pre></div>
 </div>
 </div>
@@ -734,7 +631,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
 </div>
 </section>
 <section id="visualization-with-ngl-viewer">
-<h3>Visualization with <a class="reference external" href="https://nglviewer.org/">NGL Viewer</a><a class="headerlink" href="#visualization-with-ngl-viewer" title="Permalink to this headline">#</a></h3>
+<h3>Visualization with <a class="reference external" href="https://nglviewer.org/">NGL Viewer</a><a class="headerlink" href="#visualization-with-ngl-viewer" title="Link to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fit</span><span class="o">.</span><span class="n">nglview</span><span class="p">(</span><span class="n">det_num</span><span class="p">)</span>  <span class="c1">#Runs NGLviewer for Jupyter notebooks (coloring may fail in Google Colab)</span>
 </pre></div>
 </div>
@@ -754,7 +651,7 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -762,50 +659,110 @@ theta           23.0        23.0        23.0        23.0        23.0        23.0
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch2_detector_opt.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Chapter 2: Detector Optimization</font></p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Ch2_detector_opt.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><font color="maroon">Chapter 2: Detector Optimization</font></p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="Ch4_ComparingAnalyses.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="Ch4_ComparingAnalyses.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><font color="maroon">Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors</font></p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loading-nmr-data">Loading NMR data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#processing-nmr-experimental-data">Processing NMR experimental data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connecting-data-to-locations-in-a-structure-3d-visualization">Connecting data to locations in a structure, 3D visualization</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-via-chimerax">Visualization via ChimeraX</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-with-ngl-viewer">Visualization with NGL Viewer</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Albert Smith, Kai Zumpfe<br/>
-  
-      &copy; Copyright 2023.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Albert Smith, Kai Zumpfe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

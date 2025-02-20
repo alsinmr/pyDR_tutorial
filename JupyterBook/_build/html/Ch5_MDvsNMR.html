@@ -1,114 +1,167 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="./" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Chapter 5: Comparing MD and NMR Results &#8212; pyDIFRATE Tutorial</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Ch5_MDvsNMR';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Chapter 6: Anatomy of pyDIFRATE" href="Ch6_pyDRstruct.html" />
     <link rel="prev" title="Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors" href="Ch4_ComparingAnalyses.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
     
-    <div class="container-fluid" id="banner"></div>
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-    
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="index.html">
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">pyDIFRATE Tutorial</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="pyDIFRATE Tutorial - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="pyDIFRATE Tutorial - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -118,500 +171,256 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="GettingStarted.html">
-   <font color="maroon">
-    Getting Started
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="BriefHistory.html">
-   <font color="maroon">
-    Background
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="References.html">
-   <font color="maroon">
-    References
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="GettingStarted.html"><font color="maroon">Getting Started</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="BriefHistory.html"><font color="maroon"> Background </font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="References.html"><font color="maroon"> References </font></a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Tutorial
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorial</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch1_detectors_intro.html">
-   <font color="maroon">
-    Chapter 1: A brief introduction to detectors
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch2_detector_opt.html">
-   <font color="maroon">
-    Chapter 2: Detector Optimization
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch3_basic_NMR.html">
-   <font color="maroon">
-    Chapter 3: A Basic NMR Analysis
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch4_ComparingAnalyses.html">
-   <font color="maroon">
-    Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors
-   </font>
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   <font color="maroon">
-    Chapter 5: Comparing MD and NMR Results
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch6_pyDRstruct.html">
-   <font color="maroon">
-    Chapter 6: Anatomy of pyDIFRATE
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch7_CCana.html">
-   <font color="maroon">
-    Chapter 7: Cross-Correlated Dynamics via iRED
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Ch8_ROMANCE_backbone.html">
-   <font color="maroon">
-    Chapter 8: ROMANCE Analysis of Backbone Motion
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Ch1_detectors_intro.html"><font color="maroon"> Chapter 1: A brief introduction to detectors </font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch2_detector_opt.html"><font color="maroon">Chapter 2: Detector Optimization</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch3_basic_NMR.html"><font color="maroon">Chapter 3: A Basic NMR Analysis</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch4_ComparingAnalyses.html"><font color="maroon">Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors</font></a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#"><font color="maroon">Chapter 5: Comparing MD and NMR Results</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch6_pyDRstruct.html"><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch7_CCana.html"><font color="maroon">Chapter 7: Cross-Correlated Dynamics via iRED</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Ch8_ROMANCE_backbone.html"><font color="maroon">Chapter 8: ROMANCE Analysis of Backbone Motion</font></a></li>
 </ul>
-<p class="caption">
- <span class="caption-text">
-  Templates
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Templates</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_blank.html">
-   <font color="maroon">
-    Template: pyDR Setup
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_basicNMR.html">
-   <font color="maroon">
-    Template: Basic NMR
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_SolnNMR.html">
-   <font color="maroon">
-    Template: Solution-State NMR
-   </font>
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Tpl_CCana.html">
-   <font color="maroon">
-    Template: Cross-Correlated Dynamics via iRED
-   </font>
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_blank.html"><font color="maroon">Template: pyDR Setup</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_basicNMR.html"><font color="maroon">Template: Basic NMR</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_SolnNMR.html"><font color="maroon">Template: Solution-State NMR</font></a></li>
+<li class="toctree-l1"><a class="reference internal" href="Tpl_CCana.html"><font color="maroon">Template: Cross-Correlated Dynamics via iRED</font></a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/alsinmr/pyDR_tutorial/master?urlpath=tree/JupyterBook/Ch5_MDvsNMR.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/pyDR_tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/alsinmr/pyDR_tutorial/issues/new?title=Issue%20on%20page%20%2FCh5_MDvsNMR.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Ch5_MDvsNMR.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/alsinmr/pyDR_tutorial/"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/alsinmr/pyDR_tutorial//issues/new?title=Issue%20on%20page%20%2FCh5_MDvsNMR.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="_sources/Ch5_MDvsNMR.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button>
 
-      </li>
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup-and-data-downloads">
-   Setup and data downloads
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#downloading-from-google-drive-to-google-colab">
-     Downloading from Google Drive to Google Colab
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-and-process-nmr">
-   Load and Process NMR
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-md-and-process-md">
-   Load MD and Process MD
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#open-md-trajectory-specify-bonds">
-     Open MD trajectory, specify bonds
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-the-md-correlation-functions">
-     Calculate the MD correlation functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#md-preprocessing-fit-with-no-opt-detectors">
-     MD Preprocessing (fit with no_opt detectors)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#detector-optimization">
-     Detector Optimization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#process-and-plot-md-data">
-     Process and plot MD data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-nmr-results-to-md-results">
-   Compare NMR results to MD results
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimize-md-detectors-to-match-nmr-detectors">
-     Optimize MD detectors to match NMR detectors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-comparison-between-nmr-and-md">
-     Plot the comparison between NMR and MD
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1><font color="maroon">Chapter 5: Comparing MD and NMR Results</font></h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#setup-and-data-downloads">
-   Setup and data downloads
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#downloading-from-google-drive-to-google-colab">
-     Downloading from Google Drive to Google Colab
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-and-process-nmr">
-   Load and Process NMR
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#load-md-and-process-md">
-   Load MD and Process MD
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#open-md-trajectory-specify-bonds">
-     Open MD trajectory, specify bonds
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#calculate-the-md-correlation-functions">
-     Calculate the MD correlation functions
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#md-preprocessing-fit-with-no-opt-detectors">
-     MD Preprocessing (fit with no_opt detectors)
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#detector-optimization">
-     Detector Optimization
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#process-and-plot-md-data">
-     Process and plot MD data
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#compare-nmr-results-to-md-results">
-   Compare NMR results to MD results
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#optimize-md-detectors-to-match-nmr-detectors">
-     Optimize MD detectors to match NMR detectors
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#plot-the-comparison-between-nmr-and-md">
-     Plot the comparison between NMR and MD
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><font color="maroon">Chapter 5: Comparing MD and NMR Results</font></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-data-downloads">Setup and data downloads</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-from-google-drive-to-google-colab">Downloading from Google Drive to Google Colab</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-process-nmr">Load and Process NMR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-md-and-process-md">Load MD and Process MD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-md-trajectory-specify-bonds">Open MD trajectory, specify bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-md-correlation-functions">Calculate the MD correlation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#md-preprocessing-fit-with-no-opt-detectors">MD Preprocessing (fit with no_opt detectors)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detector-optimization">Detector Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#process-and-plot-md-data">Process and plot MD data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-nmr-results-to-md-results">Compare NMR results to MD results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimize-md-detectors-to-match-nmr-detectors">Optimize MD detectors to match NMR detectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-comparison-between-nmr-and-md">Plot the comparison between NMR and MD</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
-  <section class="tex2jax_ignore mathjax_ignore" id="font-color-maroon-chapter-5-comparing-md-and-nmr-results-font">
-<h1><font color="maroon">Chapter 5: Comparing MD and NMR Results</font><a class="headerlink" href="#font-color-maroon-chapter-5-comparing-md-and-nmr-results-font" title="Permalink to this headline">#</a></h1>
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-5-comparing-md-and-nmr-results">
+<h1><font color="maroon">Chapter 5: Comparing MD and NMR Results</font><a class="headerlink" href="#chapter-5-comparing-md-and-nmr-results" title="Link to this heading">#</a></h1>
 <p><a href="https://githubtocolab.com/alsinmr/pyDR_tutorial/blob/main/ColabNotebooks/Ch5_MDvsNMR.ipynb" target="_blank"><img src="https://colab.research.google.com/assets/colab-badge.svg"></a></p>
 <p>One of the biggest advantages of the <em>Detectors</em> approach is our ability to compare data from different sources. In this tutorial, we will look at comparing dynamics from NMR and MD data. However, we will also use detectors to compare, for example, the total motion in MD data to motion separated via reference frames (<a class="reference external" href="https://doi.org/10.1016/j.jmro.2022.100045">ROMANCE</a>) and the total motion vs. detector analysis of the cross correlation of motion.</p>
 <p>Note that if you’re running this locally, you may need to manually <a class="reference external" href="https://drive.google.com/file/d/1xgp5_BVeCh6Weu4tnsl1ToRZR49eM5hW/view?usp=share_link">download</a> the .xtc file and place it in
 pyDR/examples/HETs15N.</p>
 <section id="setup-and-data-downloads">
-<h2>Setup and data downloads<a class="headerlink" href="#setup-and-data-downloads" title="Permalink to this headline">#</a></h2>
+<h2>Setup and data downloads<a class="headerlink" href="#setup-and-data-downloads" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SETUP pyDR</span>
@@ -630,12 +439,12 @@ pyDR/examples/HETs15N.</p>
 </div>
 </div>
 <section id="downloading-from-google-drive-to-google-colab">
-<h3>Downloading from Google Drive to Google Colab<a class="headerlink" href="#downloading-from-google-drive-to-google-colab" title="Permalink to this headline">#</a></h3>
+<h3>Downloading from Google Drive to Google Colab<a class="headerlink" href="#downloading-from-google-drive-to-google-colab" title="Link to this heading">#</a></h3>
 <p>In the tutorial, we will use files that are already stored as part of pyDR/examples. If you are working locally, you can just download outside of the Jupyter notebook and then tell pyDR later where the files are. However, in Google Colab, you need to get the files to the Colab server somehow. Here, we show how to download them from file IDs from Google Drive (these need to be viewable to anyone with the share link in your the share settings).</p>
 </section>
 </section>
 <section id="load-and-process-nmr">
-<h2>Load and Process NMR<a class="headerlink" href="#load-and-process-nmr" title="Permalink to this headline">#</a></h2>
+<h2>Load and Process NMR<a class="headerlink" href="#load-and-process-nmr" title="Link to this heading">#</a></h2>
 <p>We’ll do this in just a few lines. See the previous examples for processing NMR</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -673,9 +482,9 @@ p5:NMR:1w_0cR6ykj
 </div>
 </section>
 <section id="load-md-and-process-md">
-<h2>Load MD and Process MD<a class="headerlink" href="#load-md-and-process-md" title="Permalink to this headline">#</a></h2>
+<h2>Load MD and Process MD<a class="headerlink" href="#load-md-and-process-md" title="Link to this heading">#</a></h2>
 <section id="open-md-trajectory-specify-bonds">
-<h3>Open MD trajectory, specify bonds<a class="headerlink" href="#open-md-trajectory-specify-bonds" title="Permalink to this headline">#</a></h3>
+<h3>Open MD trajectory, specify bonds<a class="headerlink" href="#open-md-trajectory-specify-bonds" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Paths may need adjusted if running locally ()</span>
@@ -696,7 +505,7 @@ p5:NMR:1w_0cR6ykj
 </div>
 </section>
 <section id="calculate-the-md-correlation-functions">
-<h3>Calculate the MD correlation functions<a class="headerlink" href="#calculate-the-md-correlation-functions" title="Permalink to this headline">#</a></h3>
+<h3>Calculate the MD correlation functions<a class="headerlink" href="#calculate-the-md-correlation-functions" title="Link to this heading">#</a></h3>
 <p>To speed up the tutorial, we take only every tenth point out of the MD trajectory (50 ps timesteps). Ideally, we would use all time points.</p>
 <p>To calculate the rank-2 reorientational correlation functions, we use the md2data function on a selection object, which then exports the results to an MD data object</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pyDR</span><span class="o">.</span><span class="n">md2data</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
@@ -725,12 +534,12 @@ p5:NMR:1w_0cR6ykj
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_15_0.png" src="_images/Ch5_MDvsNMR_15_0.png" />
+<img alt="_images/afbacfd08480ca31d9bc369c5ca960b478149bf24ae0084c368f1743444ee045.png" src="_images/afbacfd08480ca31d9bc369c5ca960b478149bf24ae0084c368f1743444ee045.png" />
 </div>
 </div>
 </section>
 <section id="md-preprocessing-fit-with-no-opt-detectors">
-<h3>MD Preprocessing (fit with no_opt detectors)<a class="headerlink" href="#md-preprocessing-fit-with-no-opt-detectors" title="Permalink to this headline">#</a></h3>
+<h3>MD Preprocessing (fit with no_opt detectors)<a class="headerlink" href="#md-preprocessing-fit-with-no-opt-detectors" title="Link to this heading">#</a></h3>
 <p>When working with MD simulations, we produce a very large data set (here, the data object has 70x40000 data points, and if we hadn’t skipped points in the trajectory, it would be 70x400000. We also have trajectories with 70x2000000 data points). We would rather not save that data, but would also like to avoid re-processing every time we need a change to the analysis.</p>
 <p>The solution is to use a large (12-15) number of <em>unoptimized</em> detectors. Data from unoptimized detectors is difficult to interpret directly, but can be subsequently reprocessed to optimized detectors, and allows us to try different processing approaches without dealing with the large correlation functions with every attempt.</p>
 <div class="cell docutils container">
@@ -756,7 +565,7 @@ n12:MD:backboneB
 </div>
 </section>
 <section id="detector-optimization">
-<h3>Detector Optimization<a class="headerlink" href="#detector-optimization" title="Permalink to this headline">#</a></h3>
+<h3>Detector Optimization<a class="headerlink" href="#detector-optimization" title="Link to this heading">#</a></h3>
 <p>We can optimize the MD detectors for comparison to NMR data, or simply for analysis of the MD alone. The latter approach provides better information on the dynamics in the MD, but cannot be quantitatively compared to the NMR results.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -766,7 +575,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_19_0.png" src="_images/Ch5_MDvsNMR_19_0.png" />
+<img alt="_images/5557348c4107e3b75061934ecea39bff8f75e9322d0266bce37d06525f912d69.png" src="_images/5557348c4107e3b75061934ecea39bff8f75e9322d0266bce37d06525f912d69.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -784,13 +593,13 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_20_0.png" src="_images/Ch5_MDvsNMR_20_0.png" />
+<img alt="_images/739d9bc32fb3f42498a0c91c236572319c78ec211ef22751319d070dfc9e4935.png" src="_images/739d9bc32fb3f42498a0c91c236572319c78ec211ef22751319d070dfc9e4935.png" />
 </div>
 </div>
 <p>Above, we obtain reasonably good reproduction with <span class="math notranslate nohighlight">\(n=9\)</span> for detectors 0-2 (ns/ps range). The latter 2 detectors (<span class="math notranslate nohighlight">\(\mu\)</span>s range) are poorly reproduced because the 2 <span class="math notranslate nohighlight">\(\mu\)</span>s trajectory is insufficient for reproducing microsecond dynamics.</p>
 </section>
 <section id="process-and-plot-md-data">
-<h3>Process and plot MD data<a class="headerlink" href="#process-and-plot-md-data" title="Permalink to this headline">#</a></h3>
+<h3>Process and plot MD data<a class="headerlink" href="#process-and-plot-md-data" title="Link to this heading">#</a></h3>
 <p>We’ll start by processing the MD data for evaluation without comparison to NMR.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -817,7 +626,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_24_0.png" src="_images/Ch5_MDvsNMR_24_0.png" />
+<img alt="_images/22e2075d8641d4739ab06a52d86f48fb3b6863c1055c535c217846571167d795.png" src="_images/22e2075d8641d4739ab06a52d86f48fb3b6863c1055c535c217846571167d795.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -828,11 +637,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "a36928045f0e4183ae574f72c168463c", "version_major": 2, "version_minor": 0}
-</script><script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "bf40ded136de4ec0b171d84656d7e189", "version_major": 2, "version_minor": 0}
-</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "a36928045f0e4183ae574f72c168463c", "version_major": 2, "version_minor": 0}</script><script type="application/vnd.jupyter.widget-view+json">{"model_id": "bf40ded136de4ec0b171d84656d7e189", "version_major": 2, "version_minor": 0}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -861,15 +666,15 @@ n12:MD:backboneB
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Optimized 1 data objects
 </pre></div>
 </div>
-<img alt="_images/Ch5_MDvsNMR_28_1.png" src="_images/Ch5_MDvsNMR_28_1.png" />
+<img alt="_images/8358d3bebaa16109ec4e71f91c39862c8eb424c64302e721af0276692c18963f.png" src="_images/8358d3bebaa16109ec4e71f91c39862c8eb424c64302e721af0276692c18963f.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="compare-nmr-results-to-md-results">
-<h2>Compare NMR results to MD results<a class="headerlink" href="#compare-nmr-results-to-md-results" title="Permalink to this headline">#</a></h2>
+<h2>Compare NMR results to MD results<a class="headerlink" href="#compare-nmr-results-to-md-results" title="Link to this heading">#</a></h2>
 <section id="optimize-md-detectors-to-match-nmr-detectors">
-<h3>Optimize MD detectors to match NMR detectors<a class="headerlink" href="#optimize-md-detectors-to-match-nmr-detectors" title="Permalink to this headline">#</a></h3>
+<h3>Optimize MD detectors to match NMR detectors<a class="headerlink" href="#optimize-md-detectors-to-match-nmr-detectors" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span><span class="o">=</span><span class="n">proj</span><span class="p">[</span><span class="s1">&#39;NMR&#39;</span><span class="p">][</span><span class="s1">&#39;proc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sens</span><span class="o">.</span><span class="n">rhoz</span>
@@ -889,7 +694,7 @@ n12:MD:backboneB
 </div>
 </section>
 <section id="plot-the-comparison-between-nmr-and-md">
-<h3>Plot the comparison between NMR and MD<a class="headerlink" href="#plot-the-comparison-between-nmr-and-md" title="Permalink to this headline">#</a></h3>
+<h3>Plot the comparison between NMR and MD<a class="headerlink" href="#plot-the-comparison-between-nmr-and-md" title="Link to this heading">#</a></h3>
 <p>pyDR compares detector sensitivies between data sets to decide which detector windows are most comparable. Furthermore, it determines based on the selection object or the data labels what positions should be plotted on top of each other. Therefore, we do not need to do anything but specify what should be plotted.</p>
 <p>Note that the project manages the plotting. It will always try to plot into the previous plot, unless we set the current plot.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span><span class="o">.</span><span class="n">current_plot</span><span class="o">=</span><span class="mi">2</span> <span class="c1">#Generate a new plot. Counting starts at 1, which is the default</span>
@@ -911,7 +716,7 @@ n12:MD:backboneB
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Ch5_MDvsNMR_33_0.png" src="_images/Ch5_MDvsNMR_33_0.png" />
+<img alt="_images/445d6c8df1b28ed5e67f0dca7b507fb973f613f5007fc8b3eb69a3c12fa4be13.png" src="_images/445d6c8df1b28ed5e67f0dca7b507fb973f613f5007fc8b3eb69a3c12fa4be13.png" />
 </div>
 </div>
 <p>No MD data is plotted for the last detector, since the detector sensitivies were very different. Note that typically MD-derived microsecond motion is difficult to reproduce. Also, note that this data set is better reproduced with longer, optimized MD trajectories.</p>
@@ -931,7 +736,7 @@ n12:MD:backboneB
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
@@ -939,50 +744,121 @@ n12:MD:backboneB
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Ch4_ComparingAnalyses.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><font color="maroon">Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors</font></p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Ch4_ComparingAnalyses.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><font color="maroon">Chapter 4: Comparison of Model-Free, SDM, LeMaster’s Approach, and Detectors</font></p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="Ch6_pyDRstruct.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="Ch6_pyDRstruct.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><font color="maroon">Chapter 6: Anatomy of pyDIFRATE</font></p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-and-data-downloads">Setup and data downloads</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#downloading-from-google-drive-to-google-colab">Downloading from Google Drive to Google Colab</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-and-process-nmr">Load and Process NMR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-md-and-process-md">Load MD and Process MD</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#open-md-trajectory-specify-bonds">Open MD trajectory, specify bonds</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-the-md-correlation-functions">Calculate the MD correlation functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#md-preprocessing-fit-with-no-opt-detectors">MD Preprocessing (fit with no_opt detectors)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detector-optimization">Detector Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#process-and-plot-md-data">Process and plot MD data</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-nmr-results-to-md-results">Compare NMR results to MD results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimize-md-detectors-to-match-nmr-detectors">Optimize MD detectors to match NMR detectors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-comparison-between-nmr-and-md">Plot the comparison between NMR and MD</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Albert Smith, Kai Zumpfe<br/>
-  
-      &copy; Copyright 2023.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Albert Smith, Kai Zumpfe
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
